@@ -9,11 +9,11 @@
       18
     ],
     [
-      "opencode",
-      18
+      "cursor",
+      15
     ],
     [
-      "cursor",
+      "opencode",
       15
     ],
     [
@@ -68,10 +68,6 @@
     ],
     [
       "gemini-3.1-flash-lite-preview",
-      3
-    ],
-    [
-      "google/gemma-4-26b-a4b-it",
       3
     ],
     [
@@ -139,11 +135,11 @@
       3
     ],
     [
-      "qwen/qwen3.6-plus",
-      3
+      "gemini-2.5-flash",
+      2
     ],
     [
-      "gemini-2.5-flash",
+      "qwen/qwen3.6-plus",
       2
     ],
     [
@@ -153,20 +149,24 @@
     [
       "gemini-3.1-pro-preview",
       1
+    ],
+    [
+      "google/gemma-4-26b-a4b-it",
+      1
     ]
   ],
   "languages": [
     [
       "python",
-      33
+      32
     ],
     [
       "rust",
-      31
+      30
     ],
     [
       "pascal",
-      30
+      29
     ]
   ],
   "build_statuses": [
@@ -177,14 +177,10 @@
     [
       "syntax_error",
       10
-    ],
-    [
-      "no_output",
-      3
     ]
   ],
   "totals": {
-    "versions": 94,
+    "versions": 91,
     "accepted": 59,
     "built_ok": 81
   }

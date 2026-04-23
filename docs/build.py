@@ -26,7 +26,7 @@ OUT_VERSIONS_DIR = OUT_DATA_DIR / "versions"
 
 # Build statuses to exclude from the site (runs where the agent never
 # produced any code because the upstream API was down / timed out).
-EXCLUDED_BUILD_STATUSES = {"api_unavailable"}
+EXCLUDED_BUILD_STATUSES = {"api_unavailable", "no_output"}
 
 
 SUMMARY_FIELDS = (
