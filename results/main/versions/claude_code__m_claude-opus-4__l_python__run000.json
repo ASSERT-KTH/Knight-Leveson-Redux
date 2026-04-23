@@ -1,0 +1,21 @@
+{
+  "agent_name": "claude_code",
+  "model_name": "claude",
+  "run_id": 0,
+  "prompt": "You are implementing the Launch Interceptor Program from Knight & Leveson (1986).\n\nThe file `spec.md` in your workspace is the verbatim specification: Pascal types,\nglobal variables, the parameterless procedure `DECIDE`, and the `REALCOMPARE`\nfunction contract. All functional requirements and Launch Interceptor Conditions\n(LICs) are defined only there. Do not skip or reinterpret any part of it.\n\nPython embedding (delivery only; this does not replace the spec):\n- Implement a single function `decide` that is behaviorally equivalent to `DECIDE`.\n- Inputs: `numpoints` (int, 2..100) corresponds to `NUMPOINTS`. `x` and `y` are\n  Python lists of length `numpoints` with `x[i]`, `y[i]` as the coordinates of\n  point i+1 in the spec (Pascal indices 1..NUMPOINTS \u2192 Python 0..numpoints-1).\n- `parameters` is a Python dict whose keys are the field names of `PARAMETERS`\n  in the spec (`LENGTH1`, `RADIUS1`, `EPSILON`, \u2026) with the same types and\n  constraints as in the Pascal record.\n- `lcm` is a 15\u00d715 list of strings, each entry one of `\"NOTUSED\"`, `\"ORR\"`, `\"ANDD\"`\n  matching the `LCM` connector enum. The matrix is symmetric; diagonal entries\n  are ignored for PUM off-diagonals (see spec).\n- `pum_diag` is a length-15 list of bools: `pum_diag[i]` is the PUM diagonal\n  element for LIC (i+1), i.e. the spec\u2019s `PUM[i,i]` for i in 1..15.\n- Return a 4-tuple `(cmv, pum, fuv, launch)`:\n  - `cmv`: 15 bools, `cmv[i]` is CMV for LIC (i+1).\n  - `pum`: 15\u00d715 bools; off-diagonal from `LCM` and `CMV` per spec; diagonal\n    `pum[i][i] == pum_diag[i]`.\n  - `fuv`: 15 bools per the spec\u2019s FUV rules.\n  - `launch`: bool, the LAUNCH decision.\n- The Pascal caller supplied `REALCOMPARE`. In Python there is no caller: define\n  a helper `realcompare(a: float, b: float) -> str` that implements the same\n  semantics, returning `\"LT\"`, `\"EQ\"`, or `\"GT\"` for the six-significant-digit\n  comparison described in the spec. Use it everywhere the spec requires real\n  comparisons inside the logic equivalent to `DECIDE`.\n\nEngineering constraints:\n- Write everything in one file named `decide.py`, self-contained and importable\n  with no side effects at import time.\n- Do not read from stdin, write to stdout/stderr, or read other files.\n- Do not add any `if __name__ == \"__main__\"` block.\n- Use only the Python standard library.\n\nThe specification is in: /tmp/nvp_claude_code_htlynihu/spec.md\n\nWrite your implementation to: decide.py\n",
+  "source_code": "",
+  "timestamp": "2026-04-14T15:15:26.941022+00:00",
+  "generation_config": {
+    "agent": "claude_code",
+    "cli": "claude",
+    "model": "anthropic/claude-opus-4",
+    "base_url": "https://openrouter.ai/api",
+    "skip_permissions": true,
+    "no_session_persistence": true
+  },
+  "acceptance_passed": false,
+  "build_status": "api_unavailable",
+  "sandbox_dir": "/tmp/nvp_claude_code_htlynihu",
+  "error_message": "claude CLI failed to launch: Command '['claude', '--print', '--dangerously-skip-permissions', '--no-session-persistence', '--output-format', 'json', '--add-dir', '/tmp/nvp_claude_code_htlynihu', '--model', 'anthropic/claude-opus-4']' timed out after 1200 seconds",
+  "language": "python"
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Implementation &middot; NVP Agent Implementations</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css"
+    />
+  </head>
+  <body class="view-page">
+    <header class="site-header compact">
+      <div class="wrap">
+        <div class="brand">
+          <p class="crumbs">
+            <a href="./index.html">&larr; All implementations</a>
+          </p>
+          <h1 id="view-title">Loading…</h1>
+          <p id="view-subtitle" class="tagline"></p>
+        </div>
+        <nav class="header-links">
+          <a id="raw-json" href="#" rel="noopener" target="_blank">Raw JSON</a>
+          <button id="copy-code" type="button" class="reset-btn">
+            Copy code
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap view-layout">
+      <aside class="meta-panel" aria-label="Metadata">
+        <dl id="meta-list" class="meta-list"></dl>
+        <section class="meta-error" id="meta-error" hidden>
+          <h3>Error message</h3>
+          <pre id="error-text"></pre>
+        </section>
+        <section class="meta-prompt">
+          <h3>Prompt</h3>
+          <details>
+            <summary>Show the exact prompt sent to the agent</summary>
+            <pre id="prompt-text"></pre>
+          </details>
+        </section>
+      </aside>
+
+      <section class="code-panel" aria-label="Source code">
+        <div class="code-header">
+          <span id="code-filename" class="code-filename"></span>
+          <span id="code-stats" class="code-stats"></span>
+        </div>
+        <pre class="code-block"><code id="code-body" class="hljs"></code></pre>
+      </section>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/rust.min.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/python.min.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/delphi.min.js"
+    ></script>
+    <script src="./js/view.js" type="module"></script>
+  </body>
+</html>

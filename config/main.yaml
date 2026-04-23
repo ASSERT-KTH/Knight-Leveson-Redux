@@ -1,0 +1,121 @@
+# NVP AI Agent Experiment — Pilot Configuration
+# Faithful to Knight & Leveson (1986) methodology
+
+seed: 42
+benchmark: launch_interceptor
+
+# Full factorial: uncomment pascal/rust when fpc and cargo are on PATH
+languages:
+  # - python
+  - pascal
+  # - rust
+
+agent_spec_path: benchmarks/launch_interceptor/spec_original.md
+
+fault_log: results/main-spec-2/fault_events.jsonl
+fault_log_detail: summary
+
+# Acceptance screening: number of random cases (all must pass to be admitted)
+# K&L used 200; we use 50 for the pilot
+acceptance_n: 200
+
+# Main campaign: number of shared random test cases
+# K&L used 1,000,000; pilot uses 10,000 to give statistical power for ~0.1% failure rate.
+# run_campaign streams one test at a time; analyze_results aggregates in one CSV pass (RAM ~ O(versions²), not O(tests×versions)).
+campaign_n: 1000000
+
+# Parallel campaign: threads used to evaluate admitted versions concurrently within each test
+# (default: min(64, CPU count)). Override with: python -m pipeline.run_campaign ... --workers N
+campaign_workers: 32
+
+# ---------------------------------------------------------------------------
+# Agents
+# ---------------------------------------------------------------------------
+# Each entry supports:
+#   name:    agent identifier (cursor | claude_code | codex | gemini | opencode | mock)
+#   runs:    independent generations per model (total = len(models) × runs)
+#   config:
+#     models:          list of model ids (or one string); runs applies to each
+#     model:           legacy single model
+#                        cursor:      "gpt-5", "sonnet-4", "sonnet-4-thinking", ...
+#                        claude_code: "sonnet", "opus", or full name like
+#                                     "anthropic/claude-opus-4-5" (for OpenRouter)
+#                        codex:       "o4-mini", "o3", "codex-mini-latest", ...
+#                        gemini:      "gemini-2.5-flash", "gemini-2.5-pro", ...
+#                                     Prefer env GEMINI_API_KEY; optional gemini_api_key in config
+#                        opencode:    "openrouter/anthropic/claude-sonnet-4" or direct
+#                                     "anthropic/claude-sonnet-4" (non-OpenRouter)
+#     openrouter:      opencode — if true, CLI model becomes openrouter/<your model>
+#     openrouter_sandbox_config: opencode — optional; sandbox opencode.json (needs API key)
+#     openrouter_api_key: opencode — optional; or opencode auth / .env OPENROUTER_API_KEY
+#     attach:          opencode only — URL of `opencode serve` (optional)
+#     opencode_agent:  opencode only — agent profile e.g. "build" (optional)
+#     timeout_seconds: per-run wall-clock limit (default 600)
+# ---------------------------------------------------------------------------
+
+agents:
+  
+  - name: cursor
+    runs: 1
+    config:
+      models:
+      - composer-2-fast
+      - composer-2
+      - composer-1.5
+      - grok-4-20
+      - kimi-k2.5
+  
+  - name: claude_code
+    runs: 1
+    config:
+      models:
+      - anthropic/claude-opus-4.6
+      - anthropic/claude-opus-4.5
+      - anthropic/claude-opus-4.1
+      - anthropic/claude-opus-4
+      - anthropic/claude-sonnet-4.6
+      - anthropic/claude-sonnet-4.5
+      - anthropic/claude-sonnet-4
+      - anthropic/claude-haiku-4.5
+  
+  - name: codex
+    runs: 1
+    config:
+      models:
+      - gpt-5.4
+      - gpt-5.4-mini
+      - gpt-5.3-codex
+      - gpt-5.2-codex
+      - gpt-5.2
+      - gpt-5.1-codex-max
+      - gpt-5.1
+      - gpt-5.1-codex
+      - gpt-5-codex
+      - gpt-5
+
+  - name: gemini
+    runs: 1
+    config:
+      models:
+      - gemini-3.1-pro-preview
+      - gemini-3.1-flash-lite-preview
+      - gemini-3-flash-preview
+      - gemini-2.5-pro
+      - gemini-2.5-flash
+      - gemini-2.5-flash-lite
+
+  - name: opencode
+    runs: 1
+    config:
+      openrouter: true
+      models:
+      - qwen/qwen3.6-plus
+      - qwen/qwen3.5-flash-02-23
+      - qwen/qwen3.5-plus-02-15
+      - qwen/qwen3.5-397b-a17b
+      - google/gemma-4-26b-a4b-it
+      - google/gemma-4-31b-it
+
+
+# Default timeout used when not overridden per-agent
+agent_timeout_seconds: 1200

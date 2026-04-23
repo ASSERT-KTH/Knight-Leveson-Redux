@@ -1,0 +1,60 @@
+# NVP AI Agent Experiment — Pilot Configuration
+# Faithful to Knight & Leveson (1986) methodology
+
+seed: 42
+benchmark: launch_interceptor
+
+languages:
+  - python
+
+# Verbatim Knight & Leveson spec (markdown). Override only for pinned reproducibility.
+agent_spec_path: benchmarks/launch_interceptor/spec_original.md
+
+# Optional: JSONL of failing campaign rows (inputs + bit-diff). Same pass as campaign.
+# fault_log: results/pilot/fault_events.jsonl
+# fault_log_detail: summary   # summary | full (includes full PUM matrices)
+
+# Acceptance screening: number of random cases (all must pass to be admitted)
+# K&L used 200; we use 50 for the pilot
+acceptance_n: 50
+
+# Main campaign: number of shared random test cases
+# K&L used 1,000,000; pilot uses 10,000 to give statistical power for ~0.1% failure rate
+campaign_n: 10000
+
+# ---------------------------------------------------------------------------
+# Agents
+# ---------------------------------------------------------------------------
+# Each entry supports:
+#   name:    agent identifier (cursor | claude_code | codex | gemini | opencode | mock)
+#   runs:    independent generations per model (total = len(models) × runs)
+#   config:
+#     models:          list of model ids (or one string); runs applies to each
+#     model:           legacy single model
+#                        cursor:      "gpt-5", "sonnet-4", "sonnet-4-thinking", ...
+#                        claude_code: "sonnet", "opus", or full name like
+#                                     "anthropic/claude-opus-4-5" (for OpenRouter)
+#                        codex:       "o4-mini", "o3", "codex-mini-latest", ...
+#                        gemini:      "gemini-2.5-flash", "gemini-2.5-pro", ...
+#                                     Prefer env GEMINI_API_KEY; optional gemini_api_key in config
+#                        opencode:    "openrouter/anthropic/claude-sonnet-4" or direct
+#                                     "anthropic/claude-sonnet-4" (non-OpenRouter)
+#     openrouter:      opencode — if true, pass model as openrouter/<vendor>/<model>
+#     openrouter_sandbox_config: opencode — optional; inject sandbox opencode.json (needs key)
+#     openrouter_api_key: opencode — optional; prefer env OPENROUTER_API_KEY or opencode auth
+#     attach:          opencode only — URL of `opencode serve` (optional)
+#     opencode_agent:  opencode only — agent profile e.g. "build" (optional)
+#     timeout_seconds: per-run wall-clock limit (default 600)
+# ---------------------------------------------------------------------------
+
+agents:
+  - name: opencode
+    runs: 1
+    config:
+      timeout_seconds: 600
+      openrouter: true
+      model: anthropic/claude-sonnet-4.5
+      opencode_agent: build
+
+# Default timeout used when not overridden per-agent
+agent_timeout_seconds: 600

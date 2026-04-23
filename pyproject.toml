@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "nvp-ai-experiment"
+version = "0.1.0"
+description = "Knight & Leveson NVP fault-independence experiment using AI coding agents"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.0",
+    "scipy>=1.11",
+    "statsmodels>=0.14",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "matplotlib>=3.6",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "pytest-xdist", "hypothesis>=6.92"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agents*", "pipeline*", "analysis*", "oracle*", "benchmarks*", "harnesses*"]
+
+[tool.pytest.ini_options]
+testpaths = ["oracle", "tests"]
+python_files = ["test_*.py"]

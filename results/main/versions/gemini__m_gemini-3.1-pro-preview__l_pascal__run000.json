@@ -1,0 +1,20 @@
+{
+  "agent_name": "gemini",
+  "model_name": "gemini",
+  "run_id": 0,
+  "prompt": "You are implementing the Launch Interceptor Program from Knight & Leveson (1986).\n\nThe file `spec.md` in your workspace is the verbatim specification (Pascal types,\nglobals, parameterless `DECIDE`, and `REALCOMPARE`). All LICs and logic are defined\nonly there.\n\nFree Pascal delivery (this does not replace the spec):\n- Write a unit named `lipdecide` in a single file named `lipdecide.pas`.\n- The unit must `use` the shared unit `globals` (provided by the evaluation harness),\n  which declares all K&L global variables and the `COMPTYPE` enumeration (`LT`, `EQ`,\n  `GT`). Do not redeclare those globals.\n- Implement `function REALCOMPARE(A, B: real): COMPTYPE;` in `lipdecide` with the same\n  semantics as in the spec (six-significant-digit comparison). The harness does not\n  supply `REALCOMPARE`; use your implementation everywhere the spec requires real\n  comparisons inside the logic equivalent to `DECIDE`.\n- Implement `procedure DECIDE;` that reads inputs from and writes outputs to the\n  globals in `globals` (same contract as the original Pascal problem statement).\n- Indices: Pascal arrays `X[i]`, `Y[i]` for `i = 1 .. NUMPOINTS` match the spec.\n\nEngineering constraints:\n- Target Free Pascal (`fpc`). Use only the standard RTL and FPC standard units that\n  ship with `fpc` (no external packages).\n- Do not include a `program` or `begin`/`end.` main block \u2014 only the unit.\n\nThe specification is in: /tmp/nvp_gemini_z8z1awmr/spec.md\n\nWrite your implementation to: lipdecide.pas\n",
+  "source_code": "",
+  "timestamp": "2026-04-22T11:56:09.687605+00:00",
+  "generation_config": {
+    "agent": "gemini",
+    "cli": "gemini",
+    "model": "gemini-3.1-pro-preview",
+    "headless": true,
+    "approval_mode": "yolo"
+  },
+  "acceptance_passed": false,
+  "build_status": "api_unavailable",
+  "sandbox_dir": "/tmp/nvp_gemini_z8z1awmr",
+  "error_message": "gemini CLI exited 1: You have exhausted your daily quota on this model.",
+  "language": "pascal"
+}

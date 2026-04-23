@@ -1,0 +1,20 @@
+{
+  "agent_name": "gemini",
+  "model_name": "gemini",
+  "run_id": 0,
+  "prompt": "You are implementing the Launch Interceptor Program from Knight & Leveson (1986).\n\nThe file `spec.md` in your workspace is the verbatim specification. All LICs and logic\nare defined only there.\n\n## Rust delivery (evaluation harness)\n\nYour code is linked as the `decide` module next to the harness `types.rs` and `main.rs`.\nSubmit **only** one file `decide.rs` implementing:\n\n  `pub fn decide(input: &DecideInput) -> DecideOutput`\n\nImport wire types with:\n\n  `use crate::types::{DecideInput, DecideOutput};`\n\nDo **not** declare `mod types;`, `mod main;`, or a `main` function. Do not add `Cargo.toml`\ndependencies beyond what the harness already provides (serde for JSON types only).\n\n## Types you must match exactly (same as `types.rs` in the harness)\n\n`DecideInput` fields:\n- `numpoints: usize` \u2014 number of points (2..100). Always index `input.x` / `input.y` with\n  **usize** (e.g. `for i in 0..input.numpoints` then `input.x[i]`). If you have an `i32`\n  index, cast: `input.x[i as usize]` (or use `usize` throughout).\n- `x`, `y: Vec<f64>` \u2014 length `numpoints`, 0-based indices for point i+1 vs the Pascal spec.\n- `parameters: Parameters` \u2014 see field names below (Rust **snake_case** only in source code).\n- `lcm: Vec<Vec<String>>` \u2014 15\u00d715, symmetric; each off-diagonal entry is exactly one of\n  `\"NOTUSED\"`, `\"ORR\"`, `\"ANDD\"`.\n- `pum_diag: Vec<bool>` \u2014 length 15; diagonal PUM for LIC 1..15.\n\n`Parameters` (access with `input.parameters.<field>`). Floating-point fields: `length1`,\n`radius1`, `epsilon`, `area1`, `dist`, `length2`, `radius2`, `area2`. Integer/count fields\n(all **usize**): `q_pts`, `quads`, `n_pts`, `k_pts`, `a_pts`, `b_pts`, `c_pts`, `d_pts`,\n`e_pts`, `f_pts`, `g_pts`.\n\nWire JSON uses Pascal-style keys (`LENGTH1`, `Q_PTS`, \u2026); serde maps them to these Rust\nnames. **Do not** use `LENGTH1`, `Q_PTS`, or other Pascal names as Rust identifiers \u2014 they\nwill not compile.\n\n`DecideOutput` fields (lengths are mandatory):\n- `cmv: Vec<bool>` \u2014 length 15\n- `pum: Vec<Vec<bool>>` \u2014 15 rows, each length 15\n- `fuv: Vec<bool>` \u2014 length 15\n- `launch: bool`\n\nBuild them with `vec![false; 15]`, nested `vec!`, or collect from iterators. If you compute\nfixed arrays `[bool; 15]` and `[[bool; 15]; 15]`, either convert rows with `.to_vec()` or return\nusing the harness helper (import `DecideOutput` from `crate::types`):\n\n  `DecideOutput::from_fixed(cmv, pum, fuv, launch)`\n\nDo **not** return bare `[bool; 15]` where a `Vec<bool>` is required unless you convert.\n\n## Real comparisons\n\nImplement `realcompare(a: f64, b: f64) -> &'static str` returning exactly `\"LT\"`, `\"EQ\"`,\nor `\"GT\"` per the six-significant-digit rule in `spec.md`. Use it everywhere the spec\nrequires real comparisons.\n\nThe specification is in: /tmp/nvp_gemini_jaeb12c_/spec.md\n\nWrite your implementation to: decide.rs\n",
+  "source_code": "",
+  "timestamp": "2026-04-16T13:16:10.468739+00:00",
+  "generation_config": {
+    "agent": "gemini",
+    "cli": "gemini",
+    "model": "gemini-2.5-pro",
+    "headless": true,
+    "approval_mode": "yolo"
+  },
+  "acceptance_passed": false,
+  "build_status": "api_unavailable",
+  "sandbox_dir": "/tmp/nvp_gemini_jaeb12c_",
+  "error_message": "gemini CLI exited 1: You have exhausted your daily quota on this model.",
+  "language": "rust"
+}

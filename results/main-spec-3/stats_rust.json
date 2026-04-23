@@ -1,0 +1,151 @@
+{
+  "kl": {
+    "n_versions": 19,
+    "T": 1000000,
+    "K_observed": 422,
+    "P_0": 0.996147117325176,
+    "P_1": 0.003846770626753035,
+    "P_m": 6.1120480709412825e-06,
+    "expected_K": 6.112048070941283,
+    "std_K": 2.4722481092741604,
+    "z": 168.2225786194094,
+    "p_value": 0.0,
+    "reject_h0_99pct": true,
+    "reject_h0_95pct": true
+  },
+  "version_stats": [
+    {
+      "version_id": "claude_code__m_claude-haiku-4.5__l_rust__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 999579,
+      "failure_rate": 0.0004210000000000047
+    },
+    {
+      "version_id": "claude_code__m_claude-opus-4.5__l_rust__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 999579,
+      "failure_rate": 0.0004210000000000047
+    },
+    {
+      "version_id": "claude_code__m_claude-opus-4.6__l_rust__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "claude_code__m_claude-sonnet-4.5__l_rust__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "claude_code__m_claude-sonnet-4.6__l_rust__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 999579,
+      "failure_rate": 0.0004210000000000047
+    },
+    {
+      "version_id": "codex__m_gpt-5-codex__l_rust__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "codex__m_gpt-5.1-codex-max__l_rust__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999579,
+      "failure_rate": 0.0004210000000000047
+    },
+    {
+      "version_id": "codex__m_gpt-5.1-codex__l_rust__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999579,
+      "failure_rate": 0.0004210000000000047
+    },
+    {
+      "version_id": "codex__m_gpt-5.2-codex__l_rust__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "codex__m_gpt-5.2__l_rust__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 1000000,
+      "failure_rate": 0.0
+    },
+    {
+      "version_id": "codex__m_gpt-5.3-codex__l_rust__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999944,
+      "failure_rate": 5.599999999994498e-05
+    },
+    {
+      "version_id": "codex__m_gpt-5.4__l_rust__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "cursor__m_composer-1.5__l_rust__run000",
+      "agent": "cursor",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "cursor__m_composer-2-fast__l_rust__run000",
+      "agent": "cursor",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "cursor__m_composer-2__l_rust__run000",
+      "agent": "cursor",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "cursor__m_grok-4-20__l_rust__run000",
+      "agent": "cursor",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "gemini__m_gemini-3-flash-preview__l_rust__run000",
+      "agent": "gemini",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "opencode__m_qwen_qwen3.5-397b-a17b__l_rust__run000",
+      "agent": "opencode",
+      "total": 1000000,
+      "passed_count": 998743,
+      "failure_rate": 0.0012569999999999526
+    },
+    {
+      "version_id": "opencode__m_qwen_qwen3.5-plus-02-15__l_rust__run000",
+      "agent": "opencode",
+      "total": 1000000,
+      "passed_count": 999579,
+      "failure_rate": 0.0004210000000000047
+    }
+  ]
+}

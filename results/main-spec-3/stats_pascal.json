@@ -1,0 +1,123 @@
+{
+  "kl": {
+    "n_versions": 15,
+    "T": 1000000,
+    "K_observed": 423,
+    "P_0": 0.9874505437318545,
+    "P_1": 0.012521935120370307,
+    "P_m": 2.7521147775213042e-05,
+    "expected_K": 27.52114777521304,
+    "std_K": 5.245988025304497,
+    "z": 75.3869147846238,
+    "p_value": 0.0,
+    "reject_h0_99pct": true,
+    "reject_h0_95pct": true
+  },
+  "version_stats": [
+    {
+      "version_id": "claude_code__m_claude-opus-4.6__l_pascal__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 1000000,
+      "failure_rate": 0.0
+    },
+    {
+      "version_id": "claude_code__m_claude-sonnet-4.6__l_pascal__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 998778,
+      "failure_rate": 0.0012219999999999454
+    },
+    {
+      "version_id": "codex__m_gpt-5-codex__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999578,
+      "failure_rate": 0.00042200000000003346
+    },
+    {
+      "version_id": "codex__m_gpt-5.1-codex-max__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "codex__m_gpt-5.1-codex__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999579,
+      "failure_rate": 0.0004210000000000047
+    },
+    {
+      "version_id": "codex__m_gpt-5.1__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999556,
+      "failure_rate": 0.00044399999999999995
+    },
+    {
+      "version_id": "codex__m_gpt-5.2-codex__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "codex__m_gpt-5.2__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "codex__m_gpt-5.3-codex__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "codex__m_gpt-5.4__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "codex__m_gpt-5__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "cursor__m_composer-1.5__l_pascal__run000",
+      "agent": "cursor",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "cursor__m_composer-2-fast__l_pascal__run000",
+      "agent": "cursor",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "gemini__m_gemini-3-flash-preview__l_pascal__run000",
+      "agent": "gemini",
+      "total": 1000000,
+      "passed_count": 999998,
+      "failure_rate": 1.999999999946489e-06
+    },
+    {
+      "version_id": "opencode__m_qwen_qwen3.6-plus__l_pascal__run000",
+      "agent": "opencode",
+      "total": 1000000,
+      "passed_count": 989950,
+      "failure_rate": 0.010050000000000003
+    }
+  ]
+}

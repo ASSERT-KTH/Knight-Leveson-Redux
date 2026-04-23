@@ -1,0 +1,415 @@
+[
+  {
+    "version_id": "claude_code__m_claude-haiku-4.5__l_rust__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-haiku-4.5",
+    "language": "rust"
+  },
+  {
+    "version_id": "claude_code__m_claude-opus-4.5__l_python__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-opus-4.5",
+    "language": "python"
+  },
+  {
+    "version_id": "claude_code__m_claude-opus-4.5__l_rust__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-opus-4.5",
+    "language": "rust"
+  },
+  {
+    "version_id": "claude_code__m_claude-opus-4.6__l_pascal__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-opus-4.6",
+    "language": "pascal"
+  },
+  {
+    "version_id": "claude_code__m_claude-opus-4.6__l_python__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-opus-4.6",
+    "language": "python"
+  },
+  {
+    "version_id": "claude_code__m_claude-opus-4.6__l_rust__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-opus-4.6",
+    "language": "rust"
+  },
+  {
+    "version_id": "claude_code__m_claude-sonnet-4.5__l_python__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-sonnet-4.5",
+    "language": "python"
+  },
+  {
+    "version_id": "claude_code__m_claude-sonnet-4.5__l_rust__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-sonnet-4.5",
+    "language": "rust"
+  },
+  {
+    "version_id": "claude_code__m_claude-sonnet-4.6__l_pascal__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-sonnet-4.6",
+    "language": "pascal"
+  },
+  {
+    "version_id": "claude_code__m_claude-sonnet-4.6__l_python__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-sonnet-4.6",
+    "language": "python"
+  },
+  {
+    "version_id": "claude_code__m_claude-sonnet-4.6__l_rust__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-sonnet-4.6",
+    "language": "rust"
+  },
+  {
+    "version_id": "claude_code__m_claude-sonnet-4__l_python__run000",
+    "agent": "claude_code",
+    "run_id": 0,
+    "model": "anthropic/claude-sonnet-4",
+    "language": "python"
+  },
+  {
+    "version_id": "codex__m_gpt-5-codex__l_pascal__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5-codex",
+    "language": "pascal"
+  },
+  {
+    "version_id": "codex__m_gpt-5-codex__l_python__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5-codex",
+    "language": "python"
+  },
+  {
+    "version_id": "codex__m_gpt-5-codex__l_rust__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5-codex",
+    "language": "rust"
+  },
+  {
+    "version_id": "codex__m_gpt-5.1-codex-max__l_pascal__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.1-codex-max",
+    "language": "pascal"
+  },
+  {
+    "version_id": "codex__m_gpt-5.1-codex-max__l_python__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.1-codex-max",
+    "language": "python"
+  },
+  {
+    "version_id": "codex__m_gpt-5.1-codex-max__l_rust__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.1-codex-max",
+    "language": "rust"
+  },
+  {
+    "version_id": "codex__m_gpt-5.1-codex__l_pascal__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.1-codex",
+    "language": "pascal"
+  },
+  {
+    "version_id": "codex__m_gpt-5.1-codex__l_python__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.1-codex",
+    "language": "python"
+  },
+  {
+    "version_id": "codex__m_gpt-5.1-codex__l_rust__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.1-codex",
+    "language": "rust"
+  },
+  {
+    "version_id": "codex__m_gpt-5.1__l_pascal__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.1",
+    "language": "pascal"
+  },
+  {
+    "version_id": "codex__m_gpt-5.2-codex__l_pascal__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.2-codex",
+    "language": "pascal"
+  },
+  {
+    "version_id": "codex__m_gpt-5.2-codex__l_python__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.2-codex",
+    "language": "python"
+  },
+  {
+    "version_id": "codex__m_gpt-5.2-codex__l_rust__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.2-codex",
+    "language": "rust"
+  },
+  {
+    "version_id": "codex__m_gpt-5.2__l_pascal__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.2",
+    "language": "pascal"
+  },
+  {
+    "version_id": "codex__m_gpt-5.2__l_python__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.2",
+    "language": "python"
+  },
+  {
+    "version_id": "codex__m_gpt-5.2__l_rust__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.2",
+    "language": "rust"
+  },
+  {
+    "version_id": "codex__m_gpt-5.3-codex__l_pascal__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.3-codex",
+    "language": "pascal"
+  },
+  {
+    "version_id": "codex__m_gpt-5.3-codex__l_python__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.3-codex",
+    "language": "python"
+  },
+  {
+    "version_id": "codex__m_gpt-5.3-codex__l_rust__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.3-codex",
+    "language": "rust"
+  },
+  {
+    "version_id": "codex__m_gpt-5.4-mini__l_python__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.4-mini",
+    "language": "python"
+  },
+  {
+    "version_id": "codex__m_gpt-5.4__l_pascal__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.4",
+    "language": "pascal"
+  },
+  {
+    "version_id": "codex__m_gpt-5.4__l_python__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.4",
+    "language": "python"
+  },
+  {
+    "version_id": "codex__m_gpt-5.4__l_rust__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5.4",
+    "language": "rust"
+  },
+  {
+    "version_id": "codex__m_gpt-5__l_pascal__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5",
+    "language": "pascal"
+  },
+  {
+    "version_id": "codex__m_gpt-5__l_python__run000",
+    "agent": "codex",
+    "run_id": 0,
+    "model": "gpt-5",
+    "language": "python"
+  },
+  {
+    "version_id": "cursor__m_composer-1.5__l_pascal__run000",
+    "agent": "cursor",
+    "run_id": 0,
+    "model": "composer-1.5",
+    "language": "pascal"
+  },
+  {
+    "version_id": "cursor__m_composer-1.5__l_rust__run000",
+    "agent": "cursor",
+    "run_id": 0,
+    "model": "composer-1.5",
+    "language": "rust"
+  },
+  {
+    "version_id": "cursor__m_composer-2-fast__l_pascal__run000",
+    "agent": "cursor",
+    "run_id": 0,
+    "model": "composer-2-fast",
+    "language": "pascal"
+  },
+  {
+    "version_id": "cursor__m_composer-2-fast__l_python__run000",
+    "agent": "cursor",
+    "run_id": 0,
+    "model": "composer-2-fast",
+    "language": "python"
+  },
+  {
+    "version_id": "cursor__m_composer-2-fast__l_rust__run000",
+    "agent": "cursor",
+    "run_id": 0,
+    "model": "composer-2-fast",
+    "language": "rust"
+  },
+  {
+    "version_id": "cursor__m_composer-2__l_python__run000",
+    "agent": "cursor",
+    "run_id": 0,
+    "model": "composer-2",
+    "language": "python"
+  },
+  {
+    "version_id": "cursor__m_composer-2__l_rust__run000",
+    "agent": "cursor",
+    "run_id": 0,
+    "model": "composer-2",
+    "language": "rust"
+  },
+  {
+    "version_id": "cursor__m_grok-4-20__l_python__run000",
+    "agent": "cursor",
+    "run_id": 0,
+    "model": "grok-4-20",
+    "language": "python"
+  },
+  {
+    "version_id": "cursor__m_grok-4-20__l_rust__run000",
+    "agent": "cursor",
+    "run_id": 0,
+    "model": "grok-4-20",
+    "language": "rust"
+  },
+  {
+    "version_id": "cursor__m_kimi-k2.5__l_python__run000",
+    "agent": "cursor",
+    "run_id": 0,
+    "model": "kimi-k2.5",
+    "language": "python"
+  },
+  {
+    "version_id": "gemini__m_gemini-3-flash-preview__l_pascal__run000",
+    "agent": "gemini",
+    "run_id": 0,
+    "model": "gemini-3-flash-preview",
+    "language": "pascal"
+  },
+  {
+    "version_id": "gemini__m_gemini-3-flash-preview__l_python__run000",
+    "agent": "gemini",
+    "run_id": 0,
+    "model": "gemini-3-flash-preview",
+    "language": "python"
+  },
+  {
+    "version_id": "gemini__m_gemini-3-flash-preview__l_rust__run000",
+    "agent": "gemini",
+    "run_id": 0,
+    "model": "gemini-3-flash-preview",
+    "language": "rust"
+  },
+  {
+    "version_id": "gemini__m_gemini-3.1-pro-preview__l_python__run000",
+    "agent": "gemini",
+    "run_id": 0,
+    "model": "gemini-3.1-pro-preview",
+    "language": "python"
+  },
+  {
+    "version_id": "opencode__m_google_gemma-4-26b-a4b-it__l_python__run000",
+    "agent": "opencode",
+    "run_id": 0,
+    "model": "openrouter/google/gemma-4-26b-a4b-it",
+    "language": "python"
+  },
+  {
+    "version_id": "opencode__m_google_gemma-4-31b-it__l_python__run000",
+    "agent": "opencode",
+    "run_id": 0,
+    "model": "openrouter/google/gemma-4-31b-it",
+    "language": "python"
+  },
+  {
+    "version_id": "opencode__m_qwen_qwen3.5-397b-a17b__l_python__run000",
+    "agent": "opencode",
+    "run_id": 0,
+    "model": "openrouter/qwen/qwen3.5-397b-a17b",
+    "language": "python"
+  },
+  {
+    "version_id": "opencode__m_qwen_qwen3.5-397b-a17b__l_rust__run000",
+    "agent": "opencode",
+    "run_id": 0,
+    "model": "openrouter/qwen/qwen3.5-397b-a17b",
+    "language": "rust"
+  },
+  {
+    "version_id": "opencode__m_qwen_qwen3.5-flash-02-23__l_python__run000",
+    "agent": "opencode",
+    "run_id": 0,
+    "model": "openrouter/qwen/qwen3.5-flash-02-23",
+    "language": "python"
+  },
+  {
+    "version_id": "opencode__m_qwen_qwen3.5-plus-02-15__l_python__run000",
+    "agent": "opencode",
+    "run_id": 0,
+    "model": "openrouter/qwen/qwen3.5-plus-02-15",
+    "language": "python"
+  },
+  {
+    "version_id": "opencode__m_qwen_qwen3.5-plus-02-15__l_rust__run000",
+    "agent": "opencode",
+    "run_id": 0,
+    "model": "openrouter/qwen/qwen3.5-plus-02-15",
+    "language": "rust"
+  },
+  {
+    "version_id": "opencode__m_qwen_qwen3.6-plus__l_pascal__run000",
+    "agent": "opencode",
+    "run_id": 0,
+    "model": "openrouter/qwen/qwen3.6-plus",
+    "language": "pascal"
+  }
+]
