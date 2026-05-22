@@ -15,6 +15,7 @@ dependencies = [
     "python-dotenv>=1.0",
     "matplotlib>=3.6",
     "numpy>=1.26",
+    "upsetplot>=0.9",
 ]
 
 [project.optional-dependencies]

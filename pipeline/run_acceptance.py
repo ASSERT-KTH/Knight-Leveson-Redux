@@ -32,7 +32,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from agents.base import VersionRecord
 from benchmarks.launch_interceptor.generator import generate_acceptance_cases
-from harnesses.execution import create_runner
+from pipeline.harness_runtime import CreateRunner, create_runner_factory, resolve_harness_root
 
 _ERR_CAP = 8000
 
@@ -61,6 +61,7 @@ def _run_acceptance(
     record: VersionRecord,
     cases: list[dict],
     *,
+    runner_factory: CreateRunner,
     revalidate_build: bool = False,
 ) -> tuple[bool, str, int, int]:
     """
@@ -81,7 +82,7 @@ def _run_acceptance(
     tmp = Path(tempfile.mkdtemp(prefix="nvp_accept_"))
     runner = None
     try:
-        runner, err = create_runner(record.language, record.source_code, tmp)
+        runner, err = runner_factory(record.language, record.source_code, tmp)
         if runner is None:
             if revalidate_build:
                 record.build_status = "syntax_error"
@@ -117,6 +118,7 @@ def run(
     seed: int = 42,
     acceptance_n: int = 200,
     *,
+    harness_root: str | None = None,
     revalidate_build: bool = False,
 ) -> None:
     versions_dir_path = Path(versions_dir)
@@ -127,6 +129,9 @@ def run(
         sys.exit(1)
 
     index = json.loads(index_path.read_text())
+    runner_factory = create_runner_factory(harness_root)
+    if harness_root:
+        print(f"Using harness root: {Path(harness_root).resolve()}")
     print(f"Generating {acceptance_n} acceptance test cases (seed={seed + 1000})...")
     cases = generate_acceptance_cases(seed=seed, n=acceptance_n)
     print(f"Running acceptance screening on {len(index)} version(s)...\n")
@@ -137,7 +142,7 @@ def run(
     for entry in index:
         record = VersionRecord.from_json(versions_dir_path / entry["file"])
         passed, reason, n_ok, n_total = _run_acceptance(
-            record, cases, revalidate_build=revalidate_build
+            record, cases, runner_factory=runner_factory, revalidate_build=revalidate_build
         )
 
         lang = entry.get("language") or getattr(record, "language", None) or "python"
@@ -199,6 +204,19 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--acceptance-n", type=int, default=200)
     parser.add_argument(
+        "--harness-root",
+        default=None,
+        help=(
+            "Alternate harness directory to use for runner creation, e.g. "
+            "harnesses-realcompare. Defaults to the importable harnesses package."
+        ),
+    )
+    parser.add_argument(
+        "--realcompare-harness",
+        action="store_true",
+        help="Use harnesses-realcompare (equivalent to --harness-root harnesses-realcompare).",
+    )
+    parser.add_argument(
         "--revalidate-build",
         action="store_true",
         help=(
@@ -207,11 +225,16 @@ def main() -> None:
         ),
     )
     args = parser.parse_args()
+    try:
+        harness_root = resolve_harness_root(args.harness_root, args.realcompare_harness)
+    except ValueError as exc:
+        parser.error(str(exc))
     run(
         args.versions,
         args.output,
         args.seed,
         args.acceptance_n,
+        harness_root=harness_root,
         revalidate_build=args.revalidate_build,
     )
 

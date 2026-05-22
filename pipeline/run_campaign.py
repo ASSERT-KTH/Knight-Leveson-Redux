@@ -43,7 +43,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from agents.base import VersionRecord
 from benchmarks.launch_interceptor.decide_diff import campaign_inputs_only, diff_decide_outputs
 from benchmarks.launch_interceptor.generator import iter_campaign_cases
-from harnesses.execution import create_runner
+from pipeline.harness_runtime import create_runner_factory, resolve_harness_root
 
 
 def _compare_outputs(expected: tuple, actual: tuple) -> bool:
@@ -88,9 +88,13 @@ def run(
     output_path: str,
     *,
     fault_log: str | None = None,
+    harness_root: str | None = None,
     workers: int | None = None,
 ) -> None:
     config = yaml.safe_load(Path(config_path).read_text())
+    runner_factory = create_runner_factory(harness_root)
+    if harness_root:
+        print(f"Using harness root: {Path(harness_root).resolve()}")
     seed = config.get("seed", 42)
     campaign_n = config.get("campaign_n", 1000)
     fault_log_detail = config.get("fault_log_detail", "summary")
@@ -133,7 +137,7 @@ def run(
         lang = entry.get("language") or getattr(record, "language", None) or "python"
         tmp = Path(tempfile.mkdtemp(prefix=f"nvp_camp_{version_id}_"))
         tmp_dirs.append(tmp)
-        runner, rerr = create_runner(record.language, record.source_code, tmp)
+        runner, rerr = runner_factory(record.language, record.source_code, tmp)
         versions.append({
             "version_id": version_id,
             "agent": entry["agent"],
@@ -283,6 +287,19 @@ def main() -> None:
         help="JSONL path for failing cases (inputs + diff). Overrides config fault_log if set.",
     )
     parser.add_argument(
+        "--harness-root",
+        default=None,
+        help=(
+            "Alternate harness directory to use for runner creation, e.g. "
+            "harnesses-realcompare. Defaults to the importable harnesses package."
+        ),
+    )
+    parser.add_argument(
+        "--realcompare-harness",
+        action="store_true",
+        help="Use harnesses-realcompare (equivalent to --harness-root harnesses-realcompare).",
+    )
+    parser.add_argument(
         "--workers",
         type=int,
         default=None,
@@ -293,7 +310,18 @@ def main() -> None:
         ),
     )
     args = parser.parse_args()
-    run(args.accepted, args.config, args.output, fault_log=args.fault_log, workers=args.workers)
+    try:
+        harness_root = resolve_harness_root(args.harness_root, args.realcompare_harness)
+    except ValueError as exc:
+        parser.error(str(exc))
+    run(
+        args.accepted,
+        args.config,
+        args.output,
+        fault_log=args.fault_log,
+        harness_root=harness_root,
+        workers=args.workers,
+    )
 
 
 if __name__ == "__main__":
