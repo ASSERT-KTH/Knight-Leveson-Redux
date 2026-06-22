@@ -1,0 +1,150 @@
+{
+  "agent": "gemini",
+  "model": "gemini-2.5-pro",
+  "run_id": 0,
+  "language": "rust",
+  "sandbox_dir": "/tmp/nvp_gemini_ni4kn9ta",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "session_id": "69b0c9e0-be9e-4b33-b215-173c6f571588",
+      "response": "\nI have completed the user's request. The deliverables `decide.rs` and `decide_bin` have been created and are in the root directory. I will now wait for the user's next instruction.\n",
+      "stats": {
+        "models": {
+          "gemini-2.5-pro": {
+            "api": {
+              "totalRequests": 15,
+              "totalErrors": 0,
+              "totalLatencyMs": 493837
+            },
+            "tokens": {
+              "input": 154266,
+              "prompt": 682581,
+              "candidates": 10233,
+              "total": 759935,
+              "cached": 528315,
+              "thoughts": 67121,
+              "tool": 0
+            },
+            "roles": {
+              "main": {
+                "totalRequests": 15,
+                "totalErrors": 0,
+                "totalLatencyMs": 493837,
+                "tokens": {
+                  "input": 154266,
+                  "prompt": 682581,
+                  "candidates": 10233,
+                  "total": 759935,
+                  "cached": 528315,
+                  "thoughts": 67121,
+                  "tool": 0
+                }
+              }
+            }
+          }
+        },
+        "tools": {
+          "totalCalls": 17,
+          "totalSuccess": 16,
+          "totalFail": 1,
+          "totalDurationMs": 4954,
+          "totalDecisions": {
+            "accept": 16,
+            "reject": 0,
+            "modify": 0,
+            "auto_accept": 0
+          },
+          "byName": {
+            "read_file": {
+              "count": 4,
+              "success": 4,
+              "fail": 0,
+              "durationMs": 57,
+              "decisions": {
+                "accept": 4,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "run_shell_command": {
+              "count": 8,
+              "success": 7,
+              "fail": 1,
+              "durationMs": 4851,
+              "decisions": {
+                "accept": 7,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "write_file": {
+              "count": 3,
+              "success": 3,
+              "fail": 0,
+              "durationMs": 26,
+              "decisions": {
+                "accept": 3,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "replace": {
+              "count": 2,
+              "success": 2,
+              "fail": 0,
+              "durationMs": 20,
+              "decisions": {
+                "accept": 2,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            }
+          }
+        },
+        "files": {
+          "totalLinesAdded": 885,
+          "totalLinesRemoved": 5
+        }
+      },
+      "stream": "stdout",
+      "index": 0
+    },
+    {
+      "stream": "stderr",
+      "index": 0,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 1,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 2,
+      "format": "text",
+      "text": "[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics."
+    },
+    {
+      "stream": "stderr",
+      "index": 3,
+      "format": "text",
+      "text": "[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset)."
+    },
+    {
+      "stream": "stderr",
+      "index": 4,
+      "format": "text",
+      "text": "Error executing tool run_shell_command: Tool execution denied by policy."
+    }
+  ],
+  "raw_agent_stdout": "{\n  \"session_id\": \"69b0c9e0-be9e-4b33-b215-173c6f571588\",\n  \"response\": \"\\nI have completed the user's request. The deliverables `decide.rs` and `decide_bin` have been created and are in the root directory. I will now wait for the user's next instruction.\\n\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-2.5-pro\": {\n        \"api\": {\n          \"totalRequests\": 15,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 493837\n        },\n        \"tokens\": {\n          \"input\": 154266,\n          \"prompt\": 682581,\n          \"candidates\": 10233,\n          \"total\": 759935,\n          \"cached\": 528315,\n          \"thoughts\": 67121,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 15,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 493837,\n            \"tokens\": {\n              \"input\": 154266,\n              \"prompt\": 682581,\n              \"candidates\": 10233,\n              \"total\": 759935,\n              \"cached\": 528315,\n              \"thoughts\": 67121,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 17,\n      \"totalSuccess\": 16,\n      \"totalFail\": 1,\n      \"totalDurationMs\": 4954,\n      \"totalDecisions\": {\n        \"accept\": 16,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"read_file\": {\n          \"count\": 4,\n          \"success\": 4,\n          \"fail\": 0,\n          \"durationMs\": 57,\n          \"decisions\": {\n            \"accept\": 4,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"run_shell_command\": {\n          \"count\": 8,\n          \"success\": 7,\n          \"fail\": 1,\n          \"durationMs\": 4851,\n          \"decisions\": {\n            \"accept\": 7,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"write_file\": {\n          \"count\": 3,\n          \"success\": 3,\n          \"fail\": 0,\n          \"durationMs\": 26,\n          \"decisions\": {\n            \"accept\": 3,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"replace\": {\n          \"count\": 2,\n          \"success\": 2,\n          \"fail\": 0,\n          \"durationMs\": 20,\n          \"decisions\": {\n            \"accept\": 2,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 885,\n      \"totalLinesRemoved\": 5\n    }\n  }\n}",
+  "raw_agent_stderr": "YOLO mode is enabled. All tool calls will be automatically approved.\nYOLO mode is enabled. All tool calls will be automatically approved.\n[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics.\n[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset).\nError executing tool run_shell_command: Tool execution denied by policy.\n"
+}

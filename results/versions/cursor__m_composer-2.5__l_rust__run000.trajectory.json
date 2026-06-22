@@ -1,0 +1,30 @@
+{
+  "agent": "cursor",
+  "model": "composer-2.5",
+  "run_id": 0,
+  "language": "rust",
+  "sandbox_dir": "/tmp/nvp_cursor_94djom3f",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 181978,
+      "duration_api_ms": 181978,
+      "result": "Implementing the Launch Interceptor Program per the spec. Reading the specification and reference files.\nReading the JSON schema and a few examples:\nImplementing the full solution and validating against all 15 examples.\nFixing off-by-one errors in spaced LIC loops.\nAll 15 examples pass. Cleaning up the unused helper and verifying the deliverables.\nThe Launch Interceptor Program is implemented and validated against all 15 oracle examples in `prompt_examples.json`.\n\n### Deliverables\n\n| File | Role |\n|------|------|\n| [`decide.rs`](decide.rs) | Core `DECIDE` logic: all 15 LICs, `realcompare` (matching `realcompare_reference.rs`), PUM/FUV/LAUNCH |\n| [`decide_bin`](decide_bin) | Release binary: one JSON object on stdin \u2192 one on stdout |\n| [`decide_bin.rs`](decide_bin.rs) | JSON I/O wrapper (uses `serde` / `serde_json`) |\n| [`Cargo.toml`](Cargo.toml) | Build config |\n\n### Behavior\n\n- **LICs 1\u201315** per `spec.md`, with `realcompare` used for every real comparison\n- **PUM** off-diagonal from LCM + CMV; diagonal from input `pum_diag`\n- **FUV** and **LAUNCH** per the spec\u2019s rules\n- **Quadrant assignment** follows the spec\u2019s axis-priority examples (e.g. `(0,0)\u2192I`, `(-1,0)\u2192II`, `(0,-1)\u2192III`)\n\n### Usage\n\n```bash\necho '<input-json>' | ./decide_bin\n```\n\nOutput shape: `{\"cmv\":[...],\"pum\":[[...]],\"fuv\":[...],\"launch\":bool}`.\n\nRebuild with:\n\n```bash\ncargo build --release && cp target/release/decide_bin ./decide_bin\n```",
+      "session_id": "2894974c-0707-4dfc-bf65-4dc2c235fce1",
+      "request_id": "1be09638-6773-4e62-9261-0434fff80386",
+      "usage": {
+        "inputTokens": 30584,
+        "outputTokens": 14987,
+        "cacheReadTokens": 324584,
+        "cacheWriteTokens": 0
+      },
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":181978,\"duration_api_ms\":181978,\"result\":\"Implementing the Launch Interceptor Program per the spec. Reading the specification and reference files.\\nReading the JSON schema and a few examples:\\nImplementing the full solution and validating against all 15 examples.\\nFixing off-by-one errors in spaced LIC loops.\\nAll 15 examples pass. Cleaning up the unused helper and verifying the deliverables.\\nThe Launch Interceptor Program is implemented and validated against all 15 oracle examples in `prompt_examples.json`.\\n\\n### Deliverables\\n\\n| File | Role |\\n|------|------|\\n| [`decide.rs`](decide.rs) | Core `DECIDE` logic: all 15 LICs, `realcompare` (matching `realcompare_reference.rs`), PUM/FUV/LAUNCH |\\n| [`decide_bin`](decide_bin) | Release binary: one JSON object on stdin \u2192 one on stdout |\\n| [`decide_bin.rs`](decide_bin.rs) | JSON I/O wrapper (uses `serde` / `serde_json`) |\\n| [`Cargo.toml`](Cargo.toml) | Build config |\\n\\n### Behavior\\n\\n- **LICs 1\u201315** per `spec.md`, with `realcompare` used for every real comparison\\n- **PUM** off-diagonal from LCM + CMV; diagonal from input `pum_diag`\\n- **FUV** and **LAUNCH** per the spec\u2019s rules\\n- **Quadrant assignment** follows the spec\u2019s axis-priority examples (e.g. `(0,0)\u2192I`, `(-1,0)\u2192II`, `(0,-1)\u2192III`)\\n\\n### Usage\\n\\n```bash\\necho '<input-json>' | ./decide_bin\\n```\\n\\nOutput shape: `{\\\"cmv\\\":[...],\\\"pum\\\":[[...]],\\\"fuv\\\":[...],\\\"launch\\\":bool}`.\\n\\nRebuild with:\\n\\n```bash\\ncargo build --release && cp target/release/decide_bin ./decide_bin\\n```\",\"session_id\":\"2894974c-0707-4dfc-bf65-4dc2c235fce1\",\"request_id\":\"1be09638-6773-4e62-9261-0434fff80386\",\"usage\":{\"inputTokens\":30584,\"outputTokens\":14987,\"cacheReadTokens\":324584,\"cacheWriteTokens\":0}}\n",
+  "raw_agent_stderr": ""
+}

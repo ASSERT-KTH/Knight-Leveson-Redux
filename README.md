@@ -32,11 +32,8 @@ The **Launch Interceptor Program** from Knight & Leveson (1986). Agents read the
 ├── docs/                            # GitHub Pages site showcasing every agent implementation
 │   ├── experiment_design.md         #   full research design document
 │   ├── index.html / view.html       #   static site (Deploy from /docs)
-│   └── build.py                     #   regenerates docs/data/ from results/main/versions/
-└── results/
-    ├── pilot/                       # initial validation run
-    ├── main/                        # headline experiment outputs
-    └── main-spec-2, main-spec-3/    # follow-up campaigns against spec variants
+│   └── build.py                     #   regenerates docs/data/ from results/versions/
+└── results/                         # latest config-filtered campaign outputs
 ```
 
 Large `campaign.csv` files (multiple GB each) are intentionally **not** checked in; see [`.gitignore`](.gitignore). Per-version implementations, stats, and plots are tracked.
@@ -112,15 +109,14 @@ python -m pipeline.run_campaign --accepted results/pilot/accepted.json --config 
 python -m analysis.analyze_results --campaign results/pilot/campaign.csv --output results/pilot/ --report report.md
 ```
 
-Latest results in `results/main-spec-3/`: `campaign.csv` (gitignored; regenerate with step 3), `stats.json`, `summary_table.csv`, `failure_heatmap.png`.
-Final report: `report.md`.
+Latest results in `results/`: `campaign.csv` (gitignored; regenerate with step 3), `analysis_report.md`, `analysis/stats.json`, `analysis/summary_table.csv`, and generated plots.
 
 ## Browse Implementations
 
-Every per-agent/model/language version produced by `generate_versions` is archived under [`results/main/versions/`](results/main/versions/) as JSON (prompt + source + build/acceptance metadata). The [`docs/`](docs/) folder ships a static GitHub Pages site for browsing them interactively (filter by agent, model, language, build status; syntax-highlighted code viewer).
+Every per-agent/model/language version produced by `generate_versions` is archived under [`results/versions/`](results/versions/) as JSON (prompt + source + build/acceptance metadata). The [`docs/`](docs/) folder ships a static GitHub Pages site for browsing them interactively (filter by agent, model, language, build status; syntax-highlighted code viewer).
 
 ```bash
-python3 docs/build.py                # regenerate docs/data/ from results/main/versions/
+python3 docs/build.py                # regenerate docs/data/ from results/versions/
 python3 -m http.server -d docs 8000  # preview locally at http://localhost:8000
 ```
 

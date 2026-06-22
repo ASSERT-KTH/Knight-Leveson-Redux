@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the static GitHub Pages site in ``docs/`` from ``results/main/versions/``.
+"""Build the static GitHub Pages site from ``results/versions/``.
 
 This script:
   * Copies every per-version JSON file into ``docs/data/versions/``.
@@ -13,13 +13,14 @@ main /docs".
 """
 from __future__ import annotations
 
+import argparse
 import json
 import shutil
 from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE_DIR = ROOT / "results" / "main" / "versions"
+DEFAULT_SOURCE_DIR = ROOT / "results" / "versions"
 OUT_DATA_DIR = ROOT / "docs" / "data"
 OUT_VERSIONS_DIR = OUT_DATA_DIR / "versions"
 
@@ -45,9 +46,9 @@ SUMMARY_FIELDS = (
 )
 
 
-def build() -> None:
-    if not SOURCE_DIR.exists():
-        raise SystemExit(f"Source directory not found: {SOURCE_DIR}")
+def build(source_dir: Path = DEFAULT_SOURCE_DIR) -> None:
+    if not source_dir.exists():
+        raise SystemExit(f"Source directory not found: {source_dir}")
 
     OUT_VERSIONS_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -57,7 +58,7 @@ def build() -> None:
 
     # Upstream index.json carries extra fields (configured_model, model_slug)
     # that are not present in per-version files; merge them in when available.
-    upstream_index_path = SOURCE_DIR / "index.json"
+    upstream_index_path = source_dir / "index.json"
     upstream_by_id: dict[str, dict] = {}
     if upstream_index_path.exists():
         try:
@@ -75,8 +76,8 @@ def build() -> None:
     languages: Counter[str] = Counter()
     statuses: Counter[str] = Counter()
 
-    for src in sorted(SOURCE_DIR.glob("*.json")):
-        if src.name == "index.json":
+    for src in sorted(source_dir.glob("*.json")):
+        if src.name == "index.json" or src.name.endswith(".trajectory.json"):
             continue
         try:
             payload = json.loads(src.read_text(encoding="utf-8"))
@@ -166,5 +167,20 @@ def build() -> None:
     )
 
 
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Build docs/data from an archived versions directory."
+    )
+    parser.add_argument(
+        "--source",
+        type=Path,
+        default=DEFAULT_SOURCE_DIR,
+        help=f"Versions directory to publish (default: {DEFAULT_SOURCE_DIR})",
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    build()
+    args = parse_args()
+    build(args.source.resolve())

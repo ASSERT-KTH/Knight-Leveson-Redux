@@ -398,44 +398,77 @@ def write_full_pool_cdf_plot(
     plot_path: Path,
 ) -> None:
     """
-    Empirical CDF of per-version oracle failure counts vs. empirical CDF of
+    Bucketed percentage comparison of per-version oracle failure counts vs.
     majority-vote unit failure counts K over all triples (full pool only).
     """
-    singles = np.sort(fail_counts.astype(np.float64))
-    triples = np.sort(K_all.astype(np.float64))
+    bucket_specs = [
+        ("0", lambda x: x == 0),
+        ("(0,10]", lambda x: (x > 0) & (x <= 10)),
+        ("(10,100]", lambda x: (x > 10) & (x <= 100)),
+        ("(100,1000]", lambda x: (x > 100) & (x <= 1000)),
+        (">1000", lambda x: x > 1000),
+    ]
+    singles = fail_counts.astype(np.int64)
+    triples = K_all.astype(np.int64)
     n_s = singles.size
     n_t = triples.size
-    y_s = np.arange(1, n_s + 1, dtype=np.float64) / n_s
-    y_t = np.arange(1, n_t + 1, dtype=np.float64) / n_t
 
-    fig, ax = plt.subplots(figsize=(7.2, 4.6))
-    ax.step(
-        singles,
-        y_s,
-        where="post",
+    singles_pct = []
+    triples_pct = []
+    singles_counts = []
+    triples_counts = []
+    labels = []
+    for label, pred in bucket_specs:
+        labels.append(label)
+        singles_n = int(np.count_nonzero(pred(singles)))
+        triples_n = int(np.count_nonzero(pred(triples)))
+        singles_counts.append(singles_n)
+        triples_counts.append(triples_n)
+        singles_pct.append(100.0 * float(singles_n) / max(n_s, 1))
+        triples_pct.append(100.0 * float(triples_n) / max(n_t, 1))
+
+    x = np.arange(len(labels), dtype=np.float64)
+    width = 0.36
+    fig, ax = plt.subplots(figsize=(8.0, 4.8))
+    bars_s = ax.bar(
+        x - width / 2,
+        singles_pct,
+        width=width,
         color="#1f77b4",
-        linewidth=1.8,
         label=f"Single version (n = {n_s})",
     )
-    ax.step(
-        triples,
-        y_t,
-        where="post",
+    bars_t = ax.bar(
+        x + width / 2,
+        triples_pct,
+        width=width,
         color="#ff7f0e",
-        linewidth=1.8,
         alpha=0.92,
         label=f"3-version unit, all triples (n = {n_t:,})",
     )
+    ax.set_xticks(x, labels)
+    ax.tick_params(axis="x", labelrotation=15, labelsize=10)
     ax.set_xlabel(f"Oracle failures K (of {T:,} tests)", fontsize=11)
-    ax.set_ylabel("Cumulative fraction", fontsize=11)
+    ax.set_ylabel("Percentage of versions", fontsize=11)
     ax.set_title(
-        "Empirical CDF: single-version vs 3-version unit (full pool)",
+        "Bucketed failure-count distribution: single-version vs 3-version unit",
         fontsize=11,
     )
-    ax.set_xscale("symlog", linthresh=10, base=10)
-    ax.set_ylim(0.0, 1.01)
-    ax.grid(True, linestyle=":", alpha=0.5)
-    ax.legend(loc="lower right", fontsize=10)
+    ymax = max(max(singles_pct, default=0.0), max(triples_pct, default=0.0))
+    ax.set_ylim(0.0, min(100.0, ymax + 12.0))
+    ax.grid(True, axis="y", linestyle=":", alpha=0.5)
+    ax.legend(loc="upper right", fontsize=10)
+    for bars in (bars_s, bars_t):
+        for bar in bars:
+            height = bar.get_height()
+            ax.text(
+                bar.get_x() + bar.get_width() / 2,
+                height + 1.0,
+                f"{height:.1f}%",
+                ha="center",
+                va="bottom",
+                fontsize=8,
+                rotation=0,
+            )
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     fig.tight_layout()

@@ -8,51 +8,55 @@ from pathlib import Path
 from typing import Any
 
 from harnesses.base import LanguageHarness
+from harnesses.prompt_context import build_reference_context
 
 
 PYTHON_TASK_PROMPT_TEMPLATE = """\
 You are implementing the Launch Interceptor Program from Knight & Leveson (1986).
 
-The file `spec.md` in your workspace is the verbatim specification: Pascal types,
-global variables, the parameterless procedure `DECIDE`, and the `REALCOMPARE`
-function contract. All functional requirements and Launch Interceptor Conditions
-(LICs) are defined only there. Do not skip or reinterpret any part of it.
+Your workspace initially contains only:
+- `spec.md`
+- `prompt_examples.json`
+- `realcompare_reference.py`
 
-Python embedding (delivery only; this does not replace the spec):
-- Implement a single function `decide` that is behaviorally equivalent to `DECIDE`.
-- Inputs: `numpoints` (int, 2..100) corresponds to `NUMPOINTS`. `x` and `y` are
-  Python lists of length `numpoints` with `x[i]`, `y[i]` as the coordinates of
-  point i+1 in the spec (Pascal indices 1..NUMPOINTS → Python 0..numpoints-1).
-- `parameters` is a Python dict whose keys are the field names of `PARAMETERS`
-  in the spec (`LENGTH1`, `RADIUS1`, `EPSILON`, …) with the same types and
-  constraints as in the Pascal record.
-- `lcm` is a 15×15 list of strings, each entry one of `"NOTUSED"`, `"ORR"`, `"ANDD"`
-  matching the `LCM` connector enum. The matrix is symmetric; diagonal entries
-  are ignored for PUM off-diagonals (see spec).
-- `pum_diag` is a length-15 list of bools: `pum_diag[i]` is the PUM diagonal
-  element for LIC (i+1), i.e. the spec’s `PUM[i,i]` for i in 1..15.
-- Return a 4-tuple `(cmv, pum, fuv, launch)`:
-  - `cmv`: 15 bools, `cmv[i]` is CMV for LIC (i+1).
-  - `pum`: 15×15 bools; off-diagonal from `LCM` and `CMV` per spec; diagonal
-    `pum[i][i] == pum_diag[i]`.
-  - `fuv`: 15 bools per the spec’s FUV rules.
-  - `launch`: bool, the LAUNCH decision.
-- The Pascal caller supplied `REALCOMPARE`. In Python there is no caller: define
-  a helper `realcompare(a: float, b: float) -> str` that implements the same
-  semantics, returning `"LT"`, `"EQ"`, or `"GT"` for the six-significant-digit
-  comparison described in the spec. Use it everywhere the spec requires real
-  comparisons inside the logic equivalent to `DECIDE`.
+The file `spec.md` is the verbatim specification. All functional requirements and
+Launch Interceptor Conditions (LICs) are defined only there.
+
+Python delivery:
+- Your main deliverable is a standalone Python file at `{executable_path}`.
+- That file must be runnable as `python {executable_path}`.
+- On each run, it must read exactly one input JSON object from stdin and write exactly one
+  output JSON object to stdout.
+- It should also expose `decide(numpoints, x, y, parameters, lcm, pum_diag)` and be
+  self-contained and importable with no side effects at import time.
+- The input will be in JSON format, and each input object will have the same shape as an
+  individual `input` object inside `prompt_examples.json`. How you parse or adapt that JSON
+  is up to you.
+- The logical inputs correspond to:
+  - `numpoints`: int, 2..100
+  - `x`, `y`: lists of floats of length `numpoints`
+  - `parameters`: dict using Pascal-style keys (`LENGTH1`, `RADIUS1`, `EPSILON`, ...)
+  - `lcm`: 15x15 list of `"NOTUSED"`, `"ORR"`, `"ANDD"`
+  - `pum_diag`: length-15 list of bools
+- The expected output must be emitted in JSON format, and each output object must have the
+  same shape as an individual `expected` object inside `prompt_examples.json`.
+- The logical output is JSON-equivalent to `(cmv, pum, fuv, launch)`.
+- Implement `realcompare(a: float, b: float) -> str` with the specified semantics,
+  using `realcompare_reference.py` as fixed reference behavior.
+- Also write the primary source snapshot to `{output_path}` for archival and later
+  evaluation by the pipeline.
 
 Engineering constraints:
-- Write everything in one file named `decide.py`, self-contained and importable
-  with no side effects at import time.
-- Do not read from stdin, write to stdout/stderr, or read other files.
-- Do not add any `if __name__ == "__main__"` block.
+- Do not read any files other than the provided reference files.
+- Do not modify `realcompare_reference.py`.
 - Use only the Python standard library.
 
 The specification is in: {spec_path}
 
-Write your implementation to: {output_path}
+{reference_context}
+
+Write the archival source file to: {output_path}
+Write the main standalone deliverable to: {executable_path}
 """
 
 
@@ -63,8 +67,17 @@ class PythonHarness(LanguageHarness):
     def output_filename(self) -> str:
         return "decide.py"
 
+    @property
+    def primary_artifact_filename(self) -> str:
+        return "decide.py"
+
     def build_prompt(self, spec_path: str, output_path: str) -> str:
-        return PYTHON_TASK_PROMPT_TEMPLATE.format(spec_path=spec_path, output_path=output_path)
+        return PYTHON_TASK_PROMPT_TEMPLATE.format(
+            spec_path=spec_path,
+            output_path=output_path,
+            executable_path=self.primary_artifact_filename,
+            reference_context=build_reference_context(self.name),
+        )
 
     def check_syntax(self, source_code: str, work_dir: Path | None = None) -> str:
         try:
@@ -82,6 +95,15 @@ class PythonHarness(LanguageHarness):
             if "def decide(" in text:
                 return text
         return ""
+
+    def validate_generation_result(self, sandbox: Path, source_code: str) -> tuple[str, str]:
+        artifact = self.primary_artifact_path(sandbox)
+        if artifact is None:
+            return "no_output", f"primary artifact not found: {self.primary_artifact_filename}"
+        status = self.check_syntax(artifact.read_text(encoding="utf-8", errors="replace"))
+        if status != "ok":
+            return status, "generated Python artifact failed syntax validation"
+        return "ok", ""
 
 
 def load_decide_module(source_code: str) -> types.ModuleType | None:

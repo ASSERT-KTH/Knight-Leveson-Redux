@@ -1,0 +1,30 @@
+{
+  "agent": "cursor",
+  "model": "composer-2",
+  "run_id": 0,
+  "language": "pascal",
+  "sandbox_dir": "/tmp/nvp_cursor_7lf41vhr",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 492191,
+      "duration_api_ms": 492191,
+      "result": "Implementing the Launch Interceptor Program per the spec. Reading the specification, examples, and reference files.\n\nReading the start of `prompt_examples.json` for structure and sampling examples.\n\nFixing LIC 7 (removing incorrect endpoint branch) and stdin reading. Compiling and testing against the examples.\n\nImplementing a minimal JSON reader/writer with SysUtils, Math, and Classes (TMemoryStream) because `fpjson` isn't available on this system.\n\nReplacing fpjson with a minimal stdin JSON scanner using Classes and System.\n\nFixing declaration order: `ParseConnector` must precede `JsParseLcm`, and `JsSkipValue` needs a proper forward declaration.\n\nMoving `TJLex` into the program's type section (types can't follow procedures) and fixing procedure order: add `TJLex` at the top, reorder JSON helpers, and move `ParseConnector` before `JsParseLcm`.\n\nAligning `REALCOMPARE` with the reference (`real` types) and removing the unused `dummy` variable.\n\nHere is what was implemented.\n\n### `lipdecide.pas`\n- **`DECIDE`** (in `procedure DECIDE`) implements all **15 LICs** from `spec.md`, **PUM** off-diagonals from **LCM** + **CMV** (diagonals taken from **`pum_diag`**), **FUV**, and **LAUNCH**.\n- **`REALCOMPARE`** matches **`realcompare_reference.pas`** (same six-significant-digit rule; `real` parameters/locals as in the reference).\n- All geometric/real checks go through **`REALCOMPARE`** (distances, areas, angles via `ArcCos` + clamped cosine, circumcircle / smallest enclosing circle for LICs 2, 9, 14, quadrant rules for LIC 5 as in the spec).\n- **JSON**: `fpjson` is not installed here, so a small **scanner** was added (only `SysUtils`, `Math`, `Classes`: stdin via **`THandleStream` + `StdInputHandle`**). It accepts any key order, skips unknown keys, and supports UTF-8 BOM.\n- **Output** is one compact JSON object: **`cmv`**, **`pum`**, **`fuv`**, **`launch`** (same shape as the examples).\n\n### `decide_bin`\n- Built with: `fpc -O2 -S2 lipdecide.pas -odecide_bin`\n- Marked executable.\n\n### Verification\nAll **15** cases in **`prompt_examples.json`** were checked with `json.dumps(..., separators=(',', ':'))` and with **indented** JSON; outputs match the **`expected`** objects exactly.\n\n`realcompare_reference.pas` was **not** modified.",
+      "session_id": "388d4b20-f36c-4beb-8523-4e41f205e914",
+      "request_id": "51b286a2-6c50-4885-abf7-d0fb5476da94",
+      "usage": {
+        "inputTokens": 54330,
+        "outputTokens": 31564,
+        "cacheReadTokens": 1448146,
+        "cacheWriteTokens": 0
+      },
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":492191,\"duration_api_ms\":492191,\"result\":\"Implementing the Launch Interceptor Program per the spec. Reading the specification, examples, and reference files.\\n\\nReading the start of `prompt_examples.json` for structure and sampling examples.\\n\\nFixing LIC 7 (removing incorrect endpoint branch) and stdin reading. Compiling and testing against the examples.\\n\\nImplementing a minimal JSON reader/writer with SysUtils, Math, and Classes (TMemoryStream) because `fpjson` isn't available on this system.\\n\\nReplacing fpjson with a minimal stdin JSON scanner using Classes and System.\\n\\nFixing declaration order: `ParseConnector` must precede `JsParseLcm`, and `JsSkipValue` needs a proper forward declaration.\\n\\nMoving `TJLex` into the program's type section (types can't follow procedures) and fixing procedure order: add `TJLex` at the top, reorder JSON helpers, and move `ParseConnector` before `JsParseLcm`.\\n\\nAligning `REALCOMPARE` with the reference (`real` types) and removing the unused `dummy` variable.\\n\\nHere is what was implemented.\\n\\n### `lipdecide.pas`\\n- **`DECIDE`** (in `procedure DECIDE`) implements all **15 LICs** from `spec.md`, **PUM** off-diagonals from **LCM** + **CMV** (diagonals taken from **`pum_diag`**), **FUV**, and **LAUNCH**.\\n- **`REALCOMPARE`** matches **`realcompare_reference.pas`** (same six-significant-digit rule; `real` parameters/locals as in the reference).\\n- All geometric/real checks go through **`REALCOMPARE`** (distances, areas, angles via `ArcCos` + clamped cosine, circumcircle / smallest enclosing circle for LICs 2, 9, 14, quadrant rules for LIC 5 as in the spec).\\n- **JSON**: `fpjson` is not installed here, so a small **scanner** was added (only `SysUtils`, `Math`, `Classes`: stdin via **`THandleStream` + `StdInputHandle`**). It accepts any key order, skips unknown keys, and supports UTF-8 BOM.\\n- **Output** is one compact JSON object: **`cmv`**, **`pum`**, **`fuv`**, **`launch`** (same shape as the examples).\\n\\n### `decide_bin`\\n- Built with: `fpc -O2 -S2 lipdecide.pas -odecide_bin`\\n- Marked executable.\\n\\n### Verification\\nAll **15** cases in **`prompt_examples.json`** were checked with `json.dumps(..., separators=(',', ':'))` and with **indented** JSON; outputs match the **`expected`** objects exactly.\\n\\n`realcompare_reference.pas` was **not** modified.\",\"session_id\":\"388d4b20-f36c-4beb-8523-4e41f205e914\",\"request_id\":\"51b286a2-6c50-4885-abf7-d0fb5476da94\",\"usage\":{\"inputTokens\":54330,\"outputTokens\":31564,\"cacheReadTokens\":1448146,\"cacheWriteTokens\":0}}\n",
+  "raw_agent_stderr": ""
+}

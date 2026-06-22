@@ -33,6 +33,20 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
+def configure_plot_style() -> None:
+    plt.rcParams.update(
+        {
+            "font.size": 13,
+            "axes.titlesize": 15,
+            "axes.labelsize": 15,
+            "xtick.labelsize": 12,
+            "ytick.labelsize": 12,
+            "legend.fontsize": 11.5,
+            "legend.title_fontsize": 12,
+        }
+    )
+
+
 def _parse_passed_cell(value: str) -> bool:
     return str(value).strip().lower() in {"1", "true", "t", "yes", "y"}
 
@@ -132,6 +146,7 @@ def bucket_counts(failures_by_triple: dict[str, int]) -> Counter[str]:
 
 
 def plot_bucket_counts(bucketed: Counter[str], output_path: Path) -> None:
+    configure_plot_style()
     labels = list(bucketed.keys())
     values = [bucketed[label] for label in labels]
 
@@ -150,6 +165,7 @@ def plot_bucket_counts(bucketed: Counter[str], output_path: Path) -> None:
             str(value),
             ha="center",
             va="bottom",
+            fontsize=12,
         )
 
     fig.tight_layout()

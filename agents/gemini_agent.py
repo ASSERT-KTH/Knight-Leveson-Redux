@@ -30,6 +30,7 @@ from pathlib import Path
 from typing import Any
 
 from agents.base import AgentBase, AgentUnavailableError
+from agents.trajectory import DEFAULT_TRAJECTORY_NOTE, parse_json_or_jsonl_output, parse_jsonl_events
 
 
 def _load_dotenv_for_gemini() -> None:
@@ -157,6 +158,14 @@ class GeminiAgent(AgentBase):
             result = self._run_cli(cmd, cwd=sandbox, timeout=self.timeout, env=env)
         except Exception as exc:
             raise AgentUnavailableError(f"gemini CLI failed to launch: {exc}") from exc
+
+        trajectory = parse_json_or_jsonl_output(result.stdout or "", stream="stdout") + parse_jsonl_events(result.stderr or "", stream="stderr")
+        self._set_invocation_artifacts(
+            trajectory=trajectory or None,
+            raw_agent_stdout=result.stdout or "",
+            raw_agent_stderr=result.stderr or "",
+            trajectory_capture_note=DEFAULT_TRAJECTORY_NOTE,
+        )
 
         if result.returncode != 0:
             raise AgentUnavailableError(

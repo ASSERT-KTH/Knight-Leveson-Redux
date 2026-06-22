@@ -1,0 +1,138 @@
+{
+  "agent": "gemini",
+  "model": "gemini-3.1-pro-preview",
+  "run_id": 0,
+  "language": "python",
+  "sandbox_dir": "/tmp/nvp_gemini_ouwa0499",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "session_id": "8139db76-bd24-44dd-a465-80030a5d5f7f",
+      "response": "I have fully implemented the Launch Interceptor Program (LIP) from the Knight & Leveson (1986) specification in `decide.py`.\n\nThe solution:\n- Exposes `decide(numpoints, x, y, parameters, lcm, pum_diag)` with no side-effects upon import.\n- Handles reading exactly one input JSON object from standard input and printing exactly one output JSON object to standard output when invoked as a script.\n- Includes the `realcompare` logic exactly as provided in the reference harness file to enforce proper six-significant-digit tolerance matching for all geometric float checks.\n- Adheres to standard python libraries (`json`, `sys`, `math`).\n- Validates 100% of the given functional Launch Interceptor Conditions with comprehensive edge case checks against floating-point comparisons.\n- Has been explicitly tested against all 15 oracle test examples in `prompt_examples.json`.\n\nYou can test it directly with:\n```bash\ncat prompt_examples.json | jq '.examples[0].input' | python decide.py\n```",
+      "stats": {
+        "models": {
+          "gemini-3.1-pro-preview": {
+            "api": {
+              "totalRequests": 14,
+              "totalErrors": 0,
+              "totalLatencyMs": 182669
+            },
+            "tokens": {
+              "input": 111243,
+              "prompt": 661338,
+              "candidates": 8845,
+              "total": 684273,
+              "cached": 550095,
+              "thoughts": 14090,
+              "tool": 0
+            },
+            "roles": {
+              "main": {
+                "totalRequests": 14,
+                "totalErrors": 0,
+                "totalLatencyMs": 182669,
+                "tokens": {
+                  "input": 111243,
+                  "prompt": 661338,
+                  "candidates": 8845,
+                  "total": 684273,
+                  "cached": 550095,
+                  "thoughts": 14090,
+                  "tool": 0
+                }
+              }
+            }
+          }
+        },
+        "tools": {
+          "totalCalls": 15,
+          "totalSuccess": 15,
+          "totalFail": 0,
+          "totalDurationMs": 422,
+          "totalDecisions": {
+            "accept": 15,
+            "reject": 0,
+            "modify": 0,
+            "auto_accept": 0
+          },
+          "byName": {
+            "read_file": {
+              "count": 3,
+              "success": 3,
+              "fail": 0,
+              "durationMs": 34,
+              "decisions": {
+                "accept": 3,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "run_shell_command": {
+              "count": 11,
+              "success": 11,
+              "fail": 0,
+              "durationMs": 379,
+              "decisions": {
+                "accept": 11,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "write_file": {
+              "count": 1,
+              "success": 1,
+              "fail": 0,
+              "durationMs": 9,
+              "decisions": {
+                "accept": 1,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            }
+          }
+        },
+        "files": {
+          "totalLinesAdded": 261,
+          "totalLinesRemoved": 0
+        }
+      },
+      "stream": "stdout",
+      "index": 0
+    },
+    {
+      "stream": "stderr",
+      "index": 0,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 1,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 2,
+      "format": "text",
+      "text": "[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics."
+    },
+    {
+      "stream": "stderr",
+      "index": 3,
+      "format": "text",
+      "text": "[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset)."
+    },
+    {
+      "stream": "stderr",
+      "index": 4,
+      "format": "text",
+      "text": "missing pgrep output"
+    }
+  ],
+  "raw_agent_stdout": "{\n  \"session_id\": \"8139db76-bd24-44dd-a465-80030a5d5f7f\",\n  \"response\": \"I have fully implemented the Launch Interceptor Program (LIP) from the Knight & Leveson (1986) specification in `decide.py`.\\n\\nThe solution:\\n- Exposes `decide(numpoints, x, y, parameters, lcm, pum_diag)` with no side-effects upon import.\\n- Handles reading exactly one input JSON object from standard input and printing exactly one output JSON object to standard output when invoked as a script.\\n- Includes the `realcompare` logic exactly as provided in the reference harness file to enforce proper six-significant-digit tolerance matching for all geometric float checks.\\n- Adheres to standard python libraries (`json`, `sys`, `math`).\\n- Validates 100% of the given functional Launch Interceptor Conditions with comprehensive edge case checks against floating-point comparisons.\\n- Has been explicitly tested against all 15 oracle test examples in `prompt_examples.json`.\\n\\nYou can test it directly with:\\n```bash\\ncat prompt_examples.json | jq '.examples[0].input' | python decide.py\\n```\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-3.1-pro-preview\": {\n        \"api\": {\n          \"totalRequests\": 14,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 182669\n        },\n        \"tokens\": {\n          \"input\": 111243,\n          \"prompt\": 661338,\n          \"candidates\": 8845,\n          \"total\": 684273,\n          \"cached\": 550095,\n          \"thoughts\": 14090,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 14,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 182669,\n            \"tokens\": {\n              \"input\": 111243,\n              \"prompt\": 661338,\n              \"candidates\": 8845,\n              \"total\": 684273,\n              \"cached\": 550095,\n              \"thoughts\": 14090,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 15,\n      \"totalSuccess\": 15,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 422,\n      \"totalDecisions\": {\n        \"accept\": 15,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"read_file\": {\n          \"count\": 3,\n          \"success\": 3,\n          \"fail\": 0,\n          \"durationMs\": 34,\n          \"decisions\": {\n            \"accept\": 3,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"run_shell_command\": {\n          \"count\": 11,\n          \"success\": 11,\n          \"fail\": 0,\n          \"durationMs\": 379,\n          \"decisions\": {\n            \"accept\": 11,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"write_file\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 9,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 261,\n      \"totalLinesRemoved\": 0\n    }\n  }\n}",
+  "raw_agent_stderr": "YOLO mode is enabled. All tool calls will be automatically approved.\nYOLO mode is enabled. All tool calls will be automatically approved.\n[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics.\n[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset).\nmissing pgrep output\n"
+}

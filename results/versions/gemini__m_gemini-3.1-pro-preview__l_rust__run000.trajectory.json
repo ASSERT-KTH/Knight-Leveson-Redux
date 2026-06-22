@@ -1,0 +1,126 @@
+{
+  "agent": "gemini",
+  "model": "gemini-3.1-pro-preview",
+  "run_id": 0,
+  "language": "rust",
+  "sandbox_dir": "/tmp/nvp_gemini_doksb7i5",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "session_id": "04be8e0f-8f02-416e-9d19-0081021e2275",
+      "response": "I have successfully implemented the Launch Interceptor Program (DECIDE) in Rust.\n\n**Implementation Details:**\n- **Source Code (`decide.rs`)**: Contains the full logic of the 15 Launch Interceptor Conditions (LICs), PUM, FUV, and the final Launch decision, strictly following the Knight & Leveson (1986) specification. It employs the provided reference implementation of `realcompare` for all critical floating-point operations.\n- **Standalone Binary (`decide_bin`)**: A compiled, optimized static binary utilizing `serde` and `serde_json` to read the specific JSON input format from `stdin` and emit the exact expected JSON output schema (comprising `cmv`, `pum`, `fuv`, and `launch` results) to `stdout`.\n\nAll 15 test examples from `prompt_examples.json` have been evaluated against this implementation, and they yield exactly the anticipated output vectors and launch matrices. The files `decide.rs` and `decide_bin` have been written to your workspace directory as requested.",
+      "stats": {
+        "models": {
+          "gemini-3.1-pro-preview": {
+            "api": {
+              "totalRequests": 21,
+              "totalErrors": 0,
+              "totalLatencyMs": 237289
+            },
+            "tokens": {
+              "input": 84479,
+              "prompt": 612168,
+              "candidates": 16860,
+              "total": 637577,
+              "cached": 527689,
+              "thoughts": 8549,
+              "tool": 0
+            },
+            "roles": {
+              "main": {
+                "totalRequests": 21,
+                "totalErrors": 0,
+                "totalLatencyMs": 237289,
+                "tokens": {
+                  "input": 84479,
+                  "prompt": 612168,
+                  "candidates": 16860,
+                  "total": 637577,
+                  "cached": 527689,
+                  "thoughts": 8549,
+                  "tool": 0
+                }
+              }
+            }
+          }
+        },
+        "tools": {
+          "totalCalls": 20,
+          "totalSuccess": 20,
+          "totalFail": 0,
+          "totalDurationMs": 10676,
+          "totalDecisions": {
+            "accept": 20,
+            "reject": 0,
+            "modify": 0,
+            "auto_accept": 0
+          },
+          "byName": {
+            "run_shell_command": {
+              "count": 19,
+              "success": 19,
+              "fail": 0,
+              "durationMs": 10666,
+              "decisions": {
+                "accept": 19,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "write_file": {
+              "count": 1,
+              "success": 1,
+              "fail": 0,
+              "durationMs": 10,
+              "decisions": {
+                "accept": 1,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            }
+          }
+        },
+        "files": {
+          "totalLinesAdded": 350,
+          "totalLinesRemoved": 0
+        }
+      },
+      "stream": "stdout",
+      "index": 0
+    },
+    {
+      "stream": "stderr",
+      "index": 0,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 1,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 2,
+      "format": "text",
+      "text": "[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics."
+    },
+    {
+      "stream": "stderr",
+      "index": 3,
+      "format": "text",
+      "text": "[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset)."
+    },
+    {
+      "stream": "stderr",
+      "index": 4,
+      "format": "text",
+      "text": "missing pgrep output"
+    }
+  ],
+  "raw_agent_stdout": "{\n  \"session_id\": \"04be8e0f-8f02-416e-9d19-0081021e2275\",\n  \"response\": \"I have successfully implemented the Launch Interceptor Program (DECIDE) in Rust.\\n\\n**Implementation Details:**\\n- **Source Code (`decide.rs`)**: Contains the full logic of the 15 Launch Interceptor Conditions (LICs), PUM, FUV, and the final Launch decision, strictly following the Knight & Leveson (1986) specification. It employs the provided reference implementation of `realcompare` for all critical floating-point operations.\\n- **Standalone Binary (`decide_bin`)**: A compiled, optimized static binary utilizing `serde` and `serde_json` to read the specific JSON input format from `stdin` and emit the exact expected JSON output schema (comprising `cmv`, `pum`, `fuv`, and `launch` results) to `stdout`.\\n\\nAll 15 test examples from `prompt_examples.json` have been evaluated against this implementation, and they yield exactly the anticipated output vectors and launch matrices. The files `decide.rs` and `decide_bin` have been written to your workspace directory as requested.\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-3.1-pro-preview\": {\n        \"api\": {\n          \"totalRequests\": 21,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 237289\n        },\n        \"tokens\": {\n          \"input\": 84479,\n          \"prompt\": 612168,\n          \"candidates\": 16860,\n          \"total\": 637577,\n          \"cached\": 527689,\n          \"thoughts\": 8549,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 21,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 237289,\n            \"tokens\": {\n              \"input\": 84479,\n              \"prompt\": 612168,\n              \"candidates\": 16860,\n              \"total\": 637577,\n              \"cached\": 527689,\n              \"thoughts\": 8549,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 20,\n      \"totalSuccess\": 20,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 10676,\n      \"totalDecisions\": {\n        \"accept\": 20,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"run_shell_command\": {\n          \"count\": 19,\n          \"success\": 19,\n          \"fail\": 0,\n          \"durationMs\": 10666,\n          \"decisions\": {\n            \"accept\": 19,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"write_file\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 10,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 350,\n      \"totalLinesRemoved\": 0\n    }\n  }\n}",
+  "raw_agent_stderr": "YOLO mode is enabled. All tool calls will be automatically approved.\nYOLO mode is enabled. All tool calls will be automatically approved.\n[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics.\n[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset).\nmissing pgrep output\n"
+}

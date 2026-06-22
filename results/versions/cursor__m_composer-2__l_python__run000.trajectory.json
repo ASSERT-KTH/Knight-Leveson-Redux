@@ -1,0 +1,30 @@
+{
+  "agent": "cursor",
+  "model": "composer-2",
+  "run_id": 0,
+  "language": "python",
+  "sandbox_dir": "/tmp/nvp_cursor_2q0eqy37",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 247466,
+      "duration_api_ms": 247466,
+      "result": "Implementing the Launch Interceptor Program per the spec. Reading the specification, examples, and reference implementation.\n\nInspecting JSON structure and running a quick parse of the examples file:\n\nImplementing `decide.py` and validating it against all 15 oracle examples.\n\nWriting `decide.py` with full LIC logic and validating against all oracle examples.\n\nAll oracle examples pass. Verifying the CLI and fixing type hints for Python 3.9 compatibility (`X | Y` requires 3.10).\n\nHere is what was delivered.\n\n### `decide.py`\n\n- **`realcompare(a, b) -> str`** \u2014 Same six-significant-digit rule as `realcompare_reference.py` (`\"LT\"`, `\"EQ\"`, `\"GT\"`).\n- **`decide(numpoints, x, y, parameters, lcm, pum_diag)`** \u2014 Returns `(cmv, pum, fuv, launch)` with 15 LICs, PUM from LCM + diagonal `pum_diag`, FUV per spec, `launch = all(fuv)`.\n- **`PI`** \u2014 `3.1415926535` as in the spec.\n- **Float relations** \u2014 Implemented via `realcompare` (`_rc_lt`, `_rc_gt`, `_rc_eq`, `_rc_le`, `_rc_ge`) for distances, areas, angles vs `PI\u00b1EPSILON`, circle radii vs `RADIUS1`/`RADIUS2`, `LENGTH1`/`LENGTH2`, `DIST`, `AREA1`/`AREA2`, collinearity (`cross == 0`), and quadrant boundaries.\n- **Geometry** \u2014 Smallest enclosing circle for three points (collinear, obtuse/right \u2192 half longest side, acute \u2192 circumradius) for LICs 2, 9, 14; point\u2013line distance for LIC 7 (coincident endpoints \u2192 distance to that point); `acos` angle at vertex for LICs 3 and 10; quadrant rules from the spec for LIC 5.\n- **CLI** \u2014 `python decide.py` reads one JSON object from stdin and prints one JSON object to stdout (with a trailing newline).\n- **Import** \u2014 No file I/O or other side effects at import time; only `main()` runs under `if __name__ == \"__main__\"`.\n\nAll **15** cases in `prompt_examples.json` match the oracle `expected` objects (`cmv`, full `pum`, `fuv`, `launch`).",
+      "session_id": "30f6d357-53bd-4718-81af-cda3079efa4a",
+      "request_id": "351b9cc7-9579-45ff-9811-10235c47e55b",
+      "usage": {
+        "inputTokens": 28291,
+        "outputTokens": 16538,
+        "cacheReadTokens": 339708,
+        "cacheWriteTokens": 0
+      },
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":247466,\"duration_api_ms\":247466,\"result\":\"Implementing the Launch Interceptor Program per the spec. Reading the specification, examples, and reference implementation.\\n\\nInspecting JSON structure and running a quick parse of the examples file:\\n\\nImplementing `decide.py` and validating it against all 15 oracle examples.\\n\\nWriting `decide.py` with full LIC logic and validating against all oracle examples.\\n\\nAll oracle examples pass. Verifying the CLI and fixing type hints for Python 3.9 compatibility (`X | Y` requires 3.10).\\n\\nHere is what was delivered.\\n\\n### `decide.py`\\n\\n- **`realcompare(a, b) -> str`** \u2014 Same six-significant-digit rule as `realcompare_reference.py` (`\\\"LT\\\"`, `\\\"EQ\\\"`, `\\\"GT\\\"`).\\n- **`decide(numpoints, x, y, parameters, lcm, pum_diag)`** \u2014 Returns `(cmv, pum, fuv, launch)` with 15 LICs, PUM from LCM + diagonal `pum_diag`, FUV per spec, `launch = all(fuv)`.\\n- **`PI`** \u2014 `3.1415926535` as in the spec.\\n- **Float relations** \u2014 Implemented via `realcompare` (`_rc_lt`, `_rc_gt`, `_rc_eq`, `_rc_le`, `_rc_ge`) for distances, areas, angles vs `PI\u00b1EPSILON`, circle radii vs `RADIUS1`/`RADIUS2`, `LENGTH1`/`LENGTH2`, `DIST`, `AREA1`/`AREA2`, collinearity (`cross == 0`), and quadrant boundaries.\\n- **Geometry** \u2014 Smallest enclosing circle for three points (collinear, obtuse/right \u2192 half longest side, acute \u2192 circumradius) for LICs 2, 9, 14; point\u2013line distance for LIC 7 (coincident endpoints \u2192 distance to that point); `acos` angle at vertex for LICs 3 and 10; quadrant rules from the spec for LIC 5.\\n- **CLI** \u2014 `python decide.py` reads one JSON object from stdin and prints one JSON object to stdout (with a trailing newline).\\n- **Import** \u2014 No file I/O or other side effects at import time; only `main()` runs under `if __name__ == \\\"__main__\\\"`.\\n\\nAll **15** cases in `prompt_examples.json` match the oracle `expected` objects (`cmv`, full `pum`, `fuv`, `launch`).\",\"session_id\":\"30f6d357-53bd-4718-81af-cda3079efa4a\",\"request_id\":\"351b9cc7-9579-45ff-9811-10235c47e55b\",\"usage\":{\"inputTokens\":28291,\"outputTokens\":16538,\"cacheReadTokens\":339708,\"cacheWriteTokens\":0}}\n",
+  "raw_agent_stderr": ""
+}

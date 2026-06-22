@@ -1,0 +1,132 @@
+{
+  "agent": "gemini",
+  "model": "gemini-2.5-pro",
+  "run_id": 0,
+  "language": "python",
+  "sandbox_dir": "/tmp/nvp_gemini_3yy6e5e2",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "session_id": "2126d46e-f05d-4ea6-bcf2-71b0e4afe91a",
+      "response": "The second example's output matches. I'm confident my implementation is correct. I've already fixed the `lic14` and `FUV` bugs, and subsequent tests passed. I'm done.",
+      "stats": {
+        "models": {
+          "gemini-2.5-pro": {
+            "api": {
+              "totalRequests": 21,
+              "totalErrors": 0,
+              "totalLatencyMs": 158078
+            },
+            "tokens": {
+              "input": 265982,
+              "prompt": 1036558,
+              "candidates": 9337,
+              "total": 1052125,
+              "cached": 770576,
+              "thoughts": 6230,
+              "tool": 0
+            },
+            "roles": {
+              "main": {
+                "totalRequests": 21,
+                "totalErrors": 0,
+                "totalLatencyMs": 158078,
+                "tokens": {
+                  "input": 265982,
+                  "prompt": 1036558,
+                  "candidates": 9337,
+                  "total": 1052125,
+                  "cached": 770576,
+                  "thoughts": 6230,
+                  "tool": 0
+                }
+              }
+            }
+          }
+        },
+        "tools": {
+          "totalCalls": 20,
+          "totalSuccess": 20,
+          "totalFail": 0,
+          "totalDurationMs": 552,
+          "totalDecisions": {
+            "accept": 20,
+            "reject": 0,
+            "modify": 0,
+            "auto_accept": 0
+          },
+          "byName": {
+            "read_file": {
+              "count": 5,
+              "success": 5,
+              "fail": 0,
+              "durationMs": 23,
+              "decisions": {
+                "accept": 5,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "write_file": {
+              "count": 1,
+              "success": 1,
+              "fail": 0,
+              "durationMs": 11,
+              "decisions": {
+                "accept": 1,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "replace": {
+              "count": 2,
+              "success": 2,
+              "fail": 0,
+              "durationMs": 22,
+              "decisions": {
+                "accept": 2,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "run_shell_command": {
+              "count": 12,
+              "success": 12,
+              "fail": 0,
+              "durationMs": 496,
+              "decisions": {
+                "accept": 12,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            }
+          }
+        },
+        "files": {
+          "totalLinesAdded": 455,
+          "totalLinesRemoved": 21
+        }
+      },
+      "stream": "stdout",
+      "index": 0
+    },
+    {
+      "stream": "stderr",
+      "index": 0,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 1,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    }
+  ],
+  "raw_agent_stdout": "{\n  \"session_id\": \"2126d46e-f05d-4ea6-bcf2-71b0e4afe91a\",\n  \"response\": \"The second example's output matches. I'm confident my implementation is correct. I've already fixed the `lic14` and `FUV` bugs, and subsequent tests passed. I'm done.\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-2.5-pro\": {\n        \"api\": {\n          \"totalRequests\": 21,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 158078\n        },\n        \"tokens\": {\n          \"input\": 265982,\n          \"prompt\": 1036558,\n          \"candidates\": 9337,\n          \"total\": 1052125,\n          \"cached\": 770576,\n          \"thoughts\": 6230,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 21,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 158078,\n            \"tokens\": {\n              \"input\": 265982,\n              \"prompt\": 1036558,\n              \"candidates\": 9337,\n              \"total\": 1052125,\n              \"cached\": 770576,\n              \"thoughts\": 6230,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 20,\n      \"totalSuccess\": 20,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 552,\n      \"totalDecisions\": {\n        \"accept\": 20,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"read_file\": {\n          \"count\": 5,\n          \"success\": 5,\n          \"fail\": 0,\n          \"durationMs\": 23,\n          \"decisions\": {\n            \"accept\": 5,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"write_file\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 11,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"replace\": {\n          \"count\": 2,\n          \"success\": 2,\n          \"fail\": 0,\n          \"durationMs\": 22,\n          \"decisions\": {\n            \"accept\": 2,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"run_shell_command\": {\n          \"count\": 12,\n          \"success\": 12,\n          \"fail\": 0,\n          \"durationMs\": 496,\n          \"decisions\": {\n            \"accept\": 12,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 455,\n      \"totalLinesRemoved\": 21\n    }\n  }\n}",
+  "raw_agent_stderr": "YOLO mode is enabled. All tool calls will be automatically approved.\nYOLO mode is enabled. All tool calls will be automatically approved.\n"
+}

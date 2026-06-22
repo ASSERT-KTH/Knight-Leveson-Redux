@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from harnesses import get_harness
+from harnesses.prompt_context import provision_reference_files
 
 # Backward-compatible alias (Python prompt body)
 from harnesses.python_harness import PYTHON_TASK_PROMPT_TEMPLATE as TASK_PROMPT_TEMPLATE
@@ -39,6 +40,12 @@ class VersionRecord:
     acceptance_passed: bool | None   # None until acceptance stage runs
     build_status: str                # "ok"|"syntax_error"|"import_error"|"runtime_error"|"api_unavailable"|"no_output"
     sandbox_dir: str                 # path to isolated working directory
+    artifact_file: str = ""
+    trajectory_file: str = ""
+    trajectory: list[dict[str, Any]] | None = None
+    raw_agent_stdout: str = ""
+    raw_agent_stderr: str = ""
+    trajectory_capture_note: str = ""
     error_message: str = ""          # human-readable failure reason (empty on success)
     language: str = "python"         # python | pascal | rust
 
@@ -87,6 +94,7 @@ class AgentBase(ABC):
     def __init__(self, config: dict[str, Any] | None = None):
         self.config = config or {}
         self._language: str = "python"
+        self._invocation_artifacts: dict[str, Any] = {}
 
     def generate_version(
         self,
@@ -102,9 +110,11 @@ class AgentBase(ABC):
         the output file, and returns a VersionRecord.
         """
         self._language = language
+        self._invocation_artifacts = {}
         harness = get_harness(language)
         out_name = harness.output_filename
         sandbox = self._make_sandbox(spec_path)
+        provision_reference_files(sandbox, language)
         prompt = harness.build_prompt(
             spec_path=str(sandbox / "spec.md"),
             output_path=out_name,
@@ -129,6 +139,10 @@ class AgentBase(ABC):
                 source_code="",
                 timestamp=timestamp,
                 generation_config=self._get_generation_config(),
+                trajectory=self._invocation_artifacts.get("trajectory"),
+                raw_agent_stdout=self._invocation_artifacts.get("raw_agent_stdout", ""),
+                raw_agent_stderr=self._invocation_artifacts.get("raw_agent_stderr", ""),
+                trajectory_capture_note=self._invocation_artifacts.get("trajectory_capture_note", ""),
                 acceptance_passed=None,
                 build_status="api_unavailable",
                 sandbox_dir=str(sandbox),
@@ -136,9 +150,10 @@ class AgentBase(ABC):
                 language=language,
             )
 
-        # Validate syntax
-        if source_code and build_status == "ok":
-            build_status = harness.check_syntax(source_code)
+        if build_status == "ok":
+            build_status, validation_detail = harness.validate_generation_result(sandbox, source_code)
+            if validation_detail:
+                no_out_hint = f"{no_out_hint}; {validation_detail}" if no_out_hint else validation_detail
 
         return VersionRecord(
             agent_name=self.name,
@@ -148,6 +163,10 @@ class AgentBase(ABC):
             source_code=source_code,
             timestamp=timestamp,
             generation_config=self._get_generation_config(),
+            trajectory=self._invocation_artifacts.get("trajectory"),
+            raw_agent_stdout=self._invocation_artifacts.get("raw_agent_stdout", ""),
+            raw_agent_stderr=self._invocation_artifacts.get("raw_agent_stderr", ""),
+            trajectory_capture_note=self._invocation_artifacts.get("trajectory_capture_note", ""),
             acceptance_passed=None,
             build_status=build_status,
             sandbox_dir=str(sandbox),
@@ -177,6 +196,21 @@ class AgentBase(ABC):
 
     def _get_generation_config(self) -> dict:
         return dict(self.config)
+
+    def _set_invocation_artifacts(
+        self,
+        *,
+        trajectory: list[dict[str, Any]] | None = None,
+        raw_agent_stdout: str = "",
+        raw_agent_stderr: str = "",
+        trajectory_capture_note: str = "",
+    ) -> None:
+        self._invocation_artifacts = {
+            "trajectory": trajectory,
+            "raw_agent_stdout": raw_agent_stdout,
+            "raw_agent_stderr": raw_agent_stderr,
+            "trajectory_capture_note": trajectory_capture_note,
+        }
 
     def _read_output(self, sandbox: Path) -> str:
         """Read generated source from sandbox using the current language harness."""

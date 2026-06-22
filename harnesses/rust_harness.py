@@ -1,5 +1,5 @@
 """
-Rust target: `decide.rs` implements `decide(&DecideInput) -> DecideOutput`; JSON-lines binary.
+Rust target: archive source in `decide.rs`; agent also builds a standalone executable.
 """
 from __future__ import annotations
 
@@ -9,7 +9,8 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from harnesses.base import LanguageHarness, run_cmd, which_or_none
+from harnesses.base import LanguageHarness, platform_executable_name, run_cmd, which_or_none
+from harnesses.prompt_context import build_reference_context
 
 _RUST_PROJECT = Path(__file__).resolve().parent / "rust"
 
@@ -17,67 +18,42 @@ _RUST_PROJECT = Path(__file__).resolve().parent / "rust"
 RUST_TASK_PROMPT_TEMPLATE = """\
 You are implementing the Launch Interceptor Program from Knight & Leveson (1986).
 
-The file `spec.md` in your workspace is the verbatim specification. All LICs and logic
-are defined only there.
+Your workspace initially contains only:
+- `spec.md`
+- `prompt_examples.json`
+- `realcompare_reference.rs`
 
-## Rust delivery (evaluation harness)
+The file `spec.md` is the verbatim specification. All LICs and logic are defined only there.
 
-Your code is linked as the `decide` module next to the harness `types.rs` and `main.rs`.
-Submit **only** one file `decide.rs` implementing:
+Rust delivery:
+- Your main deliverable is a compiled executable at `{executable_path}`.
+- On each run, it must read exactly one input JSON object from stdin and write exactly one
+  output JSON object to stdout.
+- The input will be in JSON format, and each input object will have the same shape as an
+  individual `input` object inside `prompt_examples.json`. How you parse that JSON and how
+  you build the executable are up to you.
+- The logical input schema matches the pipeline cases: `numpoints`, `x`, `y`, `parameters`,
+  `lcm`, and `pum_diag`.
+- The expected output must be emitted in JSON format, and each output object must have the
+  same shape as an individual `expected` object inside `prompt_examples.json`.
+- The logical output schema is JSON-equivalent to `(cmv, pum, fuv, launch)`.
+- Use `realcompare_reference.rs` as fixed reference behavior for `realcompare`; do not
+  modify its logic.
+- Also write the primary Rust source snapshot to `{output_path}` for archival and later
+  evaluation by the pipeline. The pipeline expects that file to contain the core Launch
+  Interceptor logic in Rust.
 
-  `pub fn decide(input: &DecideInput) -> DecideOutput`
-
-Import wire types with:
-
-  `use crate::types::{{DecideInput, DecideOutput}};`
-
-Do **not** declare `mod types;`, `mod main;`, or a `main` function. Do not add `Cargo.toml`
-dependencies beyond what the harness already provides (serde for JSON types only).
-
-## Types you must match exactly (same as `types.rs` in the harness)
-
-`DecideInput` fields:
-- `numpoints: usize` — number of points (2..100). Always index `input.x` / `input.y` with
-  **usize** (e.g. `for i in 0..input.numpoints` then `input.x[i]`). If you have an `i32`
-  index, cast: `input.x[i as usize]` (or use `usize` throughout).
-- `x`, `y: Vec<f64>` — length `numpoints`, 0-based indices for point i+1 vs the Pascal spec.
-- `parameters: Parameters` — see field names below (Rust **snake_case** only in source code).
-- `lcm: Vec<Vec<String>>` — 15×15, symmetric; each off-diagonal entry is exactly one of
-  `"NOTUSED"`, `"ORR"`, `"ANDD"`.
-- `pum_diag: Vec<bool>` — length 15; diagonal PUM for LIC 1..15.
-
-`Parameters` (access with `input.parameters.<field>`). Floating-point fields: `length1`,
-`radius1`, `epsilon`, `area1`, `dist`, `length2`, `radius2`, `area2`. Integer/count fields
-(all **usize**): `q_pts`, `quads`, `n_pts`, `k_pts`, `a_pts`, `b_pts`, `c_pts`, `d_pts`,
-`e_pts`, `f_pts`, `g_pts`.
-
-Wire JSON uses Pascal-style keys (`LENGTH1`, `Q_PTS`, …); serde maps them to these Rust
-names. **Do not** use `LENGTH1`, `Q_PTS`, or other Pascal names as Rust identifiers — they
-will not compile.
-
-`DecideOutput` fields (lengths are mandatory):
-- `cmv: Vec<bool>` — length 15
-- `pum: Vec<Vec<bool>>` — 15 rows, each length 15
-- `fuv: Vec<bool>` — length 15
-- `launch: bool`
-
-Build them with `vec![false; 15]`, nested `vec!`, or collect from iterators. If you compute
-fixed arrays `[bool; 15]` and `[[bool; 15]; 15]`, either convert rows with `.to_vec()` or return
-using the harness helper (import `DecideOutput` from `crate::types`):
-
-  `DecideOutput::from_fixed(cmv, pum, fuv, launch)`
-
-Do **not** return bare `[bool; 15]` where a `Vec<bool>` is required unless you convert.
-
-## Real comparisons
-
-Implement `realcompare(a: f64, b: f64) -> &'static str` returning exactly `"LT"`, `"EQ"`,
-or `"GT"` per the six-significant-digit rule in `spec.md`. Use it everywhere the spec
-requires real comparisons.
+Engineering constraints:
+- Do not read any files other than the provided reference files.
+- Do not modify `realcompare_reference.rs`.
+- Use standard Rust tooling and libraries only.
 
 The specification is in: {spec_path}
 
-Write your implementation to: {output_path}
+{reference_context}
+
+Write the archival source file to: {output_path}
+Write the main standalone deliverable to: {executable_path}
 """
 
 
@@ -88,8 +64,17 @@ class RustHarness(LanguageHarness):
     def output_filename(self) -> str:
         return "decide.rs"
 
+    @property
+    def primary_artifact_filename(self) -> str:
+        return platform_executable_name("decide_bin")
+
     def build_prompt(self, spec_path: str, output_path: str) -> str:
-        return RUST_TASK_PROMPT_TEMPLATE.format(spec_path=spec_path, output_path=output_path)
+        return RUST_TASK_PROMPT_TEMPLATE.format(
+            spec_path=spec_path,
+            output_path=output_path,
+            executable_path=self.primary_artifact_filename,
+            reference_context=build_reference_context(self.name),
+        )
 
     def check_syntax(self, source_code: str, work_dir: Path | None = None) -> str:
         if which_or_none("cargo") is None:
@@ -123,7 +108,7 @@ class RustHarness(LanguageHarness):
         work_dir.mkdir(parents=True, exist_ok=True)
         self._materialize_project(work_dir, source_code)
         r = run_cmd(["cargo", "build", "--release", "--quiet"], cwd=work_dir, timeout=900)
-        exe = work_dir / "target" / "release" / ("lip_harness.exe" if os.name == "nt" else "lip_harness")
+        exe = work_dir / "target" / "release" / platform_executable_name("lip_harness")
         if r.returncode != 0 or not exe.exists():
             parts = [p for p in (r.stderr or "", r.stdout or "") if p and p.strip()]
             msg = "\n".join(s.strip() for s in parts)
@@ -134,7 +119,6 @@ class RustHarness(LanguageHarness):
 
     @staticmethod
     def _materialize_project(work_dir: Path, decide_rs: str) -> None:
-        """Copy harness sources and inject agent decide.rs."""
         shutil.copy2(_RUST_PROJECT / "Cargo.toml", work_dir / "Cargo.toml")
         src = work_dir / "src"
         src.mkdir(parents=True, exist_ok=True)

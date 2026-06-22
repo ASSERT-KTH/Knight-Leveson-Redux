@@ -1,0 +1,68 @@
+{
+  "agent": "claude_code",
+  "model": "anthropic/claude-opus-4.6",
+  "run_id": 0,
+  "language": "pascal",
+  "sandbox_dir": "/tmp/nvp_claude_code_qpe9kg67",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 219822,
+      "duration_api_ms": 225941,
+      "num_turns": 24,
+      "result": "Both deliverables are in place. Here's a summary of what was implemented:\n\n**`lipdecide.pas`** - Full Launch Interceptor Program in Free Pascal:\n\n- **All 15 LICs** implemented per spec:\n  - LIC 1: Consecutive points distance > LENGTH1\n  - LIC 2: Three consecutive points not fitting in circle of RADIUS1\n  - LIC 3: Angle condition with EPSILON tolerance\n  - LIC 4: Triangle area > AREA1\n  - LIC 5: Q_PTS points spanning > QUADS quadrants\n  - LIC 6: X[j] - X[i] < 0 for consecutive points\n  - LIC 7: N_PTS points with distance from line > DIST\n  - LIC 8: Two points separated by K_PTS intervening points, distance > LENGTH1\n  - LIC 9: Three points separated by A_PTS/B_PTS, not in circle of RADIUS1\n  - LIC 10: Angle condition with C_PTS/D_PTS separation\n  - LIC 11: Triangle area with E_PTS/F_PTS separation > AREA1\n  - LIC 12: X decrease with G_PTS separation\n  - LIC 13: Dual LENGTH1/LENGTH2 condition with K_PTS separation\n  - LIC 14: Dual RADIUS1/RADIUS2 circle condition with A_PTS/B_PTS separation\n  - LIC 15: Dual AREA1/AREA2 triangle condition with E_PTS/F_PTS separation\n\n- **PUM computation**: Off-diagonal elements via LCM connectors (NOTUSED/ANDD/ORR), diagonal from input\n- **FUV computation**: Row-wise check of PUM with diagonal consideration\n- **LAUNCH decision**: All FUV elements must be true\n- **REALCOMPARE**: Exact replica of reference implementation (relative epsilon of 0.5e-5)\n- **Minimum Enclosing Circle**: Handles collinear, obtuse, and acute triangle cases\n- **JSON I/O**: Custom parser reads stdin, structured output on stdout\n\n**`decide_bin`** - Compiled executable, **15/15 oracle test cases pass**.",
+      "stop_reason": null,
+      "session_id": "db2b8fe3-a0e7-44a3-a600-45488e6d8a4a",
+      "total_cost_usd": 3.110496,
+      "usage": {
+        "input_tokens": 23,
+        "cache_creation_input_tokens": 48052,
+        "cache_read_input_tokens": 777088,
+        "output_tokens": 13814,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "modelUsage": {
+        "anthropic/claude-opus-4.6": {
+          "inputTokens": 23,
+          "outputTokens": 13814,
+          "cacheReadInputTokens": 777088,
+          "cacheCreationInputTokens": 48052,
+          "webSearchRequests": 0,
+          "costUSD": 3.103002,
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 6764,
+          "outputTokens": 146,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.007494,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "permission_denials": [],
+      "uuid": "50ef64fd-fd5c-46ef-8452-8098317dbdea",
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":219822,\"duration_api_ms\":225941,\"num_turns\":24,\"result\":\"Both deliverables are in place. Here's a summary of what was implemented:\\n\\n**`lipdecide.pas`** - Full Launch Interceptor Program in Free Pascal:\\n\\n- **All 15 LICs** implemented per spec:\\n  - LIC 1: Consecutive points distance > LENGTH1\\n  - LIC 2: Three consecutive points not fitting in circle of RADIUS1\\n  - LIC 3: Angle condition with EPSILON tolerance\\n  - LIC 4: Triangle area > AREA1\\n  - LIC 5: Q_PTS points spanning > QUADS quadrants\\n  - LIC 6: X[j] - X[i] < 0 for consecutive points\\n  - LIC 7: N_PTS points with distance from line > DIST\\n  - LIC 8: Two points separated by K_PTS intervening points, distance > LENGTH1\\n  - LIC 9: Three points separated by A_PTS/B_PTS, not in circle of RADIUS1\\n  - LIC 10: Angle condition with C_PTS/D_PTS separation\\n  - LIC 11: Triangle area with E_PTS/F_PTS separation > AREA1\\n  - LIC 12: X decrease with G_PTS separation\\n  - LIC 13: Dual LENGTH1/LENGTH2 condition with K_PTS separation\\n  - LIC 14: Dual RADIUS1/RADIUS2 circle condition with A_PTS/B_PTS separation\\n  - LIC 15: Dual AREA1/AREA2 triangle condition with E_PTS/F_PTS separation\\n\\n- **PUM computation**: Off-diagonal elements via LCM connectors (NOTUSED/ANDD/ORR), diagonal from input\\n- **FUV computation**: Row-wise check of PUM with diagonal consideration\\n- **LAUNCH decision**: All FUV elements must be true\\n- **REALCOMPARE**: Exact replica of reference implementation (relative epsilon of 0.5e-5)\\n- **Minimum Enclosing Circle**: Handles collinear, obtuse, and acute triangle cases\\n- **JSON I/O**: Custom parser reads stdin, structured output on stdout\\n\\n**`decide_bin`** - Compiled executable, **15/15 oracle test cases pass**.\",\"stop_reason\":null,\"session_id\":\"db2b8fe3-a0e7-44a3-a600-45488e6d8a4a\",\"total_cost_usd\":3.110496,\"usage\":{\"input_tokens\":23,\"cache_creation_input_tokens\":48052,\"cache_read_input_tokens\":777088,\"output_tokens\":13814,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":\"\",\"iterations\":[],\"speed\":\"standard\"},\"modelUsage\":{\"anthropic/claude-opus-4.6\":{\"inputTokens\":23,\"outputTokens\":13814,\"cacheReadInputTokens\":777088,\"cacheCreationInputTokens\":48052,\"webSearchRequests\":0,\"costUSD\":3.103002,\"contextWindow\":200000,\"maxOutputTokens\":32000},\"claude-haiku-4-5-20251001\":{\"inputTokens\":6764,\"outputTokens\":146,\"cacheReadInputTokens\":0,\"cacheCreationInputTokens\":0,\"webSearchRequests\":0,\"costUSD\":0.007494,\"contextWindow\":200000,\"maxOutputTokens\":64000}},\"permission_denials\":[],\"uuid\":\"50ef64fd-fd5c-46ef-8452-8098317dbdea\"}\n",
+  "raw_agent_stderr": ""
+}

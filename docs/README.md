@@ -2,7 +2,7 @@
 
 Static site that showcases every AI-agent version of the Knight & Leveson
 Launch Interceptor Program stored under
-[`results/main/versions/`](../results/main/versions/).
+[`results/versions/`](../results/versions/).
 
 ## Local preview
 
@@ -32,7 +32,7 @@ Then browse to http://localhost:8000/.
 docs/
 ├── index.html           # filterable listing of all implementations
 ├── view.html            # single implementation viewer (?v=<version_id>)
-├── build.py             # regenerates docs/data/ from results/main/versions/
+├── build.py             # regenerates docs/data/ from results/versions/
 ├── css/style.css
 ├── js/
 │   ├── index.js
@@ -45,7 +45,7 @@ docs/
 
 ## Refreshing the data
 
-Whenever `results/main/versions/` changes, rerun the build script:
+Whenever `results/versions/` changes, rerun the build script:
 
 ```bash
 python3 docs/build.py
@@ -57,10 +57,9 @@ resulting changes.
 
 ## Extending
 
-- **Other experiments.** Point `SOURCE_DIR` at another directory under
-  `results/` (for example `results/main-spec-3/versions/`) to generate an
-  alternate site — or parameterise `build.py` with `argparse` if you need
-  both.
+- **Other experiments.** Pass `--source` to point at another directory under
+  `results/` (for example `results/main-v2/versions/`) to generate an
+  alternate site.
 - **Extra facets.** Extend `SUMMARY_FIELDS` / the per-entry dict in
   `build.py` and add matching filter UI in `js/index.js`.
 - **Syntax highlighting.** Pascal maps to highlight.js' `delphi` grammar

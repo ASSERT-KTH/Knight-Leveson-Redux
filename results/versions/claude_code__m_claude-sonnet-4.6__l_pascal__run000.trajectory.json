@@ -1,0 +1,68 @@
+{
+  "agent": "claude_code",
+  "model": "anthropic/claude-sonnet-4.6",
+  "run_id": 0,
+  "language": "pascal",
+  "sandbox_dir": "/tmp/nvp_claude_code_61f7jyrc",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 244542,
+      "duration_api_ms": 275167,
+      "num_turns": 18,
+      "result": "Both deliverables are complete and verified:\n\n**`lipdecide.pas`** \u2014 archival Pascal source implementing:\n- All 15 LICs (LIC 1\u201315) per the spec, using `REALCOMPARE` for every real comparison\n- `CircumRadius` using the degenerate (collinear) fallback: half the longest side\n- `AngleAtVertex` returning -1 when either arm is zero-length (undefined \u2192 LIC not satisfied)\n- `PointToLineDist` with coincident-endpoint fallback per LIC 7\n- Quadrant assignment with spec priority rules (x=0 or y=0 cases)\n- `DECIDE` procedure: CMV \u2192 PUM (off-diagonal) \u2192 FUV \u2192 LAUNCH\n- Minimal hand-rolled JSON parser (no external libraries) and emitter\n\n**`decide_bin`** \u2014 compiled x86-64 executable; reads one JSON object from stdin, writes one JSON object (`cmv`, `pum`, `fuv`, `launch`) to stdout.\n\nAll 15 oracle-backed examples from `prompt_examples.json` produce exact matches.",
+      "stop_reason": null,
+      "session_id": "cc4d1ca8-3055-45d4-8874-96fab7920c99",
+      "total_cost_usd": 0.6709057500000003,
+      "usage": {
+        "input_tokens": 19,
+        "cache_creation_input_tokens": 41755,
+        "cache_read_input_tokens": 563184,
+        "output_tokens": 11177,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "modelUsage": {
+        "anthropic/claude-sonnet-4.6": {
+          "inputTokens": 29,
+          "outputTokens": 14323,
+          "cacheReadInputTokens": 607790,
+          "cacheCreationInputTokens": 50968,
+          "webSearchRequests": 0,
+          "costUSD": 0.588399,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 17498,
+          "outputTokens": 497,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 50019,
+          "webSearchRequests": 0,
+          "costUSD": 0.08250675000000002,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "permission_denials": [],
+      "uuid": "9bcd6134-545d-4ef6-b9e1-292233a3a27f",
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":244542,\"duration_api_ms\":275167,\"num_turns\":18,\"result\":\"Both deliverables are complete and verified:\\n\\n**`lipdecide.pas`** \u2014 archival Pascal source implementing:\\n- All 15 LICs (LIC 1\u201315) per the spec, using `REALCOMPARE` for every real comparison\\n- `CircumRadius` using the degenerate (collinear) fallback: half the longest side\\n- `AngleAtVertex` returning -1 when either arm is zero-length (undefined \u2192 LIC not satisfied)\\n- `PointToLineDist` with coincident-endpoint fallback per LIC 7\\n- Quadrant assignment with spec priority rules (x=0 or y=0 cases)\\n- `DECIDE` procedure: CMV \u2192 PUM (off-diagonal) \u2192 FUV \u2192 LAUNCH\\n- Minimal hand-rolled JSON parser (no external libraries) and emitter\\n\\n**`decide_bin`** \u2014 compiled x86-64 executable; reads one JSON object from stdin, writes one JSON object (`cmv`, `pum`, `fuv`, `launch`) to stdout.\\n\\nAll 15 oracle-backed examples from `prompt_examples.json` produce exact matches.\",\"stop_reason\":null,\"session_id\":\"cc4d1ca8-3055-45d4-8874-96fab7920c99\",\"total_cost_usd\":0.6709057500000003,\"usage\":{\"input_tokens\":19,\"cache_creation_input_tokens\":41755,\"cache_read_input_tokens\":563184,\"output_tokens\":11177,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":\"\",\"iterations\":[],\"speed\":\"standard\"},\"modelUsage\":{\"anthropic/claude-sonnet-4.6\":{\"inputTokens\":29,\"outputTokens\":14323,\"cacheReadInputTokens\":607790,\"cacheCreationInputTokens\":50968,\"webSearchRequests\":0,\"costUSD\":0.588399,\"contextWindow\":200000,\"maxOutputTokens\":64000},\"claude-haiku-4-5-20251001\":{\"inputTokens\":17498,\"outputTokens\":497,\"cacheReadInputTokens\":0,\"cacheCreationInputTokens\":50019,\"webSearchRequests\":0,\"costUSD\":0.08250675000000002,\"contextWindow\":200000,\"maxOutputTokens\":64000}},\"permission_denials\":[],\"uuid\":\"9bcd6134-545d-4ef6-b9e1-292233a3a27f\"}\n",
+  "raw_agent_stderr": ""
+}

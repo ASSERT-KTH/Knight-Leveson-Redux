@@ -1,0 +1,30 @@
+{
+  "agent": "cursor",
+  "model": "composer-2",
+  "run_id": 0,
+  "language": "rust",
+  "sandbox_dir": "/tmp/nvp_cursor_fsxrk336",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 204460,
+      "duration_api_ms": 204460,
+      "result": "Implementing the Launch Interceptor Program per the spec. Reading the specification, examples, and realcompare reference.\n\nImplementing the full DECIDE pipeline with `realcompare` for all float comparisons, verifying against the 15 oracle examples. Creating `Cargo.toml` and `decide.rs`, then building and testing.\n\nWriting the complete `decide.rs` implementation.\n\nAll 15 oracle examples match. Adding `#![allow(non_snake_case)]` so parameter field names match the JSON schema without warnings.\n\nHere is what was delivered.\n\n### `decide.rs`\n- Embeds **`realcompare`** line-for-line from `realcompare_reference.rs` (same constants and branch logic).\n- Uses **`PI = 3.1415926535`** for LIC 3/10 angle bounds.\n- Implements **LICs 1\u201315**, **PUM** (diagonal from `pum_diag`, off-diagonal from `lcm` + `cmv`), **FUV**, and **launch** as in `spec.md`.\n- **Circle LICs (2, 9, 14)** use the **minimum enclosing circle** radius for three points (obtuse/right: half the longest side; acute: \\(abc/(4K)\\) with Heron).\n- **LIC 7** uses distance to the **infinite line** through the first and last of each `N_PTS` window; if those endpoints coincide, uses distance to that point.\n- **LIC 5** quadrants follow the spec (axes: \\((0,0)\\to I\\), \\((0,1)\\to I\\), \\((0,-1)\\to III\\), \\((-1,0)\\to II\\), \\((1,0)\\to I\\), etc.), with **strict quadrant membership** via `realcompare` on coordinates.\n- All **scalar comparisons** in the decision logic go through **`realcompare`** (including sorting side lengths for the circle test).\n\n### `decide_bin`\n- Release binary copied to `/tmp/nvp_cursor_fsxrk336/decide_bin`.\n- **Checked:** output matches all **15** `prompt_examples.json` examples (byte-for-byte JSON vs `expected`).\n\n### Build\n`Cargo.toml` is included so `serde` / `serde_json` can parse stdin/stdout JSON. Rebuild with:\n\n```bash\ncd /tmp/nvp_cursor_fsxrk336 && cargo build --release && cp target/release/decide_bin .\n```",
+      "session_id": "33e71ec8-1225-4ffc-be63-c383affb5dbf",
+      "request_id": "87b13ddc-fc55-4dba-b04e-55f603fa1567",
+      "usage": {
+        "inputTokens": 26184,
+        "outputTokens": 13193,
+        "cacheReadTokens": 297073,
+        "cacheWriteTokens": 0
+      },
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":204460,\"duration_api_ms\":204460,\"result\":\"Implementing the Launch Interceptor Program per the spec. Reading the specification, examples, and realcompare reference.\\n\\nImplementing the full DECIDE pipeline with `realcompare` for all float comparisons, verifying against the 15 oracle examples. Creating `Cargo.toml` and `decide.rs`, then building and testing.\\n\\nWriting the complete `decide.rs` implementation.\\n\\nAll 15 oracle examples match. Adding `#![allow(non_snake_case)]` so parameter field names match the JSON schema without warnings.\\n\\nHere is what was delivered.\\n\\n### `decide.rs`\\n- Embeds **`realcompare`** line-for-line from `realcompare_reference.rs` (same constants and branch logic).\\n- Uses **`PI = 3.1415926535`** for LIC 3/10 angle bounds.\\n- Implements **LICs 1\u201315**, **PUM** (diagonal from `pum_diag`, off-diagonal from `lcm` + `cmv`), **FUV**, and **launch** as in `spec.md`.\\n- **Circle LICs (2, 9, 14)** use the **minimum enclosing circle** radius for three points (obtuse/right: half the longest side; acute: \\\\(abc/(4K)\\\\) with Heron).\\n- **LIC 7** uses distance to the **infinite line** through the first and last of each `N_PTS` window; if those endpoints coincide, uses distance to that point.\\n- **LIC 5** quadrants follow the spec (axes: \\\\((0,0)\\\\to I\\\\), \\\\((0,1)\\\\to I\\\\), \\\\((0,-1)\\\\to III\\\\), \\\\((-1,0)\\\\to II\\\\), \\\\((1,0)\\\\to I\\\\), etc.), with **strict quadrant membership** via `realcompare` on coordinates.\\n- All **scalar comparisons** in the decision logic go through **`realcompare`** (including sorting side lengths for the circle test).\\n\\n### `decide_bin`\\n- Release binary copied to `/tmp/nvp_cursor_fsxrk336/decide_bin`.\\n- **Checked:** output matches all **15** `prompt_examples.json` examples (byte-for-byte JSON vs `expected`).\\n\\n### Build\\n`Cargo.toml` is included so `serde` / `serde_json` can parse stdin/stdout JSON. Rebuild with:\\n\\n```bash\\ncd /tmp/nvp_cursor_fsxrk336 && cargo build --release && cp target/release/decide_bin .\\n```\",\"session_id\":\"33e71ec8-1225-4ffc-be63-c383affb5dbf\",\"request_id\":\"87b13ddc-fc55-4dba-b04e-55f603fa1567\",\"usage\":{\"inputTokens\":26184,\"outputTokens\":13193,\"cacheReadTokens\":297073,\"cacheWriteTokens\":0}}\n",
+  "raw_agent_stderr": ""
+}

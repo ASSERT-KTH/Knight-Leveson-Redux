@@ -1,0 +1,1146 @@
+{
+  "agent": "gemini",
+  "model": "gemini-3-flash-preview",
+  "run_id": 0,
+  "language": "pascal",
+  "sandbox_dir": "/tmp/nvp_gemini_3hhkqdu0",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "session_id": "8e1dcfa1-8a39-4615-b4a3-cdfbe36af546",
+      "response": "I have successfully implemented the Launch Interceptor Program in Pascal, adhering to all the specified functional and engineering requirements. The solution includes a comprehensive implementation of all 15 LICs, CMV, PUM, FUV, and the final launch decision logic. I've also implemented a custom JSON parser to handle the specific input/output requirements of the task. The program has been verified against the provided oracle examples, and the deliverables `lipdecide.pas` and `decide_bin` are ready.",
+      "stats": {
+        "models": {
+          "gemini-3-flash-preview": {
+            "api": {
+              "totalRequests": 30,
+              "totalErrors": 13,
+              "totalLatencyMs": 880280
+            },
+            "tokens": {
+              "input": 176057,
+              "prompt": 779876,
+              "candidates": 14809,
+              "total": 806791,
+              "cached": 603819,
+              "thoughts": 12106,
+              "tool": 0
+            },
+            "roles": {
+              "main": {
+                "totalRequests": 30,
+                "totalErrors": 13,
+                "totalLatencyMs": 880280,
+                "tokens": {
+                  "input": 176057,
+                  "prompt": 779876,
+                  "candidates": 14809,
+                  "total": 806791,
+                  "cached": 603819,
+                  "thoughts": 12106,
+                  "tool": 0
+                }
+              }
+            }
+          }
+        },
+        "tools": {
+          "totalCalls": 18,
+          "totalSuccess": 18,
+          "totalFail": 0,
+          "totalDurationMs": 644,
+          "totalDecisions": {
+            "accept": 18,
+            "reject": 0,
+            "modify": 0,
+            "auto_accept": 0
+          },
+          "byName": {
+            "read_file": {
+              "count": 4,
+              "success": 4,
+              "fail": 0,
+              "durationMs": 48,
+              "decisions": {
+                "accept": 4,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "write_file": {
+              "count": 3,
+              "success": 3,
+              "fail": 0,
+              "durationMs": 59,
+              "decisions": {
+                "accept": 3,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "run_shell_command": {
+              "count": 11,
+              "success": 11,
+              "fail": 0,
+              "durationMs": 537,
+              "decisions": {
+                "accept": 11,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            }
+          }
+        },
+        "files": {
+          "totalLinesAdded": 657,
+          "totalLinesRemoved": 97
+        }
+      },
+      "stream": "stdout",
+      "index": 0
+    },
+    {
+      "stream": "stderr",
+      "index": 0,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 1,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 2,
+      "format": "text",
+      "text": "[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics."
+    },
+    {
+      "stream": "stderr",
+      "index": 3,
+      "format": "text",
+      "text": "[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset)."
+    },
+    {
+      "stream": "stderr",
+      "index": 4,
+      "format": "text",
+      "text": "Attempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 5,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 6,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 7,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 8,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 9,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 10,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 11,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 12,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 13,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 14,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 15,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 16,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 17,
+      "format": "text",
+      "text": "Attempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 18,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 19,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 20,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 21,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 22,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 23,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 24,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 25,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 26,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 27,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 28,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 29,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 30,
+      "format": "text",
+      "text": "Attempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 31,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 32,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 33,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 34,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 35,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 36,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 37,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 38,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 39,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 40,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 41,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 42,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 43,
+      "format": "text",
+      "text": "Attempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 44,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 45,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 46,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 47,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 48,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 49,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 50,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 51,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 52,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 53,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 54,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 55,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 56,
+      "format": "text",
+      "text": "Attempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 57,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 58,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 59,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 60,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 61,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 62,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 63,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 64,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 65,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 66,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 67,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 68,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 69,
+      "format": "text",
+      "text": "Attempt 2 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 70,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 71,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 72,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 73,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 74,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 75,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 76,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 77,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 78,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 79,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 80,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 81,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 82,
+      "format": "text",
+      "text": "Attempt 3 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 83,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 84,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 85,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 86,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 87,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 88,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 89,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 90,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 91,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 92,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 93,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 94,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 95,
+      "format": "text",
+      "text": "Attempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 96,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 97,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 98,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 99,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 100,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 101,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 102,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 103,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 104,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 105,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 106,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 107,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 108,
+      "format": "text",
+      "text": "Attempt 2 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 109,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 110,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 111,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 112,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 113,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 114,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 115,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 116,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 117,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 118,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 119,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 120,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 121,
+      "format": "text",
+      "text": "Attempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 122,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 123,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 124,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 125,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 126,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 127,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 128,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 129,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 130,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 131,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 132,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 133,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 134,
+      "format": "text",
+      "text": "Attempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 135,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 136,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 137,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 138,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 139,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 140,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 141,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 142,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 143,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 144,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 145,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 146,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 147,
+      "format": "text",
+      "text": "Attempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 148,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 149,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 150,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 151,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 152,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 153,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 154,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 155,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 156,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 157,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 158,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 159,
+      "format": "text",
+      "text": "}"
+    },
+    {
+      "stream": "stderr",
+      "index": 160,
+      "format": "text",
+      "text": "Attempt 2 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 161,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 162,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 163,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 164,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 165,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 166,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 167,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 168,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 169,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 170,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 171,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 172,
+      "format": "text",
+      "text": "}"
+    }
+  ],
+  "raw_agent_stdout": "{\n  \"session_id\": \"8e1dcfa1-8a39-4615-b4a3-cdfbe36af546\",\n  \"response\": \"I have successfully implemented the Launch Interceptor Program in Pascal, adhering to all the specified functional and engineering requirements. The solution includes a comprehensive implementation of all 15 LICs, CMV, PUM, FUV, and the final launch decision logic. I've also implemented a custom JSON parser to handle the specific input/output requirements of the task. The program has been verified against the provided oracle examples, and the deliverables `lipdecide.pas` and `decide_bin` are ready.\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-3-flash-preview\": {\n        \"api\": {\n          \"totalRequests\": 30,\n          \"totalErrors\": 13,\n          \"totalLatencyMs\": 880280\n        },\n        \"tokens\": {\n          \"input\": 176057,\n          \"prompt\": 779876,\n          \"candidates\": 14809,\n          \"total\": 806791,\n          \"cached\": 603819,\n          \"thoughts\": 12106,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 30,\n            \"totalErrors\": 13,\n            \"totalLatencyMs\": 880280,\n            \"tokens\": {\n              \"input\": 176057,\n              \"prompt\": 779876,\n              \"candidates\": 14809,\n              \"total\": 806791,\n              \"cached\": 603819,\n              \"thoughts\": 12106,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 18,\n      \"totalSuccess\": 18,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 644,\n      \"totalDecisions\": {\n        \"accept\": 18,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"read_file\": {\n          \"count\": 4,\n          \"success\": 4,\n          \"fail\": 0,\n          \"durationMs\": 48,\n          \"decisions\": {\n            \"accept\": 4,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"write_file\": {\n          \"count\": 3,\n          \"success\": 3,\n          \"fail\": 0,\n          \"durationMs\": 59,\n          \"decisions\": {\n            \"accept\": 3,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"run_shell_command\": {\n          \"count\": 11,\n          \"success\": 11,\n          \"fail\": 0,\n          \"durationMs\": 537,\n          \"decisions\": {\n            \"accept\": 11,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 657,\n      \"totalLinesRemoved\": 97\n    }\n  }\n}",
+  "raw_agent_stderr": "YOLO mode is enabled. All tool calls will be automatically approved.\nYOLO mode is enabled. All tool calls will be automatically approved.\n[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics.\n[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset).\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 2 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 3 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 2 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\nAttempt 2 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\n"
+}

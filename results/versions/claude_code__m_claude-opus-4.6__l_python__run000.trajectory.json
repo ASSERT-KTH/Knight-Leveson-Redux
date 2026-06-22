@@ -1,0 +1,68 @@
+{
+  "agent": "claude_code",
+  "model": "anthropic/claude-opus-4.6",
+  "run_id": 0,
+  "language": "python",
+  "sandbox_dir": "/tmp/nvp_claude_code_dztdfgf9",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 147190,
+      "duration_api_ms": 152652,
+      "num_turns": 16,
+      "result": "All done. Here's a summary of the implementation:\n\n**`decide.py`** \u2014 standalone Launch Interceptor Program implementation:\n\n- **15 LIC functions** (`lic_0` through `lic_14`) implementing all Launch Interceptor Conditions from the spec, including:\n  - Distance checks (LICs 1, 8, 13), circle containment (LICs 2, 9, 14), angle conditions (LICs 3, 10), area conditions (LICs 4, 11, 15), quadrant counting (LIC 5), x-coordinate decreasing (LICs 6, 12), and distance-from-line (LIC 7)\n  - Proper minimum enclosing circle calculation for the radius-based LICs (handles obtuse/collinear cases)\n  - All real number comparisons use `realcompare()` with 6 significant digit tolerance\n\n- **PUM computation** \u2014 combines CMV entries via the LCM connectors (ANDD, ORR, NOTUSED), with diagonal elements from input `pum_diag`\n\n- **FUV computation** \u2014 `FUV[i]` is true if `PUM[i,i]` is false OR all elements in row i are true\n\n- **LAUNCH** \u2014 true iff all FUV elements are true\n\n- **CLI interface** \u2014 reads JSON from stdin, writes JSON to stdout\n- **Importable** \u2014 `decide()` function exposed, no side effects at import time\n\n**Test results: 15/15 oracle examples pass.**",
+      "stop_reason": null,
+      "session_id": "37a84433-7d25-4785-aae5-a98203ccccf7",
+      "total_cost_usd": 1.9219037499999998,
+      "usage": {
+        "input_tokens": 15,
+        "cache_creation_input_tokens": 40397,
+        "cache_read_input_tokens": 408740,
+        "output_tokens": 7242,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "modelUsage": {
+        "anthropic/claude-opus-4.6": {
+          "inputTokens": 15,
+          "outputTokens": 7242,
+          "cacheReadInputTokens": 408740,
+          "cacheCreationInputTokens": 40397,
+          "webSearchRequests": 0,
+          "costUSD": 1.91392875,
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 7370,
+          "outputTokens": 121,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.007975,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "permission_denials": [],
+      "uuid": "aa43d0fb-b485-4e54-96d6-3888febd2dff",
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":147190,\"duration_api_ms\":152652,\"num_turns\":16,\"result\":\"All done. Here's a summary of the implementation:\\n\\n**`decide.py`** \u2014 standalone Launch Interceptor Program implementation:\\n\\n- **15 LIC functions** (`lic_0` through `lic_14`) implementing all Launch Interceptor Conditions from the spec, including:\\n  - Distance checks (LICs 1, 8, 13), circle containment (LICs 2, 9, 14), angle conditions (LICs 3, 10), area conditions (LICs 4, 11, 15), quadrant counting (LIC 5), x-coordinate decreasing (LICs 6, 12), and distance-from-line (LIC 7)\\n  - Proper minimum enclosing circle calculation for the radius-based LICs (handles obtuse/collinear cases)\\n  - All real number comparisons use `realcompare()` with 6 significant digit tolerance\\n\\n- **PUM computation** \u2014 combines CMV entries via the LCM connectors (ANDD, ORR, NOTUSED), with diagonal elements from input `pum_diag`\\n\\n- **FUV computation** \u2014 `FUV[i]` is true if `PUM[i,i]` is false OR all elements in row i are true\\n\\n- **LAUNCH** \u2014 true iff all FUV elements are true\\n\\n- **CLI interface** \u2014 reads JSON from stdin, writes JSON to stdout\\n- **Importable** \u2014 `decide()` function exposed, no side effects at import time\\n\\n**Test results: 15/15 oracle examples pass.**\",\"stop_reason\":null,\"session_id\":\"37a84433-7d25-4785-aae5-a98203ccccf7\",\"total_cost_usd\":1.9219037499999998,\"usage\":{\"input_tokens\":15,\"cache_creation_input_tokens\":40397,\"cache_read_input_tokens\":408740,\"output_tokens\":7242,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":\"\",\"iterations\":[],\"speed\":\"standard\"},\"modelUsage\":{\"anthropic/claude-opus-4.6\":{\"inputTokens\":15,\"outputTokens\":7242,\"cacheReadInputTokens\":408740,\"cacheCreationInputTokens\":40397,\"webSearchRequests\":0,\"costUSD\":1.91392875,\"contextWindow\":200000,\"maxOutputTokens\":32000},\"claude-haiku-4-5-20251001\":{\"inputTokens\":7370,\"outputTokens\":121,\"cacheReadInputTokens\":0,\"cacheCreationInputTokens\":0,\"webSearchRequests\":0,\"costUSD\":0.007975,\"contextWindow\":200000,\"maxOutputTokens\":64000}},\"permission_denials\":[],\"uuid\":\"aa43d0fb-b485-4e54-96d6-3888febd2dff\"}\n",
+  "raw_agent_stderr": ""
+}

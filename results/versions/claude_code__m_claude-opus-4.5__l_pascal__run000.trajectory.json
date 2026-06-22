@@ -1,0 +1,68 @@
+{
+  "agent": "claude_code",
+  "model": "anthropic/claude-opus-4.5",
+  "run_id": 0,
+  "language": "pascal",
+  "sandbox_dir": "/tmp/nvp_claude_code_jmoj_7ks",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 268672,
+      "duration_api_ms": 278277,
+      "num_turns": 21,
+      "result": "Both deliverables are in place:\n\n1. **`lipdecide.pas`** - The archival Pascal source file containing the core Launch Interceptor logic\n2. **`decide_bin`** - The compiled executable that reads JSON from stdin and writes JSON to stdout\n\nThe implementation:\n- Includes all 15 LIC evaluations as specified in the spec\n- Uses the exact `REALCOMPARE` function from `realcompare_reference.pas` for floating-point comparisons\n- Computes the CMV (Conditions Met Vector) from the LIC evaluations\n- Computes the PUM (Preliminary Unlocking Matrix) off-diagonal elements using the LCM connectors\n- Computes the FUV (Final Unlocking Vector) from the PUM\n- Determines the LAUNCH decision from the FUV\n- All 15 oracle-backed test cases pass",
+      "stop_reason": null,
+      "session_id": "2ca42a11-c859-4903-8b33-d24a7ce1e546",
+      "total_cost_usd": 4.51845,
+      "usage": {
+        "input_tokens": 20,
+        "cache_creation_input_tokens": 82870,
+        "cache_read_input_tokens": 937407,
+        "output_tokens": 20621,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "modelUsage": {
+        "anthropic/claude-opus-4.5": {
+          "inputTokens": 20,
+          "outputTokens": 20621,
+          "cacheReadInputTokens": 937407,
+          "cacheCreationInputTokens": 82870,
+          "webSearchRequests": 0,
+          "costUSD": 4.506798000000001,
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 10517,
+          "outputTokens": 227,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.011652,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "permission_denials": [],
+      "uuid": "859a6c91-2bcb-44e7-8fe8-96145e732278",
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":268672,\"duration_api_ms\":278277,\"num_turns\":21,\"result\":\"Both deliverables are in place:\\n\\n1. **`lipdecide.pas`** - The archival Pascal source file containing the core Launch Interceptor logic\\n2. **`decide_bin`** - The compiled executable that reads JSON from stdin and writes JSON to stdout\\n\\nThe implementation:\\n- Includes all 15 LIC evaluations as specified in the spec\\n- Uses the exact `REALCOMPARE` function from `realcompare_reference.pas` for floating-point comparisons\\n- Computes the CMV (Conditions Met Vector) from the LIC evaluations\\n- Computes the PUM (Preliminary Unlocking Matrix) off-diagonal elements using the LCM connectors\\n- Computes the FUV (Final Unlocking Vector) from the PUM\\n- Determines the LAUNCH decision from the FUV\\n- All 15 oracle-backed test cases pass\",\"stop_reason\":null,\"session_id\":\"2ca42a11-c859-4903-8b33-d24a7ce1e546\",\"total_cost_usd\":4.51845,\"usage\":{\"input_tokens\":20,\"cache_creation_input_tokens\":82870,\"cache_read_input_tokens\":937407,\"output_tokens\":20621,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":\"\",\"iterations\":[],\"speed\":\"standard\"},\"modelUsage\":{\"anthropic/claude-opus-4.5\":{\"inputTokens\":20,\"outputTokens\":20621,\"cacheReadInputTokens\":937407,\"cacheCreationInputTokens\":82870,\"webSearchRequests\":0,\"costUSD\":4.506798000000001,\"contextWindow\":200000,\"maxOutputTokens\":32000},\"claude-haiku-4-5-20251001\":{\"inputTokens\":10517,\"outputTokens\":227,\"cacheReadInputTokens\":0,\"cacheCreationInputTokens\":0,\"webSearchRequests\":0,\"costUSD\":0.011652,\"contextWindow\":200000,\"maxOutputTokens\":64000}},\"permission_denials\":[],\"uuid\":\"859a6c91-2bcb-44e7-8fe8-96145e732278\"}\n",
+  "raw_agent_stderr": ""
+}

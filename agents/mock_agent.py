@@ -43,7 +43,9 @@ from agents.base import AgentBase, VersionRecord
 
 _HEADER = textwrap.dedent("""\
     from __future__ import annotations
+    import json
     import math
+    import sys
 
     PI = math.pi
 
@@ -282,9 +284,25 @@ _DECIDE_BODY = textwrap.dedent("""\
         return cmv, pum, fuv, all(fuv)
 """)
 
+_CLI_FOOTER = textwrap.dedent("""\
+
+    if __name__ == "__main__":
+        payload = json.load(sys.stdin)
+        cmv, pum, fuv, launch = decide(
+            payload["numpoints"],
+            payload["x"],
+            payload["y"],
+            payload["parameters"],
+            payload["lcm"],
+            payload["pum_diag"],
+        )
+        json.dump({"cmv": cmv, "pum": pum, "fuv": fuv, "launch": launch}, sys.stdout)
+""")
+
+
 
 def _build_source(circum_fn: str, quad_fn: str) -> str:
-    return _HEADER + circum_fn + quad_fn + _DECIDE_BODY
+    return _HEADER + circum_fn + quad_fn + _DECIDE_BODY + _CLI_FOOTER
 
 
 # Three variant source codes

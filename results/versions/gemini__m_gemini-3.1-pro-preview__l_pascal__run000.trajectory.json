@@ -1,0 +1,158 @@
+{
+  "agent": "gemini",
+  "model": "gemini-3.1-pro-preview",
+  "run_id": 0,
+  "language": "pascal",
+  "sandbox_dir": "/tmp/nvp_gemini_rge261ky",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "session_id": "40d44c22-8c08-4edf-aac5-3416455936ee",
+      "response": "I have completed the implementation of the Launch Interceptor Program (LIP) according to the specifications in `spec.md`.\n\nHere is a summary of the work done:\n1. **Source Code (`lipdecide.pas`)**: \n   - I authored the main Free Pascal application, ensuring strict compliance with all 15 Launch Interceptor Conditions.\n   - Incorporated `realcompare_reference.pas` verbatim to safely compare real numbers according to the fixed specifications.\n   - Built an embedded JSON lexer and recursive descent parser using standard `SysUtils` and `Math` modules. This allowed parsing arbitrarily complex JSON objects directly from `stdin` without relying on external FCL JSON packages or third-party libraries.\n   - Output logic flawlessly serializes `CMV`, `PUM`, `FUV`, and `LAUNCH` structures into the exact JSON format expected by the system.\n   - Validated logic correctness by matching outputs exactly for all 15 examples given in `prompt_examples.json`.\n\n2. **Executable (`decide_bin`)**:\n   - The Pascal code has been successfully compiled into a robust standalone binary named `decide_bin`.\n   - The application expects a JSON payload from standard input and will stream the evaluated decision matrix as JSON to standard output.\n\nThe required deliverables `lipdecide.pas` and `decide_bin` are ready in your workspace.",
+      "stats": {
+        "models": {
+          "gemini-3.1-pro-preview": {
+            "api": {
+              "totalRequests": 33,
+              "totalErrors": 0,
+              "totalLatencyMs": 253826
+            },
+            "tokens": {
+              "input": 144112,
+              "prompt": 1109615,
+              "candidates": 10425,
+              "total": 1134801,
+              "cached": 965503,
+              "thoughts": 14761,
+              "tool": 0
+            },
+            "roles": {
+              "main": {
+                "totalRequests": 33,
+                "totalErrors": 0,
+                "totalLatencyMs": 253826,
+                "tokens": {
+                  "input": 144112,
+                  "prompt": 1109615,
+                  "candidates": 10425,
+                  "total": 1134801,
+                  "cached": 965503,
+                  "thoughts": 14761,
+                  "tool": 0
+                }
+              }
+            }
+          },
+          "gemini-3-flash-preview": {
+            "api": {
+              "totalRequests": 1,
+              "totalErrors": 0,
+              "totalLatencyMs": 2742
+            },
+            "tokens": {
+              "input": 4109,
+              "prompt": 4109,
+              "candidates": 90,
+              "total": 4492,
+              "cached": 0,
+              "thoughts": 293,
+              "tool": 0
+            },
+            "roles": {
+              "utility_loop_detector": {
+                "totalRequests": 1,
+                "totalErrors": 0,
+                "totalLatencyMs": 2742,
+                "tokens": {
+                  "input": 4109,
+                  "prompt": 4109,
+                  "candidates": 90,
+                  "total": 4492,
+                  "cached": 0,
+                  "thoughts": 293,
+                  "tool": 0
+                }
+              }
+            }
+          }
+        },
+        "tools": {
+          "totalCalls": 32,
+          "totalSuccess": 32,
+          "totalFail": 0,
+          "totalDurationMs": 303444,
+          "totalDecisions": {
+            "accept": 32,
+            "reject": 0,
+            "modify": 0,
+            "auto_accept": 0
+          },
+          "byName": {
+            "read_file": {
+              "count": 5,
+              "success": 5,
+              "fail": 0,
+              "durationMs": 24,
+              "decisions": {
+                "accept": 5,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "run_shell_command": {
+              "count": 27,
+              "success": 27,
+              "fail": 0,
+              "durationMs": 303420,
+              "decisions": {
+                "accept": 27,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            }
+          }
+        },
+        "files": {
+          "totalLinesAdded": 0,
+          "totalLinesRemoved": 0
+        }
+      },
+      "stream": "stdout",
+      "index": 0
+    },
+    {
+      "stream": "stderr",
+      "index": 0,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 1,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 2,
+      "format": "text",
+      "text": "[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics."
+    },
+    {
+      "stream": "stderr",
+      "index": 3,
+      "format": "text",
+      "text": "[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset)."
+    },
+    {
+      "stream": "stderr",
+      "index": 4,
+      "format": "text",
+      "text": "missing pgrep output"
+    }
+  ],
+  "raw_agent_stdout": "{\n  \"session_id\": \"40d44c22-8c08-4edf-aac5-3416455936ee\",\n  \"response\": \"I have completed the implementation of the Launch Interceptor Program (LIP) according to the specifications in `spec.md`.\\n\\nHere is a summary of the work done:\\n1. **Source Code (`lipdecide.pas`)**: \\n   - I authored the main Free Pascal application, ensuring strict compliance with all 15 Launch Interceptor Conditions.\\n   - Incorporated `realcompare_reference.pas` verbatim to safely compare real numbers according to the fixed specifications.\\n   - Built an embedded JSON lexer and recursive descent parser using standard `SysUtils` and `Math` modules. This allowed parsing arbitrarily complex JSON objects directly from `stdin` without relying on external FCL JSON packages or third-party libraries.\\n   - Output logic flawlessly serializes `CMV`, `PUM`, `FUV`, and `LAUNCH` structures into the exact JSON format expected by the system.\\n   - Validated logic correctness by matching outputs exactly for all 15 examples given in `prompt_examples.json`.\\n\\n2. **Executable (`decide_bin`)**:\\n   - The Pascal code has been successfully compiled into a robust standalone binary named `decide_bin`.\\n   - The application expects a JSON payload from standard input and will stream the evaluated decision matrix as JSON to standard output.\\n\\nThe required deliverables `lipdecide.pas` and `decide_bin` are ready in your workspace.\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-3.1-pro-preview\": {\n        \"api\": {\n          \"totalRequests\": 33,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 253826\n        },\n        \"tokens\": {\n          \"input\": 144112,\n          \"prompt\": 1109615,\n          \"candidates\": 10425,\n          \"total\": 1134801,\n          \"cached\": 965503,\n          \"thoughts\": 14761,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 33,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 253826,\n            \"tokens\": {\n              \"input\": 144112,\n              \"prompt\": 1109615,\n              \"candidates\": 10425,\n              \"total\": 1134801,\n              \"cached\": 965503,\n              \"thoughts\": 14761,\n              \"tool\": 0\n            }\n          }\n        }\n      },\n      \"gemini-3-flash-preview\": {\n        \"api\": {\n          \"totalRequests\": 1,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 2742\n        },\n        \"tokens\": {\n          \"input\": 4109,\n          \"prompt\": 4109,\n          \"candidates\": 90,\n          \"total\": 4492,\n          \"cached\": 0,\n          \"thoughts\": 293,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"utility_loop_detector\": {\n            \"totalRequests\": 1,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 2742,\n            \"tokens\": {\n              \"input\": 4109,\n              \"prompt\": 4109,\n              \"candidates\": 90,\n              \"total\": 4492,\n              \"cached\": 0,\n              \"thoughts\": 293,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 32,\n      \"totalSuccess\": 32,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 303444,\n      \"totalDecisions\": {\n        \"accept\": 32,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"read_file\": {\n          \"count\": 5,\n          \"success\": 5,\n          \"fail\": 0,\n          \"durationMs\": 24,\n          \"decisions\": {\n            \"accept\": 5,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"run_shell_command\": {\n          \"count\": 27,\n          \"success\": 27,\n          \"fail\": 0,\n          \"durationMs\": 303420,\n          \"decisions\": {\n            \"accept\": 27,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 0,\n      \"totalLinesRemoved\": 0\n    }\n  }\n}",
+  "raw_agent_stderr": "YOLO mode is enabled. All tool calls will be automatically approved.\nYOLO mode is enabled. All tool calls will be automatically approved.\n[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics.\n[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset).\nmissing pgrep output\n"
+}

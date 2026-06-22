@@ -1,0 +1,210 @@
+{
+  "agent": "gemini",
+  "model": "gemini-3-flash-preview",
+  "run_id": 0,
+  "language": "python",
+  "sandbox_dir": "/tmp/nvp_gemini_wnj8fpld",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "session_id": "d8e0aed8-296c-4775-aca2-d8907bd556eb",
+      "response": "I have implemented the Launch Interceptor Program as specified in `spec.md`. The deliverable is a standalone Python file `decide.py` that reads input from stdin and writes output to stdout in JSON format. It includes the `decide` function and all required Launch Interceptor Conditions (LICs), as well as the tolerance-based `realcompare` function. I have verified the implementation against multiple examples from the provided reference data, confirming that it produces the correct CMV, PUM, FUV, and final launch decisions.\n\n```python\nimport sys\nimport json\nimport math\n\nPI = 3.1415926535\n\ndef realcompare(a: float, b: float) -> str:\n    \"\"\"Tolerance-based six-significant-digit comparison from the oracle.\"\"\"\n    scale = max(abs(a), abs(b))\n    if scale == 0.0:\n        return \"EQ\"\n    eps = 0.5e-5 * scale\n    diff = a - b\n    if diff > eps:\n        return \"GT\"\n    if diff < -eps:\n        return \"LT\"\n    return \"EQ\"\n\ndef get_dist(p1, p2):\n    return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)\n\ndef get_area(p1, p2, p3):\n    return 0.5 * abs(p1[0]*(p2[1] - p3[1]) + p2[0]*(p3[1] - p1[1]) + p3[0]*(p1[1] - p2[1]))\n\ndef get_angle(p1, p2, p3):\n    v1 = (p1[0] - p2[0], p1[1] - p2[1])\n    v2 = (p3[0] - p2[0], p3[1] - p2[1])\n    mag1 = math.sqrt(v1[0]**2 + v1[1]**2)\n    mag2 = math.sqrt(v2[0]**2 + v2[1]**2)\n    if realcompare(mag1, 0.0) == \"EQ\" or realcompare(mag2, 0.0) == \"EQ\":\n        return None\n    dot = v1[0]*v2[0] + v1[1]*v2[1]\n    cos_theta = dot / (mag1 * mag2)\n    if cos_theta > 1.0: cos_theta = 1.0\n    if cos_theta < -1.0: cos_theta = -1.0\n    return math.acos(cos_theta)\n\ndef in_circle(p1, p2, p3, radius):\n    a, b, c = get_dist(p1, p2), get_dist(p2, p3), get_dist(p3, p1)\n    a2, b2, c2 = a*a, b*b, c*c\n    if (realcompare(a2 + b2, c2) != \"GT\" or realcompare(b2 + c2, a2) != \"GT\" or realcompare(c2 + a2, b2) != \"GT\"):\n        r = max(a, b, c) / 2.0\n    else:\n        area = get_area(p1, p2, p3)\n        r = (a * b * c) / (4.0 * area) if realcompare(area, 0.0) == \"GT\" else max(a, b, c) / 2.0\n    return realcompare(r, radius) != \"GT\"\n\ndef get_quadrant(p):\n    x, y = p\n    if x >= 0 and y >= 0: return 1\n    if x < 0 and y >= 0: return 2\n    if x <= 0 and y < 0: return 3\n    return 4\n\ndef decide(numpoints, x, y, parameters, lcm, pum_diag):\n    points = list(zip(x, y))\n    cmv = [False] * 15\n    for i in range(numpoints - 1):\n        if realcompare(get_dist(points[i], points[i+1]), parameters[\"LENGTH1\"]) == \"GT\":\n            cmv[0] = True; break\n    for i in range(numpoints - 2):\n        if not in_circle(points[i], points[i+1], points[i+2], parameters[\"RADIUS1\"]):\n            cmv[1] = True; break\n    for i in range(numpoints - 2):\n        angle = get_angle(points[i], points[i+1], points[i+2])\n        if angle is not None and (realcompare(angle, PI - parameters[\"EPSILON\"]) == \"LT\" or realcompare(angle, PI + parameters[\"EPSILON\"]) == \"GT\"):\n            cmv[2] = True; break\n    for i in range(numpoints - 2):\n        if realcompare(get_area(points[i], points[i+1], points[i+2]), parameters[\"AREA1\"]) == \"GT\":\n            cmv[3] = True; break\n    for i in range(numpoints - parameters[\"Q_PTS\"] + 1):\n        if len({get_quadrant(points[i+j]) for j in range(parameters[\"Q_PTS\"])}) > parameters[\"QUADS\"]:\n            cmv[4] = True; break\n    for i in range(numpoints - 1):\n        if realcompare(points[i+1][0] - points[i][0], 0.0) == \"LT\":\n            cmv[5] = True; break\n    if numpoints >= 3:\n        for i in range(numpoints - parameters[\"N_PTS\"] + 1):\n            p_s, p_e = points[i], points[i + parameters[\"N_PTS\"] - 1]\n            for j in range(1, parameters[\"N_PTS\"] - 1):\n                p = points[i+j]\n                if realcompare(p_s[0], p_e[0]) == \"EQ\" and realcompare(p_s[1], p_e[1]) == \"EQ\":\n                    dist = get_dist(p, p_s)\n                else:\n                    x0, y0 = p; x1, y1 = p_s; x2, y2 = p_e\n                    dist = abs((y2-y1)*x0 - (x2-x1)*y0 + x2*y1 - y2*x1) / math.sqrt((y2-y1)**2 + (x2-x1)**2)\n                if realcompare(dist, parameters[\"DIST\"]) == \"GT\": cmv[6] = True; break\n            if cmv[6]: break\n    if numpoints >= 3:\n        for i in range(numpoints - parameters[\"K_PTS\"] - 1):\n            if realcompare(get_dist(points[i], points[i + parameters[\"K_PTS\"] + 1]), parameters[\"LENGTH1\"]) == \"GT\":\n                cmv[7] = True; break\n    if numpoints >= 5:\n        for i in range(numpoints - parameters[\"A_PTS\"] - parameters[\"B_PTS\"] - 2):\n            if not in_circle(points[i], points[i + parameters[\"A_PTS\"] + 1], points[i + parameters[\"A_PTS\"] + parameters[\"B_PTS\"] + 2], parameters[\"RADIUS1\"]):\n                cmv[8] = True; break\n    if numpoints >= 5:\n        for i in range(numpoints - parameters[\"C_PTS\"] - parameters[\"D_PTS\"] - 2):\n            angle = get_angle(points[i], points[i + parameters[\"C_PTS\"] + 1], points[i + parameters[\"C_PTS\"] + parameters[\"D_PTS\"] + 2])\n            if angle is not None and (realcompare(angle, PI - parameters[\"EPSILON\"]) == \"LT\" or realcompare(angle, PI + parameters[\"EPSILON\"]) == \"GT\"):\n                cmv[9] = True; break\n    if numpoints >= 5:\n        for i in range(numpoints - parameters[\"E_PTS\"] - parameters[\"F_PTS\"] - 2):\n            if realcompare(get_area(points[i], points[i + parameters[\"E_PTS\"] + 1], points[i + parameters[\"E_PTS\"] + parameters[\"F_PTS\"] + 2]), parameters[\"AREA1\"]) == \"GT\":\n                cmv[10] = True; break\n    if numpoints >= 3:\n        for i in range(numpoints - parameters[\"G_PTS\"] - 1):\n            if realcompare(points[i + parameters[\"G_PTS\"] + 1][0] - points[i][0], 0.0) == \"LT\":\n                cmv[11] = True; break\n    if numpoints >= 3:\n        c1 = any(realcompare(get_dist(points[i], points[i + parameters[\"K_PTS\"] + 1]), parameters[\"LENGTH1\"]) == \"GT\" for i in range(numpoints - parameters[\"K_PTS\"] - 1))\n        c2 = any(realcompare(get_dist(points[i], points[i + parameters[\"K_PTS\"] + 1]), parameters[\"LENGTH2\"]) == \"LT\" for i in range(numpoints - parameters[\"K_PTS\"] - 1))\n        if c1 and c2: cmv[12] = True\n    if numpoints >= 5:\n        c1, c2 = False, False\n        for i in range(numpoints - parameters[\"A_PTS\"] - parameters[\"B_PTS\"] - 2):\n            p1, p2, p3 = points[i], points[i+parameters[\"A_PTS\"]+1], points[i+parameters[\"A_PTS\"]+parameters[\"B_PTS\"]+2]\n            if not in_circle(p1, p2, p3, parameters[\"RADIUS1\"]): c1 = True\n            if in_circle(p1, p2, p3, parameters[\"RADIUS2\"]): c2 = True\n        if c1 and c2: cmv[13] = True\n    if numpoints >= 5:\n        c1, c2 = False, False\n        for i in range(numpoints - parameters[\"E_PTS\"] - parameters[\"F_PTS\"] - 2):\n            p1, p2, p3 = points[i], points[i+parameters[\"E_PTS\"]+1], points[i+parameters[\"E_PTS\"]+parameters[\"F_PTS\"]+2]\n            area = get_area(p1, p2, p3)\n            if realcompare(area, parameters[\"AREA1\"]) == \"GT\": c1 = True\n            if realcompare(area, parameters[\"AREA2\"]) == \"LT\": c2 = True\n        if c1 and c2: cmv[14] = True\n    pum = [[(lcm[i][j] == \"NOTUSED\" or (cmv[i] and cmv[j] if lcm[i][j] == \"ANDD\" else cmv[i] or cmv[j])) if i != j else pum_diag[i] for j in range(15)] for i in range(15)]\n    fuv = [not pum[i][i] or all(pum[i]) for i in range(15)]\n    return cmv, pum, fuv, all(fuv)\n\nif __name__ == \"__main__\":\n    try:\n        input_data = json.load(sys.stdin)\n        cmv, pum, fuv, launch = decide(input_data[\"numpoints\"], input_data[\"x\"], input_data[\"y\"], input_data[\"parameters\"], input_data[\"lcm\"], input_data[\"pum_diag\"])\n        print(json.dumps({\"cmv\": cmv, \"pum\": pum, \"fuv\": fuv, \"launch\": launch}))\n    except (EOFError, json.JSONDecodeError): pass\n```",
+      "stats": {
+        "models": {
+          "gemini-3-flash-preview": {
+            "api": {
+              "totalRequests": 6,
+              "totalErrors": 1,
+              "totalLatencyMs": 399826
+            },
+            "tokens": {
+              "input": 66017,
+              "prompt": 188498,
+              "candidates": 7266,
+              "total": 212385,
+              "cached": 122481,
+              "thoughts": 16621,
+              "tool": 0
+            },
+            "roles": {
+              "main": {
+                "totalRequests": 6,
+                "totalErrors": 1,
+                "totalLatencyMs": 399826,
+                "tokens": {
+                  "input": 66017,
+                  "prompt": 188498,
+                  "candidates": 7266,
+                  "total": 212385,
+                  "cached": 122481,
+                  "thoughts": 16621,
+                  "tool": 0
+                }
+              }
+            }
+          }
+        },
+        "tools": {
+          "totalCalls": 6,
+          "totalSuccess": 6,
+          "totalFail": 0,
+          "totalDurationMs": 189,
+          "totalDecisions": {
+            "accept": 6,
+            "reject": 0,
+            "modify": 0,
+            "auto_accept": 0
+          },
+          "byName": {
+            "read_file": {
+              "count": 3,
+              "success": 3,
+              "fail": 0,
+              "durationMs": 36,
+              "decisions": {
+                "accept": 3,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "write_file": {
+              "count": 1,
+              "success": 1,
+              "fail": 0,
+              "durationMs": 8,
+              "decisions": {
+                "accept": 1,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "run_shell_command": {
+              "count": 2,
+              "success": 2,
+              "fail": 0,
+              "durationMs": 145,
+              "decisions": {
+                "accept": 2,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            }
+          }
+        },
+        "files": {
+          "totalLinesAdded": 301,
+          "totalLinesRemoved": 0
+        }
+      },
+      "stream": "stdout",
+      "index": 0
+    },
+    {
+      "stream": "stderr",
+      "index": 0,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 1,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 2,
+      "format": "text",
+      "text": "[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics."
+    },
+    {
+      "stream": "stderr",
+      "index": 3,
+      "format": "text",
+      "text": "[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset)."
+    },
+    {
+      "stream": "stderr",
+      "index": 4,
+      "format": "text",
+      "text": "Attempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}"
+    },
+    {
+      "stream": "stderr",
+      "index": 5,
+      "format": "text",
+      "text": "    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)"
+    },
+    {
+      "stream": "stderr",
+      "index": 6,
+      "format": "text",
+      "text": "    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    {
+      "stream": "stderr",
+      "index": 7,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7"
+    },
+    {
+      "stream": "stderr",
+      "index": 8,
+      "format": "text",
+      "text": "    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)"
+    },
+    {
+      "stream": "stderr",
+      "index": 9,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19"
+    },
+    {
+      "stream": "stderr",
+      "index": 10,
+      "format": "text",
+      "text": "    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23"
+    },
+    {
+      "stream": "stderr",
+      "index": 11,
+      "format": "text",
+      "text": "    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)"
+    },
+    {
+      "stream": "stderr",
+      "index": 12,
+      "format": "text",
+      "text": "    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)"
+    },
+    {
+      "stream": "stderr",
+      "index": 13,
+      "format": "text",
+      "text": "    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)"
+    },
+    {
+      "stream": "stderr",
+      "index": 14,
+      "format": "text",
+      "text": "    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {"
+    },
+    {
+      "stream": "stderr",
+      "index": 15,
+      "format": "text",
+      "text": "  status: 503"
+    },
+    {
+      "stream": "stderr",
+      "index": 16,
+      "format": "text",
+      "text": "}"
+    }
+  ],
+  "raw_agent_stdout": "{\n  \"session_id\": \"d8e0aed8-296c-4775-aca2-d8907bd556eb\",\n  \"response\": \"I have implemented the Launch Interceptor Program as specified in `spec.md`. The deliverable is a standalone Python file `decide.py` that reads input from stdin and writes output to stdout in JSON format. It includes the `decide` function and all required Launch Interceptor Conditions (LICs), as well as the tolerance-based `realcompare` function. I have verified the implementation against multiple examples from the provided reference data, confirming that it produces the correct CMV, PUM, FUV, and final launch decisions.\\n\\n```python\\nimport sys\\nimport json\\nimport math\\n\\nPI = 3.1415926535\\n\\ndef realcompare(a: float, b: float) -> str:\\n    \\\"\\\"\\\"Tolerance-based six-significant-digit comparison from the oracle.\\\"\\\"\\\"\\n    scale = max(abs(a), abs(b))\\n    if scale == 0.0:\\n        return \\\"EQ\\\"\\n    eps = 0.5e-5 * scale\\n    diff = a - b\\n    if diff > eps:\\n        return \\\"GT\\\"\\n    if diff < -eps:\\n        return \\\"LT\\\"\\n    return \\\"EQ\\\"\\n\\ndef get_dist(p1, p2):\\n    return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)\\n\\ndef get_area(p1, p2, p3):\\n    return 0.5 * abs(p1[0]*(p2[1] - p3[1]) + p2[0]*(p3[1] - p1[1]) + p3[0]*(p1[1] - p2[1]))\\n\\ndef get_angle(p1, p2, p3):\\n    v1 = (p1[0] - p2[0], p1[1] - p2[1])\\n    v2 = (p3[0] - p2[0], p3[1] - p2[1])\\n    mag1 = math.sqrt(v1[0]**2 + v1[1]**2)\\n    mag2 = math.sqrt(v2[0]**2 + v2[1]**2)\\n    if realcompare(mag1, 0.0) == \\\"EQ\\\" or realcompare(mag2, 0.0) == \\\"EQ\\\":\\n        return None\\n    dot = v1[0]*v2[0] + v1[1]*v2[1]\\n    cos_theta = dot / (mag1 * mag2)\\n    if cos_theta > 1.0: cos_theta = 1.0\\n    if cos_theta < -1.0: cos_theta = -1.0\\n    return math.acos(cos_theta)\\n\\ndef in_circle(p1, p2, p3, radius):\\n    a, b, c = get_dist(p1, p2), get_dist(p2, p3), get_dist(p3, p1)\\n    a2, b2, c2 = a*a, b*b, c*c\\n    if (realcompare(a2 + b2, c2) != \\\"GT\\\" or realcompare(b2 + c2, a2) != \\\"GT\\\" or realcompare(c2 + a2, b2) != \\\"GT\\\"):\\n        r = max(a, b, c) / 2.0\\n    else:\\n        area = get_area(p1, p2, p3)\\n        r = (a * b * c) / (4.0 * area) if realcompare(area, 0.0) == \\\"GT\\\" else max(a, b, c) / 2.0\\n    return realcompare(r, radius) != \\\"GT\\\"\\n\\ndef get_quadrant(p):\\n    x, y = p\\n    if x >= 0 and y >= 0: return 1\\n    if x < 0 and y >= 0: return 2\\n    if x <= 0 and y < 0: return 3\\n    return 4\\n\\ndef decide(numpoints, x, y, parameters, lcm, pum_diag):\\n    points = list(zip(x, y))\\n    cmv = [False] * 15\\n    for i in range(numpoints - 1):\\n        if realcompare(get_dist(points[i], points[i+1]), parameters[\\\"LENGTH1\\\"]) == \\\"GT\\\":\\n            cmv[0] = True; break\\n    for i in range(numpoints - 2):\\n        if not in_circle(points[i], points[i+1], points[i+2], parameters[\\\"RADIUS1\\\"]):\\n            cmv[1] = True; break\\n    for i in range(numpoints - 2):\\n        angle = get_angle(points[i], points[i+1], points[i+2])\\n        if angle is not None and (realcompare(angle, PI - parameters[\\\"EPSILON\\\"]) == \\\"LT\\\" or realcompare(angle, PI + parameters[\\\"EPSILON\\\"]) == \\\"GT\\\"):\\n            cmv[2] = True; break\\n    for i in range(numpoints - 2):\\n        if realcompare(get_area(points[i], points[i+1], points[i+2]), parameters[\\\"AREA1\\\"]) == \\\"GT\\\":\\n            cmv[3] = True; break\\n    for i in range(numpoints - parameters[\\\"Q_PTS\\\"] + 1):\\n        if len({get_quadrant(points[i+j]) for j in range(parameters[\\\"Q_PTS\\\"])}) > parameters[\\\"QUADS\\\"]:\\n            cmv[4] = True; break\\n    for i in range(numpoints - 1):\\n        if realcompare(points[i+1][0] - points[i][0], 0.0) == \\\"LT\\\":\\n            cmv[5] = True; break\\n    if numpoints >= 3:\\n        for i in range(numpoints - parameters[\\\"N_PTS\\\"] + 1):\\n            p_s, p_e = points[i], points[i + parameters[\\\"N_PTS\\\"] - 1]\\n            for j in range(1, parameters[\\\"N_PTS\\\"] - 1):\\n                p = points[i+j]\\n                if realcompare(p_s[0], p_e[0]) == \\\"EQ\\\" and realcompare(p_s[1], p_e[1]) == \\\"EQ\\\":\\n                    dist = get_dist(p, p_s)\\n                else:\\n                    x0, y0 = p; x1, y1 = p_s; x2, y2 = p_e\\n                    dist = abs((y2-y1)*x0 - (x2-x1)*y0 + x2*y1 - y2*x1) / math.sqrt((y2-y1)**2 + (x2-x1)**2)\\n                if realcompare(dist, parameters[\\\"DIST\\\"]) == \\\"GT\\\": cmv[6] = True; break\\n            if cmv[6]: break\\n    if numpoints >= 3:\\n        for i in range(numpoints - parameters[\\\"K_PTS\\\"] - 1):\\n            if realcompare(get_dist(points[i], points[i + parameters[\\\"K_PTS\\\"] + 1]), parameters[\\\"LENGTH1\\\"]) == \\\"GT\\\":\\n                cmv[7] = True; break\\n    if numpoints >= 5:\\n        for i in range(numpoints - parameters[\\\"A_PTS\\\"] - parameters[\\\"B_PTS\\\"] - 2):\\n            if not in_circle(points[i], points[i + parameters[\\\"A_PTS\\\"] + 1], points[i + parameters[\\\"A_PTS\\\"] + parameters[\\\"B_PTS\\\"] + 2], parameters[\\\"RADIUS1\\\"]):\\n                cmv[8] = True; break\\n    if numpoints >= 5:\\n        for i in range(numpoints - parameters[\\\"C_PTS\\\"] - parameters[\\\"D_PTS\\\"] - 2):\\n            angle = get_angle(points[i], points[i + parameters[\\\"C_PTS\\\"] + 1], points[i + parameters[\\\"C_PTS\\\"] + parameters[\\\"D_PTS\\\"] + 2])\\n            if angle is not None and (realcompare(angle, PI - parameters[\\\"EPSILON\\\"]) == \\\"LT\\\" or realcompare(angle, PI + parameters[\\\"EPSILON\\\"]) == \\\"GT\\\"):\\n                cmv[9] = True; break\\n    if numpoints >= 5:\\n        for i in range(numpoints - parameters[\\\"E_PTS\\\"] - parameters[\\\"F_PTS\\\"] - 2):\\n            if realcompare(get_area(points[i], points[i + parameters[\\\"E_PTS\\\"] + 1], points[i + parameters[\\\"E_PTS\\\"] + parameters[\\\"F_PTS\\\"] + 2]), parameters[\\\"AREA1\\\"]) == \\\"GT\\\":\\n                cmv[10] = True; break\\n    if numpoints >= 3:\\n        for i in range(numpoints - parameters[\\\"G_PTS\\\"] - 1):\\n            if realcompare(points[i + parameters[\\\"G_PTS\\\"] + 1][0] - points[i][0], 0.0) == \\\"LT\\\":\\n                cmv[11] = True; break\\n    if numpoints >= 3:\\n        c1 = any(realcompare(get_dist(points[i], points[i + parameters[\\\"K_PTS\\\"] + 1]), parameters[\\\"LENGTH1\\\"]) == \\\"GT\\\" for i in range(numpoints - parameters[\\\"K_PTS\\\"] - 1))\\n        c2 = any(realcompare(get_dist(points[i], points[i + parameters[\\\"K_PTS\\\"] + 1]), parameters[\\\"LENGTH2\\\"]) == \\\"LT\\\" for i in range(numpoints - parameters[\\\"K_PTS\\\"] - 1))\\n        if c1 and c2: cmv[12] = True\\n    if numpoints >= 5:\\n        c1, c2 = False, False\\n        for i in range(numpoints - parameters[\\\"A_PTS\\\"] - parameters[\\\"B_PTS\\\"] - 2):\\n            p1, p2, p3 = points[i], points[i+parameters[\\\"A_PTS\\\"]+1], points[i+parameters[\\\"A_PTS\\\"]+parameters[\\\"B_PTS\\\"]+2]\\n            if not in_circle(p1, p2, p3, parameters[\\\"RADIUS1\\\"]): c1 = True\\n            if in_circle(p1, p2, p3, parameters[\\\"RADIUS2\\\"]): c2 = True\\n        if c1 and c2: cmv[13] = True\\n    if numpoints >= 5:\\n        c1, c2 = False, False\\n        for i in range(numpoints - parameters[\\\"E_PTS\\\"] - parameters[\\\"F_PTS\\\"] - 2):\\n            p1, p2, p3 = points[i], points[i+parameters[\\\"E_PTS\\\"]+1], points[i+parameters[\\\"E_PTS\\\"]+parameters[\\\"F_PTS\\\"]+2]\\n            area = get_area(p1, p2, p3)\\n            if realcompare(area, parameters[\\\"AREA1\\\"]) == \\\"GT\\\": c1 = True\\n            if realcompare(area, parameters[\\\"AREA2\\\"]) == \\\"LT\\\": c2 = True\\n        if c1 and c2: cmv[14] = True\\n    pum = [[(lcm[i][j] == \\\"NOTUSED\\\" or (cmv[i] and cmv[j] if lcm[i][j] == \\\"ANDD\\\" else cmv[i] or cmv[j])) if i != j else pum_diag[i] for j in range(15)] for i in range(15)]\\n    fuv = [not pum[i][i] or all(pum[i]) for i in range(15)]\\n    return cmv, pum, fuv, all(fuv)\\n\\nif __name__ == \\\"__main__\\\":\\n    try:\\n        input_data = json.load(sys.stdin)\\n        cmv, pum, fuv, launch = decide(input_data[\\\"numpoints\\\"], input_data[\\\"x\\\"], input_data[\\\"y\\\"], input_data[\\\"parameters\\\"], input_data[\\\"lcm\\\"], input_data[\\\"pum_diag\\\"])\\n        print(json.dumps({\\\"cmv\\\": cmv, \\\"pum\\\": pum, \\\"fuv\\\": fuv, \\\"launch\\\": launch}))\\n    except (EOFError, json.JSONDecodeError): pass\\n```\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-3-flash-preview\": {\n        \"api\": {\n          \"totalRequests\": 6,\n          \"totalErrors\": 1,\n          \"totalLatencyMs\": 399826\n        },\n        \"tokens\": {\n          \"input\": 66017,\n          \"prompt\": 188498,\n          \"candidates\": 7266,\n          \"total\": 212385,\n          \"cached\": 122481,\n          \"thoughts\": 16621,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 6,\n            \"totalErrors\": 1,\n            \"totalLatencyMs\": 399826,\n            \"tokens\": {\n              \"input\": 66017,\n              \"prompt\": 188498,\n              \"candidates\": 7266,\n              \"total\": 212385,\n              \"cached\": 122481,\n              \"thoughts\": 16621,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 6,\n      \"totalSuccess\": 6,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 189,\n      \"totalDecisions\": {\n        \"accept\": 6,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"read_file\": {\n          \"count\": 3,\n          \"success\": 3,\n          \"fail\": 0,\n          \"durationMs\": 36,\n          \"decisions\": {\n            \"accept\": 3,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"write_file\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 8,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"run_shell_command\": {\n          \"count\": 2,\n          \"success\": 2,\n          \"fail\": 0,\n          \"durationMs\": 145,\n          \"decisions\": {\n            \"accept\": 2,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 301,\n      \"totalLinesRemoved\": 0\n    }\n  }\n}",
+  "raw_agent_stderr": "YOLO mode is enabled. All tool calls will be automatically approved.\nYOLO mode is enabled. All tool calls will be automatically approved.\n[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics.\n[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset).\nAttempt 1 failed with status 503. Retrying with backoff... _ApiError: {\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"Service Unavailable\"}}\n    at throwErrorIfNotOK (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35831:24)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:35594:7\n    at async Models.generateContentStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-S2IQOR7T.js:36690:16)\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:276624:19\n    at async file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:253666:23\n    at async retryWithBackoff (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:273586:23)\n    at async GeminiChat.makeApiCallAndProcessStream (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308672:28)\n    at async GeminiChat.streamWithRetries (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:308515:29)\n    at async Turn.run (file:///home/javier/.nvm/versions/node/v20.18.0/lib/node_modules/@google/gemini-cli/bundle/chunk-QVTX2M5J.js:309002:24) {\n  status: 503\n}\n"
+}

@@ -1,0 +1,68 @@
+{
+  "agent": "claude_code",
+  "model": "anthropic/claude-opus-4.6",
+  "run_id": 0,
+  "language": "rust",
+  "sandbox_dir": "/tmp/nvp_claude_code_z6dt2c3c",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 192149,
+      "duration_api_ms": 197843,
+      "num_turns": 18,
+      "result": "Both deliverables are in place and all 15 oracle test cases pass. Here's a summary of what was implemented:\n\n**`decide.rs`** / **`decide_bin`** \u2014 A standalone Rust executable that implements the full Launch Interceptor Program:\n\n- **JSON I/O**: Hand-rolled JSON parser (no external dependencies) reads input from stdin, outputs result to stdout\n- **`realcompare`**: Copied verbatim from `realcompare_reference.rs` \u2014 compares floats to 6 significant digits using relative epsilon\n- **15 LICs**: All Launch Interceptor Conditions implemented per `spec.md`:\n  - LIC 1: Consecutive points distance > LENGTH1\n  - LIC 2: 3 consecutive points not fitting in circle of RADIUS1\n  - LIC 3: Angle deviation from PI beyond EPSILON\n  - LIC 4: Triangle area > AREA1\n  - LIC 5: Q_PTS points spanning > QUADS quadrants\n  - LIC 6: Consecutive points with decreasing X\n  - LIC 7: N_PTS consecutive points with one > DIST from first-last line\n  - LIC 8: Two points K_PTS apart, distance > LENGTH1\n  - LIC 9: Three points (A_PTS, B_PTS apart) not in circle of RADIUS1\n  - LIC 10: Angle condition with C_PTS, D_PTS spacing\n  - LIC 11: Triangle area with E_PTS, F_PTS spacing\n  - LIC 12: Decreasing X with G_PTS spacing\n  - LIC 13\u201315: Dual-condition variants of LIC 8/9/11\n- **PUM**: Combines CMV via LCM (NOTUSED/ORR/ANDD), diagonal from input\n- **FUV**: Row-all-true check with diagonal override\n- **LAUNCH**: All FUV elements must be true",
+      "stop_reason": null,
+      "session_id": "ba6565e9-cc87-4cc4-bfa1-0f463a64679f",
+      "total_cost_usd": 3.2446365,
+      "usage": {
+        "input_tokens": 17,
+        "cache_creation_input_tokens": 88762,
+        "cache_read_input_tokens": 475650,
+        "output_tokens": 11484,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "modelUsage": {
+        "anthropic/claude-opus-4.6": {
+          "inputTokens": 17,
+          "outputTokens": 11484,
+          "cacheReadInputTokens": 475650,
+          "cacheCreationInputTokens": 88762,
+          "webSearchRequests": 0,
+          "costUSD": 3.2393175,
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 4719,
+          "outputTokens": 120,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.005319,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "permission_denials": [],
+      "uuid": "bcf4b5dd-449a-4f2f-b0a2-0f6367f159b7",
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":192149,\"duration_api_ms\":197843,\"num_turns\":18,\"result\":\"Both deliverables are in place and all 15 oracle test cases pass. Here's a summary of what was implemented:\\n\\n**`decide.rs`** / **`decide_bin`** \u2014 A standalone Rust executable that implements the full Launch Interceptor Program:\\n\\n- **JSON I/O**: Hand-rolled JSON parser (no external dependencies) reads input from stdin, outputs result to stdout\\n- **`realcompare`**: Copied verbatim from `realcompare_reference.rs` \u2014 compares floats to 6 significant digits using relative epsilon\\n- **15 LICs**: All Launch Interceptor Conditions implemented per `spec.md`:\\n  - LIC 1: Consecutive points distance > LENGTH1\\n  - LIC 2: 3 consecutive points not fitting in circle of RADIUS1\\n  - LIC 3: Angle deviation from PI beyond EPSILON\\n  - LIC 4: Triangle area > AREA1\\n  - LIC 5: Q_PTS points spanning > QUADS quadrants\\n  - LIC 6: Consecutive points with decreasing X\\n  - LIC 7: N_PTS consecutive points with one > DIST from first-last line\\n  - LIC 8: Two points K_PTS apart, distance > LENGTH1\\n  - LIC 9: Three points (A_PTS, B_PTS apart) not in circle of RADIUS1\\n  - LIC 10: Angle condition with C_PTS, D_PTS spacing\\n  - LIC 11: Triangle area with E_PTS, F_PTS spacing\\n  - LIC 12: Decreasing X with G_PTS spacing\\n  - LIC 13\u201315: Dual-condition variants of LIC 8/9/11\\n- **PUM**: Combines CMV via LCM (NOTUSED/ORR/ANDD), diagonal from input\\n- **FUV**: Row-all-true check with diagonal override\\n- **LAUNCH**: All FUV elements must be true\",\"stop_reason\":null,\"session_id\":\"ba6565e9-cc87-4cc4-bfa1-0f463a64679f\",\"total_cost_usd\":3.2446365,\"usage\":{\"input_tokens\":17,\"cache_creation_input_tokens\":88762,\"cache_read_input_tokens\":475650,\"output_tokens\":11484,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":\"\",\"iterations\":[],\"speed\":\"standard\"},\"modelUsage\":{\"anthropic/claude-opus-4.6\":{\"inputTokens\":17,\"outputTokens\":11484,\"cacheReadInputTokens\":475650,\"cacheCreationInputTokens\":88762,\"webSearchRequests\":0,\"costUSD\":3.2393175,\"contextWindow\":200000,\"maxOutputTokens\":32000},\"claude-haiku-4-5-20251001\":{\"inputTokens\":4719,\"outputTokens\":120,\"cacheReadInputTokens\":0,\"cacheCreationInputTokens\":0,\"webSearchRequests\":0,\"costUSD\":0.005319,\"contextWindow\":200000,\"maxOutputTokens\":64000}},\"permission_denials\":[],\"uuid\":\"bcf4b5dd-449a-4f2f-b0a2-0f6367f159b7\"}\n",
+  "raw_agent_stderr": ""
+}

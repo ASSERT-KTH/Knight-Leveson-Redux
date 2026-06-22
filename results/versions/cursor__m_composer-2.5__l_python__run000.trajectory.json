@@ -1,0 +1,30 @@
+{
+  "agent": "cursor",
+  "model": "composer-2.5",
+  "run_id": 0,
+  "language": "python",
+  "sandbox_dir": "/tmp/nvp_cursor_4rxqsd0h",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 111204,
+      "duration_api_ms": 111204,
+      "result": "Reading the spec, examples, and reference implementation to implement `decide.py`.\nInspecting example structure and running a quick test against the reference.\nImplementing `decide.py` and validating against all 15 oracle examples.\nAll examples pass. Verifying the CLI interface and import behavior.\nImplemented `decide.py` \u2014 a standalone Launch Interceptor Program per the Knight & Leveson (1986) spec.\n\n### Deliverable: `decide.py`\n\nThe module includes:\n\n- **`realcompare(a, b)`** \u2014 six-significant-digit tolerance comparison (same logic as `realcompare_reference.py`)\n- **`decide(numpoints, x, y, parameters, lcm, pum_diag)`** \u2014 returns `{cmv, pum, fuv, launch}`\n- **CLI** \u2014 reads one JSON object from stdin and writes one JSON object to stdout when run as `python decide.py`\n- **Import-safe** \u2014 no side effects on import; logic runs only in `_main()` under `if __name__ == \"__main__\"`\n\n### Implementation highlights\n\n1. **All 15 LICs** \u2014 distance, circle containment, angles, triangle area, quadrants (with axis-priority rules from the spec), line distance, and combined conditions for LICs 13\u201315\n2. **Real comparisons** \u2014 all numeric comparisons go through `realcompare`\n3. **PUM** \u2014 off-diagonal from LCM + CMV; diagonal from input `pum_diag`\n4. **FUV** \u2014 `true` when diagonal PUM is `false`, or when the entire row is `true`\n5. **LAUNCH** \u2014 `true` only when every FUV element is `true`\n\n### Verification\n\nAll **15 oracle examples** in `prompt_examples.json` match exactly (`cmv`, `pum`, `fuv`, `launch`). The stdin/stdout CLI path was also tested successfully.",
+      "session_id": "8cb53ba9-14c1-4bea-a4e6-9ac63eb8bcc1",
+      "request_id": "994beecf-ee49-4df3-8d48-ed6bec142e46",
+      "usage": {
+        "inputTokens": 44009,
+        "outputTokens": 10407,
+        "cacheReadTokens": 169408,
+        "cacheWriteTokens": 0
+      },
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":111204,\"duration_api_ms\":111204,\"result\":\"Reading the spec, examples, and reference implementation to implement `decide.py`.\\nInspecting example structure and running a quick test against the reference.\\nImplementing `decide.py` and validating against all 15 oracle examples.\\nAll examples pass. Verifying the CLI interface and import behavior.\\nImplemented `decide.py` \u2014 a standalone Launch Interceptor Program per the Knight & Leveson (1986) spec.\\n\\n### Deliverable: `decide.py`\\n\\nThe module includes:\\n\\n- **`realcompare(a, b)`** \u2014 six-significant-digit tolerance comparison (same logic as `realcompare_reference.py`)\\n- **`decide(numpoints, x, y, parameters, lcm, pum_diag)`** \u2014 returns `{cmv, pum, fuv, launch}`\\n- **CLI** \u2014 reads one JSON object from stdin and writes one JSON object to stdout when run as `python decide.py`\\n- **Import-safe** \u2014 no side effects on import; logic runs only in `_main()` under `if __name__ == \\\"__main__\\\"`\\n\\n### Implementation highlights\\n\\n1. **All 15 LICs** \u2014 distance, circle containment, angles, triangle area, quadrants (with axis-priority rules from the spec), line distance, and combined conditions for LICs 13\u201315\\n2. **Real comparisons** \u2014 all numeric comparisons go through `realcompare`\\n3. **PUM** \u2014 off-diagonal from LCM + CMV; diagonal from input `pum_diag`\\n4. **FUV** \u2014 `true` when diagonal PUM is `false`, or when the entire row is `true`\\n5. **LAUNCH** \u2014 `true` only when every FUV element is `true`\\n\\n### Verification\\n\\nAll **15 oracle examples** in `prompt_examples.json` match exactly (`cmv`, `pum`, `fuv`, `launch`). The stdin/stdout CLI path was also tested successfully.\",\"session_id\":\"8cb53ba9-14c1-4bea-a4e6-9ac63eb8bcc1\",\"request_id\":\"994beecf-ee49-4df3-8d48-ed6bec142e46\",\"usage\":{\"inputTokens\":44009,\"outputTokens\":10407,\"cacheReadTokens\":169408,\"cacheWriteTokens\":0}}\n",
+  "raw_agent_stderr": ""
+}

@@ -1,14 +1,14 @@
 """
-Free Pascal (fpc) target: unit `lipdecide` with procedure DECIDE; JSON-lines binary.
+Free Pascal target: archive source in `lipdecide.pas`; agent also builds a standalone executable.
 """
 from __future__ import annotations
 
-import os
 import shutil
 import subprocess
 from pathlib import Path
 
-from harnesses.base import LanguageHarness, run_cmd, which_or_none
+from harnesses.base import LanguageHarness, platform_executable_name, run_cmd, which_or_none
+from harnesses.prompt_context import build_reference_context
 
 _PASCAL_DIR = Path(__file__).resolve().parent / "pascal"
 
@@ -16,31 +16,42 @@ _PASCAL_DIR = Path(__file__).resolve().parent / "pascal"
 PASCAL_TASK_PROMPT_TEMPLATE = """\
 You are implementing the Launch Interceptor Program from Knight & Leveson (1986).
 
-The file `spec.md` in your workspace is the verbatim specification (Pascal types,
-globals, parameterless `DECIDE`, and `REALCOMPARE`). All LICs and logic are defined
-only there.
+Your workspace initially contains only:
+- `spec.md`
+- `prompt_examples.json`
+- `realcompare_reference.pas`
 
-Free Pascal delivery (this does not replace the spec):
-- Write a unit named `lipdecide` in a single file named `lipdecide.pas`.
-- The unit must `use` the shared unit `globals` (provided by the evaluation harness),
-  which declares all K&L global variables and the `COMPTYPE` enumeration (`LT`, `EQ`,
-  `GT`). Do not redeclare those globals.
-- Implement `function REALCOMPARE(A, B: real): COMPTYPE;` in `lipdecide` with the same
-  semantics as in the spec (six-significant-digit comparison). The harness does not
-  supply `REALCOMPARE`; use your implementation everywhere the spec requires real
-  comparisons inside the logic equivalent to `DECIDE`.
-- Implement `procedure DECIDE;` that reads inputs from and writes outputs to the
-  globals in `globals` (same contract as the original Pascal problem statement).
-- Indices: Pascal arrays `X[i]`, `Y[i]` for `i = 1 .. NUMPOINTS` match the spec.
+The file `spec.md` is the verbatim specification. All LICs and logic are defined only there.
+
+Pascal delivery:
+- Your main deliverable is a compiled executable at `{executable_path}`.
+- On each run, it must read exactly one input JSON object from stdin and write exactly one
+  output JSON object to stdout.
+- The input will be in JSON format, and each input object will have the same shape as an
+  individual `input` object inside `prompt_examples.json`. How you parse that JSON and how
+  you build the executable are up to you.
+- The logical input schema matches the pipeline cases: `numpoints`, `x`, `y`, `parameters`,
+  `lcm`, and `pum_diag`.
+- The expected output must be emitted in JSON format, and each output object must have the
+  same shape as an individual `expected` object inside `prompt_examples.json`.
+- The logical output schema is JSON-equivalent to `(cmv, pum, fuv, launch)`.
+- Use `realcompare_reference.pas` as fixed reference behavior for `REALCOMPARE`; do not
+  modify its logic.
+- Also write the primary Pascal source snapshot to `{output_path}` for archival and later
+  evaluation by the pipeline. The pipeline expects that file to contain the core Launch
+  Interceptor logic in Pascal.
 
 Engineering constraints:
-- Target Free Pascal (`fpc`). Use only the standard RTL and FPC standard units that
-  ship with `fpc` (no external packages).
-- Do not include a `program` or `begin`/`end.` main block — only the unit.
+- Do not read any files other than the provided reference files.
+- Do not modify `realcompare_reference.pas`.
+- Use only standard Free Pascal/RTL facilities.
 
 The specification is in: {spec_path}
 
-Write your implementation to: {output_path}
+{reference_context}
+
+Write the archival source file to: {output_path}
+Write the main standalone deliverable to: {executable_path}
 """
 
 
@@ -51,13 +62,21 @@ class PascalHarness(LanguageHarness):
     def output_filename(self) -> str:
         return "lipdecide.pas"
 
+    @property
+    def primary_artifact_filename(self) -> str:
+        return platform_executable_name("decide_bin")
+
     def build_prompt(self, spec_path: str, output_path: str) -> str:
-        return PASCAL_TASK_PROMPT_TEMPLATE.format(spec_path=spec_path, output_path=output_path)
+        return PASCAL_TASK_PROMPT_TEMPLATE.format(
+            spec_path=spec_path,
+            output_path=output_path,
+            executable_path=self.primary_artifact_filename,
+            reference_context=build_reference_context(self.name),
+        )
 
     def check_syntax(self, source_code: str, work_dir: Path | None = None) -> str:
         if not which_or_none("fpc"):
             return "syntax_error"
-        # Full parse check would duplicate a harness compile; acceptance/campaign compile again.
         if len(source_code.strip()) < 20:
             return "syntax_error"
         if "lipdecide" not in source_code.lower() and "procedure" not in source_code.lower():
@@ -83,7 +102,7 @@ class PascalHarness(LanguageHarness):
         shutil.copy2(_PASCAL_DIR / "wire_json.pas", work_dir / "wire_json.pas")
         shutil.copy2(_PASCAL_DIR / "lip_harness.pas", work_dir / "lip_harness.pas")
         (work_dir / "lipdecide.pas").write_text(source_code, encoding="utf-8")
-        exe = work_dir / ("lip_harness.exe" if os.name == "nt" else "lip_harness")
+        exe = work_dir / platform_executable_name("lip_harness")
         r = run_cmd(
             [fpc, "-Mobjfpc", "-Sh", "-O2", f"-o{exe.name}", "lip_harness.pas"],
             cwd=work_dir,

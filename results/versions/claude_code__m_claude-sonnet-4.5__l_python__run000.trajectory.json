@@ -1,0 +1,68 @@
+{
+  "agent": "claude_code",
+  "model": "anthropic/claude-sonnet-4.5",
+  "run_id": 0,
+  "language": "python",
+  "sandbox_dir": "/tmp/nvp_claude_code_iddhx9l9",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 151650,
+      "duration_api_ms": 167307,
+      "num_turns": 17,
+      "result": "## Summary\n\nI have successfully implemented the Launch Interceptor Program according to the Knight & Leveson (1986) specification. Here's what was delivered:\n\n### File: `decide.py`\n\nThe implementation includes:\n\n1. **`realcompare(a, b)`** - Six-significant-digit comparison function using the reference implementation logic\n\n2. **All 15 Launch Interceptor Conditions (LICs)**:\n   - LIC 1-6: Basic geometric conditions (distance, circle containment, angles, area, quadrants, x-coordinate decrease)\n   - LIC 7-12: Conditions with intervening points\n   - LIC 13-15: Compound conditions requiring both parts to be true\n\n3. **Helper functions**:\n   - `distance()` - Euclidean distance calculation\n   - `triangle_area()` - Triangle area using cross product\n   - `angle_at_vertex()` - Angle calculation with undefined case handling\n   - `smallest_enclosing_circle_radius()` - Minimum enclosing circle for three points\n   - `point_to_line_distance()` - Distance from point to line\n   - `get_quadrant()` - Quadrant determination with priority rules\n\n4. **Core computation functions**:\n   - `compute_cmv()` - Conditions Met Vector from all 15 LICs\n   - `compute_pum()` - Preliminary Unlocking Matrix using CMV, LCM, and PUM diagonal\n   - `compute_fuv()` - Final Unlocking Vector from PUM\n   - `compute_launch()` - Final launch decision\n\n5. **Main interface**:\n   - `decide()` - Importable function accepting all parameters and returning (cmv, pum, fuv, launch)\n   - `main()` - Reads JSON from stdin, processes, and writes JSON to stdout\n\n### Testing Results\n\nAll 15 oracle-backed test cases from `prompt_examples.json` pass successfully, validating:\n- Correct CMV computation for all LICs\n- Correct PUM computation from CMV and LCM\n- Correct FUV computation from PUM\n- Correct LAUNCH decision from FUV\n\nThe implementation is standalone, uses only the Python standard library, and is both runnable as a script and importable as a module.",
+      "stop_reason": null,
+      "session_id": "9b4c4a10-d59c-46d5-9cad-844fff81d40a",
+      "total_cost_usd": 0.46474935000000017,
+      "usage": {
+        "input_tokens": 59,
+        "cache_creation_input_tokens": 41729,
+        "cache_read_input_tokens": 471852,
+        "output_tokens": 10033,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "modelUsage": {
+        "anthropic/claude-sonnet-4.5": {
+          "inputTokens": 59,
+          "outputTokens": 10033,
+          "cacheReadInputTokens": 471852,
+          "cacheCreationInputTokens": 41729,
+          "webSearchRequests": 0,
+          "costUSD": 0.4487113500000001,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 14328,
+          "outputTokens": 342,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.016038,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "permission_denials": [],
+      "uuid": "4f239b67-0a5d-4974-ac8c-c83626ee6542",
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":151650,\"duration_api_ms\":167307,\"num_turns\":17,\"result\":\"## Summary\\n\\nI have successfully implemented the Launch Interceptor Program according to the Knight & Leveson (1986) specification. Here's what was delivered:\\n\\n### File: `decide.py`\\n\\nThe implementation includes:\\n\\n1. **`realcompare(a, b)`** - Six-significant-digit comparison function using the reference implementation logic\\n\\n2. **All 15 Launch Interceptor Conditions (LICs)**:\\n   - LIC 1-6: Basic geometric conditions (distance, circle containment, angles, area, quadrants, x-coordinate decrease)\\n   - LIC 7-12: Conditions with intervening points\\n   - LIC 13-15: Compound conditions requiring both parts to be true\\n\\n3. **Helper functions**:\\n   - `distance()` - Euclidean distance calculation\\n   - `triangle_area()` - Triangle area using cross product\\n   - `angle_at_vertex()` - Angle calculation with undefined case handling\\n   - `smallest_enclosing_circle_radius()` - Minimum enclosing circle for three points\\n   - `point_to_line_distance()` - Distance from point to line\\n   - `get_quadrant()` - Quadrant determination with priority rules\\n\\n4. **Core computation functions**:\\n   - `compute_cmv()` - Conditions Met Vector from all 15 LICs\\n   - `compute_pum()` - Preliminary Unlocking Matrix using CMV, LCM, and PUM diagonal\\n   - `compute_fuv()` - Final Unlocking Vector from PUM\\n   - `compute_launch()` - Final launch decision\\n\\n5. **Main interface**:\\n   - `decide()` - Importable function accepting all parameters and returning (cmv, pum, fuv, launch)\\n   - `main()` - Reads JSON from stdin, processes, and writes JSON to stdout\\n\\n### Testing Results\\n\\nAll 15 oracle-backed test cases from `prompt_examples.json` pass successfully, validating:\\n- Correct CMV computation for all LICs\\n- Correct PUM computation from CMV and LCM\\n- Correct FUV computation from PUM\\n- Correct LAUNCH decision from FUV\\n\\nThe implementation is standalone, uses only the Python standard library, and is both runnable as a script and importable as a module.\",\"stop_reason\":null,\"session_id\":\"9b4c4a10-d59c-46d5-9cad-844fff81d40a\",\"total_cost_usd\":0.46474935000000017,\"usage\":{\"input_tokens\":59,\"cache_creation_input_tokens\":41729,\"cache_read_input_tokens\":471852,\"output_tokens\":10033,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":\"\",\"iterations\":[],\"speed\":\"standard\"},\"modelUsage\":{\"anthropic/claude-sonnet-4.5\":{\"inputTokens\":59,\"outputTokens\":10033,\"cacheReadInputTokens\":471852,\"cacheCreationInputTokens\":41729,\"webSearchRequests\":0,\"costUSD\":0.4487113500000001,\"contextWindow\":200000,\"maxOutputTokens\":64000},\"claude-haiku-4-5-20251001\":{\"inputTokens\":14328,\"outputTokens\":342,\"cacheReadInputTokens\":0,\"cacheCreationInputTokens\":0,\"webSearchRequests\":0,\"costUSD\":0.016038,\"contextWindow\":200000,\"maxOutputTokens\":64000}},\"permission_denials\":[],\"uuid\":\"4f239b67-0a5d-4974-ac8c-c83626ee6542\"}\n",
+  "raw_agent_stderr": ""
+}

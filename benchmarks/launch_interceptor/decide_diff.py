@@ -5,7 +5,80 @@ Used by the campaign fault log and for tests.
 """
 from __future__ import annotations
 
+import hashlib
+from dataclasses import dataclass
 from typing import Any
+
+
+@dataclass(frozen=True, slots=True)
+class PackedDecideOutput:
+    cmv_bits: int
+    pum_rows: tuple[int, ...]
+    fuv_bits: int
+    launch_bit: int
+
+
+def pack_bool_vector(values: list[bool] | tuple[bool, ...], *, width: int = 15) -> int:
+    if len(values) != width:
+        raise ValueError(f"expected {width} booleans, got {len(values)}")
+    bits = 0
+    for idx, value in enumerate(values):
+        if bool(value):
+            bits |= 1 << idx
+    return bits
+
+
+def unpack_bool_vector(bits: int, *, width: int = 15) -> list[bool]:
+    return [bool((bits >> idx) & 1) for idx in range(width)]
+
+
+def pack_pum_rows(pum: list[list[bool]] | tuple[list[bool], ...], *, width: int = 15) -> tuple[int, ...]:
+    if len(pum) != width:
+        raise ValueError(f"expected {width} PUM rows, got {len(pum)}")
+    return tuple(pack_bool_vector(list(row), width=width) for row in pum)
+
+
+def unpack_pum_rows(rows: tuple[int, ...] | list[int], *, width: int = 15) -> list[list[bool]]:
+    if len(rows) != width:
+        raise ValueError(f"expected {width} packed PUM rows, got {len(rows)}")
+    return [unpack_bool_vector(int(row), width=width) for row in rows]
+
+
+def pack_decide_output(
+    output: tuple[list[bool], list[list[bool]], list[bool], bool],
+) -> PackedDecideOutput:
+    cmv, pum, fuv, launch = output
+    return PackedDecideOutput(
+        cmv_bits=pack_bool_vector(list(cmv)),
+        pum_rows=pack_pum_rows(list(pum)),
+        fuv_bits=pack_bool_vector(list(fuv)),
+        launch_bit=int(bool(launch)),
+    )
+
+
+def unpack_decide_output(
+    packed: PackedDecideOutput,
+) -> tuple[list[bool], list[list[bool]], list[bool], bool]:
+    return (
+        unpack_bool_vector(packed.cmv_bits),
+        unpack_pum_rows(packed.pum_rows),
+        unpack_bool_vector(packed.fuv_bits),
+        bool(packed.launch_bit),
+    )
+
+
+def pack_case_expected_output(case: dict[str, Any]) -> PackedDecideOutput:
+    return pack_decide_output((case["cmv"], case["pum"], case["fuv"], case["launch"]))
+
+
+def packed_output_digest(packed: PackedDecideOutput) -> int:
+    h = hashlib.blake2b(digest_size=8)
+    h.update(int(packed.cmv_bits).to_bytes(2, "little", signed=False))
+    for row_bits in packed.pum_rows:
+        h.update(int(row_bits).to_bytes(2, "little", signed=False))
+    h.update(int(packed.fuv_bits).to_bytes(2, "little", signed=False))
+    h.update(int(packed.launch_bit).to_bytes(1, "little", signed=False))
+    return int.from_bytes(h.digest(), "little", signed=False)
 
 
 def diff_decide_outputs(

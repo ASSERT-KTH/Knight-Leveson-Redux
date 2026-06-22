@@ -33,6 +33,7 @@ from pathlib import Path
 from typing import Any
 
 from agents.base import AgentBase, AgentUnavailableError
+from agents.trajectory import DEFAULT_TRAJECTORY_NOTE, parse_jsonl_events
 
 
 class CodexAgent(AgentBase):
@@ -96,6 +97,14 @@ class CodexAgent(AgentBase):
             result = self._run_cli(cmd, cwd=sandbox, timeout=self.timeout, env=env)
         except Exception as exc:
             raise AgentUnavailableError(f"codex CLI failed to launch: {exc}") from exc
+
+        trajectory = parse_jsonl_events(result.stdout or "", stream="stdout") + parse_jsonl_events(result.stderr or "", stream="stderr")
+        self._set_invocation_artifacts(
+            trajectory=trajectory or None,
+            raw_agent_stdout=result.stdout or "",
+            raw_agent_stderr=result.stderr or "",
+            trajectory_capture_note=DEFAULT_TRAJECTORY_NOTE,
+        )
 
         if result.returncode != 0:
             snippet = (result.stderr or result.stdout or "")[:500]

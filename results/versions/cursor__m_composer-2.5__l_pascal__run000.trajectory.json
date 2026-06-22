@@ -1,0 +1,30 @@
+{
+  "agent": "cursor",
+  "model": "composer-2.5",
+  "run_id": 0,
+  "language": "pascal",
+  "sandbox_dir": "/tmp/nvp_cursor_0xy71xwc",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 360332,
+      "duration_api_ms": 360332,
+      "result": "Implementing the Launch Interceptor Program per the spec. Reading the specification and reference files.\nExtracting a complete example to understand the JSON schema, then implementing the solution.\nImplementing the full Pascal program with JSON I/O and all 15 LICs.\nInvestigating parsing and LIC logic. PUM diagonal mismatch suggests a parsing bug.\nInputBuf is truncated at 255 characters \u2014 likely a ShortString limit. Fixing that and stdin reading.\nAll 15 oracle examples pass. Cleaning up unused variables and verifying deliverables.\nThe Launch Interceptor Program is implemented and verified against all 15 oracle examples in `prompt_examples.json`.\n\n## Deliverables\n\n| File | Description |\n|------|-------------|\n| [`lipdecide.pas`](lipdecide.pas) | Pascal source: all 15 LICs, `DECIDE`, PUM/FUV/LAUNCH, JSON stdin/stdout |\n| [`decide_bin`](decide_bin) | Compiled Free Pascal executable |\n\n## Behavior\n\n- Reads one JSON input object from stdin (`numpoints`, `x`, `y`, `parameters`, `lcm`, `pum_diag`)\n- Runs `DECIDE` (CMV \u2192 PUM off-diagonal \u2192 FUV \u2192 `LAUNCH`)\n- Writes one JSON output object: `{ \"cmv\", \"pum\", \"fuv\", \"launch\" }`\n- `REALCOMPARE` matches [`realcompare_reference.pas`](realcompare_reference.pas) exactly (inlined, unmodified logic)\n- No runtime file I/O beyond stdin/stdout\n\n## Usage\n\n```bash\n./decide_bin < input.json\n```\n\n## Implementation notes\n\n- All real comparisons go through `REALCOMPARE` (6 significant-digit tolerance).\n- `pum_diag` sets the PUM diagonal; off-diagonal PUM entries come from LCM + CMV.\n- Input JSON is buffered in an `AnsiString` so long single-line payloads are not truncated at 255 characters (ShortString limit).\n\nAll 15 `prompt_examples.json` cases pass with exact expected output.",
+      "session_id": "5b1fbb85-9096-4bcf-9433-90838d4a892a",
+      "request_id": "e1da5b5d-c2b4-4d68-9c70-d5036ba1b117",
+      "usage": {
+        "inputTokens": 47955,
+        "outputTokens": 27329,
+        "cacheReadTokens": 1240739,
+        "cacheWriteTokens": 0
+      },
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":360332,\"duration_api_ms\":360332,\"result\":\"Implementing the Launch Interceptor Program per the spec. Reading the specification and reference files.\\nExtracting a complete example to understand the JSON schema, then implementing the solution.\\nImplementing the full Pascal program with JSON I/O and all 15 LICs.\\nInvestigating parsing and LIC logic. PUM diagonal mismatch suggests a parsing bug.\\nInputBuf is truncated at 255 characters \u2014 likely a ShortString limit. Fixing that and stdin reading.\\nAll 15 oracle examples pass. Cleaning up unused variables and verifying deliverables.\\nThe Launch Interceptor Program is implemented and verified against all 15 oracle examples in `prompt_examples.json`.\\n\\n## Deliverables\\n\\n| File | Description |\\n|------|-------------|\\n| [`lipdecide.pas`](lipdecide.pas) | Pascal source: all 15 LICs, `DECIDE`, PUM/FUV/LAUNCH, JSON stdin/stdout |\\n| [`decide_bin`](decide_bin) | Compiled Free Pascal executable |\\n\\n## Behavior\\n\\n- Reads one JSON input object from stdin (`numpoints`, `x`, `y`, `parameters`, `lcm`, `pum_diag`)\\n- Runs `DECIDE` (CMV \u2192 PUM off-diagonal \u2192 FUV \u2192 `LAUNCH`)\\n- Writes one JSON output object: `{ \\\"cmv\\\", \\\"pum\\\", \\\"fuv\\\", \\\"launch\\\" }`\\n- `REALCOMPARE` matches [`realcompare_reference.pas`](realcompare_reference.pas) exactly (inlined, unmodified logic)\\n- No runtime file I/O beyond stdin/stdout\\n\\n## Usage\\n\\n```bash\\n./decide_bin < input.json\\n```\\n\\n## Implementation notes\\n\\n- All real comparisons go through `REALCOMPARE` (6 significant-digit tolerance).\\n- `pum_diag` sets the PUM diagonal; off-diagonal PUM entries come from LCM + CMV.\\n- Input JSON is buffered in an `AnsiString` so long single-line payloads are not truncated at 255 characters (ShortString limit).\\n\\nAll 15 `prompt_examples.json` cases pass with exact expected output.\",\"session_id\":\"5b1fbb85-9096-4bcf-9433-90838d4a892a\",\"request_id\":\"e1da5b5d-c2b4-4d68-9c70-d5036ba1b117\",\"usage\":{\"inputTokens\":47955,\"outputTokens\":27329,\"cacheReadTokens\":1240739,\"cacheWriteTokens\":0}}\n",
+  "raw_agent_stderr": ""
+}

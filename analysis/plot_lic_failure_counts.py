@@ -134,6 +134,7 @@ def plot_counts_stacked(
     output_path: Path,
     *,
     stack_by: str,
+    font_scale: float = 1.0,
 ) -> None:
     x = list(range(1, 16))
     language_colors = {
@@ -150,7 +151,20 @@ def plot_counts_stacked(
     }
     colors = language_colors if stack_by == "language" else agent_colors
 
-    fig, ax = plt.subplots(figsize=(10, 5))
+    base_font = 11.0 * font_scale
+    plt.rcParams.update(
+        {
+            'font.size': base_font,
+            'axes.titlesize': base_font * 1.2,
+            'axes.labelsize': base_font * 1.15,
+            'xtick.labelsize': base_font,
+            'ytick.labelsize': base_font,
+            'legend.fontsize': base_font * 0.95,
+            'legend.title_fontsize': base_font,
+        }
+    )
+
+    fig, ax = plt.subplots(figsize=(10.8, 5.4))
     bottom = [0] * len(x)
     for group in groups:
         y = [counts_by_group[group][lic] for lic in x]
@@ -173,7 +187,7 @@ def plot_counts_stacked(
 
     totals = [sum(counts_by_group[group][lic] for group in groups) for lic in x]
     for lic, total in zip(x, totals):
-        ax.text(lic, total, str(total), ha="center", va="bottom")
+        ax.text(lic, total, str(total), ha="center", va="bottom", fontsize=base_font * 0.9)
 
     fig.tight_layout()
     fig.savefig(output_path, dpi=150)
@@ -205,6 +219,12 @@ def parse_args() -> argparse.Namespace:
         choices=("language", "agent"),
         default="language",
         help="Color stacked segments by language or by agent.",
+    )
+    parser.add_argument(
+        "--font-scale",
+        type=float,
+        default=1.0,
+        help="Multiply all plot font sizes by this factor.",
     )
     return parser.parse_args()
 
@@ -254,6 +274,7 @@ def main() -> None:
         groups,
         output_path,
         stack_by=args.stack_by,
+        font_scale=args.font_scale,
     )
 
     print(f"Wrote {output_path}")

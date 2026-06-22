@@ -1,0 +1,68 @@
+{
+  "agent": "claude_code",
+  "model": "anthropic/claude-opus-4.5",
+  "run_id": 0,
+  "language": "rust",
+  "sandbox_dir": "/tmp/nvp_claude_code_dqtdv8xt",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 190652,
+      "duration_api_ms": 210073,
+      "num_turns": 17,
+      "result": "The implementation is complete. Here's a summary:\n\n**Deliverables created:**\n- `decide.rs` - The archival Rust source file (31KB) containing the full Launch Interceptor Program implementation\n- `decide_bin` - Compiled executable (ELF 64-bit) that reads JSON from stdin and outputs JSON to stdout\n\n**Implementation details:**\n- All 15 LICs (Launch Interceptor Conditions) implemented per the spec\n- Uses the `realcompare` function from the reference implementation for all floating-point comparisons\n- Computes CMV (Conditions Met Vector), PUM (Preliminary Unlocking Matrix), FUV (Final Unlocking Vector), and LAUNCH decision\n- Custom minimal JSON parser (no external dependencies)\n- Geometric helpers for distance, angle, triangle area, minimum enclosing circle radius, and point-to-line distance\n\n**Test results:** All 15 oracle-backed test cases from `prompt_examples.json` pass successfully.",
+      "stop_reason": null,
+      "session_id": "9e341934-97e8-4b9e-90e1-1cc58d67c8eb",
+      "total_cost_usd": 2.76556225,
+      "usage": {
+        "input_tokens": 16,
+        "cache_creation_input_tokens": 48479,
+        "cache_read_input_tokens": 518246,
+        "output_tokens": 14206,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "modelUsage": {
+        "anthropic/claude-opus-4.5": {
+          "inputTokens": 16,
+          "outputTokens": 14206,
+          "cacheReadInputTokens": 518246,
+          "cacheCreationInputTokens": 48479,
+          "webSearchRequests": 0,
+          "costUSD": 2.7520402499999994,
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 12552,
+          "outputTokens": 194,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.013522,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "permission_denials": [],
+      "uuid": "42508cf0-fd2f-4a3e-8eed-9f1b83760cc9",
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":190652,\"duration_api_ms\":210073,\"num_turns\":17,\"result\":\"The implementation is complete. Here's a summary:\\n\\n**Deliverables created:**\\n- `decide.rs` - The archival Rust source file (31KB) containing the full Launch Interceptor Program implementation\\n- `decide_bin` - Compiled executable (ELF 64-bit) that reads JSON from stdin and outputs JSON to stdout\\n\\n**Implementation details:**\\n- All 15 LICs (Launch Interceptor Conditions) implemented per the spec\\n- Uses the `realcompare` function from the reference implementation for all floating-point comparisons\\n- Computes CMV (Conditions Met Vector), PUM (Preliminary Unlocking Matrix), FUV (Final Unlocking Vector), and LAUNCH decision\\n- Custom minimal JSON parser (no external dependencies)\\n- Geometric helpers for distance, angle, triangle area, minimum enclosing circle radius, and point-to-line distance\\n\\n**Test results:** All 15 oracle-backed test cases from `prompt_examples.json` pass successfully.\",\"stop_reason\":null,\"session_id\":\"9e341934-97e8-4b9e-90e1-1cc58d67c8eb\",\"total_cost_usd\":2.76556225,\"usage\":{\"input_tokens\":16,\"cache_creation_input_tokens\":48479,\"cache_read_input_tokens\":518246,\"output_tokens\":14206,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":\"\",\"iterations\":[],\"speed\":\"standard\"},\"modelUsage\":{\"anthropic/claude-opus-4.5\":{\"inputTokens\":16,\"outputTokens\":14206,\"cacheReadInputTokens\":518246,\"cacheCreationInputTokens\":48479,\"webSearchRequests\":0,\"costUSD\":2.7520402499999994,\"contextWindow\":200000,\"maxOutputTokens\":32000},\"claude-haiku-4-5-20251001\":{\"inputTokens\":12552,\"outputTokens\":194,\"cacheReadInputTokens\":0,\"cacheCreationInputTokens\":0,\"webSearchRequests\":0,\"costUSD\":0.013522,\"contextWindow\":200000,\"maxOutputTokens\":64000}},\"permission_denials\":[],\"uuid\":\"42508cf0-fd2f-4a3e-8eed-9f1b83760cc9\"}\n",
+  "raw_agent_stderr": ""
+}

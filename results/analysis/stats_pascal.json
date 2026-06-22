@@ -1,0 +1,109 @@
+{
+  "kl": {
+    "n_versions": 13,
+    "T": 1000000,
+    "K_observed": 419,
+    "P_0": 0.9973477025186034,
+    "P_1": 0.002649596303861776,
+    "P_m": 2.7011775348387453e-06,
+    "expected_K": 2.7011775348387452,
+    "std_K": 1.6435237261684634,
+    "z": 253.29650910223006,
+    "p_value": 0.0,
+    "reject_h0_99pct": true,
+    "reject_h0_95pct": true
+  },
+  "version_stats": [
+    {
+      "version_id": "claude_code__m_claude-opus-4.5__l_pascal__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 1000000,
+      "failure_rate": 0.0
+    },
+    {
+      "version_id": "claude_code__m_claude-opus-4.6__l_pascal__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 1000000,
+      "failure_rate": 0.0
+    },
+    {
+      "version_id": "claude_code__m_claude-sonnet-4.5__l_pascal__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 999031,
+      "failure_rate": 0.0009689999999999976
+    },
+    {
+      "version_id": "claude_code__m_claude-sonnet-4.6__l_pascal__run000",
+      "agent": "claude_code",
+      "total": 1000000,
+      "passed_count": 999581,
+      "failure_rate": 0.0004189999999999472
+    },
+    {
+      "version_id": "codex__m_gpt-5.2__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 1000000,
+      "failure_rate": 0.0
+    },
+    {
+      "version_id": "codex__m_gpt-5.3-codex__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 1000000,
+      "failure_rate": 0.0
+    },
+    {
+      "version_id": "codex__m_gpt-5.4__l_pascal__run000",
+      "agent": "codex",
+      "total": 1000000,
+      "passed_count": 1000000,
+      "failure_rate": 0.0
+    },
+    {
+      "version_id": "cursor__m_composer-2.5__l_pascal__run000",
+      "agent": "cursor",
+      "total": 1000000,
+      "passed_count": 999581,
+      "failure_rate": 0.0004189999999999472
+    },
+    {
+      "version_id": "cursor__m_composer-2__l_pascal__run000",
+      "agent": "cursor",
+      "total": 1000000,
+      "passed_count": 1000000,
+      "failure_rate": 0.0
+    },
+    {
+      "version_id": "gemini__m_gemini-3-flash-preview__l_pascal__run000",
+      "agent": "gemini",
+      "total": 1000000,
+      "passed_count": 1000000,
+      "failure_rate": 0.0
+    },
+    {
+      "version_id": "gemini__m_gemini-3.1-pro-preview__l_pascal__run000",
+      "agent": "gemini",
+      "total": 1000000,
+      "passed_count": 999990,
+      "failure_rate": 9.99999999995449e-06
+    },
+    {
+      "version_id": "opencode__m_qwen_qwen3.5-397b-a17b__l_pascal__run000",
+      "agent": "opencode",
+      "total": 1000000,
+      "passed_count": 999581,
+      "failure_rate": 0.0004189999999999472
+    },
+    {
+      "version_id": "opencode__m_qwen_qwen3.6-plus__l_pascal__run000",
+      "agent": "opencode",
+      "total": 1000000,
+      "passed_count": 999581,
+      "failure_rate": 0.0004189999999999472
+    }
+  ]
+}

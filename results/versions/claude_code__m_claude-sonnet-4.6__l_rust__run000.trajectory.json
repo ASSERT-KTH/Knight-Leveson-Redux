@@ -1,0 +1,68 @@
+{
+  "agent": "claude_code",
+  "model": "anthropic/claude-sonnet-4.6",
+  "run_id": 0,
+  "language": "rust",
+  "sandbox_dir": "/tmp/nvp_claude_code_bxxc8yno",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "result",
+      "subtype": "success",
+      "is_error": false,
+      "duration_ms": 192070,
+      "duration_api_ms": 212705,
+      "num_turns": 18,
+      "result": "All 15/15 oracle examples pass. Here's a summary of what was built:\n\n**`decide.rs` / `decide_bin`** \u2014 a self-contained Rust program that:\n\n- **Reads** one JSON object from stdin matching the `input` schema (`numpoints`, `x`, `y`, `parameters`, `lcm`, `pum_diag`)\n- **Writes** one JSON object to stdout matching the `expected` schema (`cmv`, `pum`, `fuv`, `launch`)\n- Uses a hand-rolled JSON parser (no external crates)\n- Embeds `realcompare` verbatim from `realcompare_reference.rs` (6-significant-digit comparison)\n\n**LIC implementations (all 15, 0-indexed internally):**\n\n| LIC | Condition |\n|-----|-----------|\n| 0 | Consecutive pair distance > LENGTH1 |\n| 1 | Consecutive triple min-enclosing-circle radius > RADIUS1 |\n| 2 | Consecutive triple angle < \u03c0\u2212\u03b5 or > \u03c0+\u03b5 |\n| 3 | Consecutive triple triangle area > AREA1 |\n| 4 | Q_PTS consecutive points span > QUADS quadrants |\n| 5 | Consecutive pair X[j]\u2212X[i] < 0 |\n| 6 | N_PTS window: interior point farther than DIST from endpoint line |\n| 7 | Pair separated by K_PTS distance > LENGTH1 |\n| 8 | Triple separated by A_PTS, B_PTS; min-enclosing-circle > RADIUS1 |\n| 9 | Triple separated by C_PTS, D_PTS; angle condition |\n| 10 | Triple separated by E_PTS, F_PTS; area > AREA1 |\n| 11 | Pair separated by G_PTS; X[j]\u2212X[i] < 0 |\n| 12 | Pair separated by K_PTS; distance > LENGTH1 AND < LENGTH2 |\n| 13 | Triple separated by A_PTS, B_PTS; radius > RADIUS1 AND \u2264 RADIUS2 |\n| 14 | Triple separated by E_PTS, F_PTS; area > AREA1 AND < AREA2 |\n\n**PUM**, **FUV**, and **LAUNCH** follow the spec exactly, with diagonal elements taken from `pum_diag` input.",
+      "stop_reason": null,
+      "session_id": "09eb60e3-f37a-4c8c-b12d-57ded56bd88d",
+      "total_cost_usd": 0.67175415,
+      "usage": {
+        "input_tokens": 17,
+        "cache_creation_input_tokens": 90773,
+        "cache_read_input_tokens": 472128,
+        "output_tokens": 11843,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "modelUsage": {
+        "anthropic/claude-sonnet-4.6": {
+          "inputTokens": 17,
+          "outputTokens": 11843,
+          "cacheReadInputTokens": 472128,
+          "cacheCreationInputTokens": 90773,
+          "webSearchRequests": 0,
+          "costUSD": 0.6597331499999999,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 11061,
+          "outputTokens": 192,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.012021,
+          "contextWindow": 200000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "permission_denials": [],
+      "uuid": "2d5f4fd3-2510-4e80-a8d1-4d35d8bc62f1",
+      "stream": "stdout",
+      "index": 0
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":192070,\"duration_api_ms\":212705,\"num_turns\":18,\"result\":\"All 15/15 oracle examples pass. Here's a summary of what was built:\\n\\n**`decide.rs` / `decide_bin`** \u2014 a self-contained Rust program that:\\n\\n- **Reads** one JSON object from stdin matching the `input` schema (`numpoints`, `x`, `y`, `parameters`, `lcm`, `pum_diag`)\\n- **Writes** one JSON object to stdout matching the `expected` schema (`cmv`, `pum`, `fuv`, `launch`)\\n- Uses a hand-rolled JSON parser (no external crates)\\n- Embeds `realcompare` verbatim from `realcompare_reference.rs` (6-significant-digit comparison)\\n\\n**LIC implementations (all 15, 0-indexed internally):**\\n\\n| LIC | Condition |\\n|-----|-----------|\\n| 0 | Consecutive pair distance > LENGTH1 |\\n| 1 | Consecutive triple min-enclosing-circle radius > RADIUS1 |\\n| 2 | Consecutive triple angle < \u03c0\u2212\u03b5 or > \u03c0+\u03b5 |\\n| 3 | Consecutive triple triangle area > AREA1 |\\n| 4 | Q_PTS consecutive points span > QUADS quadrants |\\n| 5 | Consecutive pair X[j]\u2212X[i] < 0 |\\n| 6 | N_PTS window: interior point farther than DIST from endpoint line |\\n| 7 | Pair separated by K_PTS distance > LENGTH1 |\\n| 8 | Triple separated by A_PTS, B_PTS; min-enclosing-circle > RADIUS1 |\\n| 9 | Triple separated by C_PTS, D_PTS; angle condition |\\n| 10 | Triple separated by E_PTS, F_PTS; area > AREA1 |\\n| 11 | Pair separated by G_PTS; X[j]\u2212X[i] < 0 |\\n| 12 | Pair separated by K_PTS; distance > LENGTH1 AND < LENGTH2 |\\n| 13 | Triple separated by A_PTS, B_PTS; radius > RADIUS1 AND \u2264 RADIUS2 |\\n| 14 | Triple separated by E_PTS, F_PTS; area > AREA1 AND < AREA2 |\\n\\n**PUM**, **FUV**, and **LAUNCH** follow the spec exactly, with diagonal elements taken from `pum_diag` input.\",\"stop_reason\":null,\"session_id\":\"09eb60e3-f37a-4c8c-b12d-57ded56bd88d\",\"total_cost_usd\":0.67175415,\"usage\":{\"input_tokens\":17,\"cache_creation_input_tokens\":90773,\"cache_read_input_tokens\":472128,\"output_tokens\":11843,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":\"\",\"iterations\":[],\"speed\":\"standard\"},\"modelUsage\":{\"anthropic/claude-sonnet-4.6\":{\"inputTokens\":17,\"outputTokens\":11843,\"cacheReadInputTokens\":472128,\"cacheCreationInputTokens\":90773,\"webSearchRequests\":0,\"costUSD\":0.6597331499999999,\"contextWindow\":200000,\"maxOutputTokens\":64000},\"claude-haiku-4-5-20251001\":{\"inputTokens\":11061,\"outputTokens\":192,\"cacheReadInputTokens\":0,\"cacheCreationInputTokens\":0,\"webSearchRequests\":0,\"costUSD\":0.012021,\"contextWindow\":200000,\"maxOutputTokens\":64000}},\"permission_denials\":[],\"uuid\":\"2d5f4fd3-2510-4e80-a8d1-4d35d8bc62f1\"}\n",
+  "raw_agent_stderr": ""
+}

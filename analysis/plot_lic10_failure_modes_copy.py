@@ -40,15 +40,16 @@ _LANGUAGE_COLORS = {
 }
 
 
-def load_lic10_failures(fault_events_path: Path) -> dict[str, frozenset[int]]:
-    """Return {version_id: frozenset of test_ids that cause LIC-10 failure}."""
+def load_lic_failures(fault_events_path: Path, lic_number: int) -> dict[str, frozenset[int]]:
+    """Return {version_id: frozenset of test_ids that cause the selected LIC failure}."""
     failures: dict[str, set[int]] = collections.defaultdict(set)
+    lic_index = lic_number - 1
     with fault_events_path.open(encoding="utf-8") as fh:
         for line in fh:
             rec = json.loads(line)
             diff = rec.get("diff", {})
             mismatches = diff.get("cmv_mismatch_indices", []) if isinstance(diff, dict) else []
-            if 9 in mismatches:  # LIC 10 = 0-indexed bit 9
+            if lic_index in mismatches:
                 failures[rec["version_id"]].add(int(rec["test_id"]))
     return {vid: frozenset(test_ids) for vid, test_ids in failures.items()}
 
@@ -76,7 +77,7 @@ def build_groups(
     failures: dict[str, frozenset[int]],
     all_versions: list[str],
 ) -> list[dict]:
-    """Group versions by identical LIC-10 failing test set."""
+    """Group versions by identical selected-LIC failing test set."""
     by_set: dict[frozenset[int], list[str]] = collections.defaultdict(list)
     for version_id in all_versions:
         by_set[failures.get(version_id, frozenset())].append(version_id)
@@ -324,16 +325,16 @@ def draw_language_stacked_totals(
     return cumulative.tolist()
 
 
-def plot_lic10(groups: list[dict], output_path: Path) -> None:
+def plot_lic(groups: list[dict], output_path: Path, lic_number: int) -> None:
     test_list = sorted_test_cases(groups)
     if not test_list:
-        raise ValueError("No LIC-10 failures found; there are no test-case rows to plot.")
+        raise ValueError(f"No LIC-{lic_number} failures found; there are no test-case rows to plot.")
 
     series, subset_labels, subset_colors = build_upset_series(groups, test_list)
     languages, counts_by_language = build_language_totals(groups, test_list)
 
     fig_w = max(16.0, 9.0 + 1.8 * len(groups))
-    fig_h = max(10.5, 6.8 + 0.95 * len(test_list))
+    fig_h = min(max(10.5, 6.8 + 0.95 * len(test_list)), 120.0)
     fig = plt.figure(figsize=(fig_w, fig_h))
 
     upset = FixedUpSet(
@@ -383,7 +384,7 @@ def plot_lic10(groups: list[dict], output_path: Path) -> None:
     annotate_total_counts(axes["totals"], total_counts, fontsize=5)
 
     fig.suptitle(
-        "LIC-10 Failure Modes",
+        f"LIC-{lic_number} Failure Modes",
         fontsize=8,
         fontweight="bold",
         y=0.89,
@@ -410,9 +411,18 @@ def main() -> None:
         type=Path,
         default=Path("results/main-spec-3/lic10_failure_modes.pdf"),
     )
+    parser.add_argument(
+        "--lic",
+        type=int,
+        default=10,
+        help="1-based LIC number to visualize (default: 10).",
+    )
     args = parser.parse_args()
 
-    failures = load_lic10_failures(args.fault_events)
+    if args.lic < 1 or args.lic > 15:
+        raise SystemExit("--lic must be between 1 and 15.")
+
+    failures = load_lic_failures(args.fault_events, args.lic)
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from analysis.analyze_results import analysis_version_ids, read_campaign_version_order
@@ -436,7 +446,7 @@ def main() -> None:
         )
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    plot_lic10(groups, args.output)
+    plot_lic(groups, args.output, args.lic)
 
 
 if __name__ == "__main__":

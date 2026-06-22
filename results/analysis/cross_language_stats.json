@@ -1,0 +1,9 @@
+{
+  "n_matched_pairs": 42,
+  "mean_phi": 0.9657393807832761,
+  "pairs_by_lang": {
+    "pascal|python": 1.0,
+    "pascal|rust": 0.9143484519581904,
+    "python|rust": 1.0
+  }
+}
