@@ -22,7 +22,9 @@ const LANG_MAP = {
 };
 
 function displayStatus(status) {
-  return status === "api_unavailable" ? "timeout (api_unavailable)" : status;
+  if (status === "api_unavailable") return "timeout (api_unavailable)";
+  if (status === "no_output") return "missing artifact (no_output)";
+  return status;
 }
 
 async function main() {

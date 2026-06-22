@@ -47,7 +47,9 @@ docs/
 
 The browser displays `api_unavailable` as `timeout (api_unavailable)`: the
 generation attempt did not produce an artifact because the agent/API call timed
-out or was unavailable.
+out or was unavailable. It displays `no_output` as
+`missing artifact (no_output)`: the run may have produced partial text or source,
+but did not produce the required primary artifact.
 
 ## Refreshing the data
 
