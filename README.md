@@ -113,7 +113,7 @@ Latest results in `results/`: `campaign.csv` (gitignored; regenerate with step 3
 
 ## Browse Implementations
 
-Every per-agent/model/language version produced by `generate_versions` is archived under [`results/versions/`](results/versions/) as JSON (prompt + source + build/acceptance metadata). The [`docs/`](docs/) folder ships a static GitHub Pages site for browsing them interactively (filter by agent, model, language, build status; syntax-highlighted code viewer).
+Every per-agent/model/language version produced by `generate_versions` is archived under [`results/versions/`](results/versions/) as JSON (build/acceptance metadata plus prompt/source when available). The [`docs/`](docs/) folder ships a static GitHub Pages site for browsing them interactively (filter by agent, model, language, build status; syntax-highlighted code viewer).
 
 ```bash
 python3 docs/build.py                # regenerate docs/data/ from results/versions/

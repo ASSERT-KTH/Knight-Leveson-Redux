@@ -1,0 +1,30 @@
+{
+  "agent_name": "gemini",
+  "model_name": "gemini-2.5-flash-lite",
+  "run_id": 0,
+  "prompt": "You are implementing the Launch Interceptor Program from Knight & Leveson (1986).\n\nYour workspace initially contains only:\n- `spec.md`\n- `prompt_examples.json`\n- `realcompare_reference.rs`\n\nThe file `spec.md` is the verbatim specification. All LICs and logic are defined only there.\n\nRust delivery:\n- Your main deliverable is a compiled executable at `decide_bin`.\n- On each run, it must read exactly one input JSON object from stdin and write exactly one\n  output JSON object to stdout.\n- The input will be in JSON format, and each input object will have the same shape as an\n  individual `input` object inside `prompt_examples.json`. How you parse that JSON and how\n  you build the executable are up to you.\n- The logical input schema matches the pipeline cases: `numpoints`, `x`, `y`, `parameters`,\n  `lcm`, and `pum_diag`.\n- The expected output must be emitted in JSON format, and each output object must have the\n  same shape as an individual `expected` object inside `prompt_examples.json`.\n- The logical output schema is JSON-equivalent to `(cmv, pum, fuv, launch)`.\n- Use `realcompare_reference.rs` as fixed reference behavior for `realcompare`; do not\n  modify its logic.\n- Also write the primary Rust source snapshot to `decide.rs` for archival and later\n  evaluation by the pipeline. The pipeline expects that file to contain the core Launch\n  Interceptor logic in Rust.\n\nEngineering constraints:\n- Do not read any files other than the provided reference files.\n- Do not modify `realcompare_reference.rs`.\n- Use standard Rust tooling and libraries only.\n\nThe specification is in: /tmp/nvp_gemini_rz38_vv2/spec.md\n\nReference material is available in your workspace:\n- Read `prompt_examples.json` for 15 oracle-backed correct input/output examples.\n- Each example contains the full input and the full expected output object (`cmv`, `pum`, `fuv`, `launch`).\n- Read `realcompare_reference.rs` for a working `realcompare` implementation derived from `harnesses-realcompare/rust/src/types.rs`. Treat that implementation as fixed reference behavior: do not modify its logic.\n\n\nWrite the archival source file to: decide.rs\nWrite the main standalone deliverable to: decide_bin\n",
+  "source_code": "",
+  "timestamp": "2026-05-27T10:50:04.932997+00:00",
+  "generation_config": {
+    "agent": "gemini",
+    "cli": "gemini",
+    "model": "gemini-2.5-flash-lite",
+    "headless": true,
+    "approval_mode": "yolo"
+  },
+  "acceptance_passed": false,
+  "build_status": "ok",
+  "sandbox_dir": "/tmp/nvp_gemini_rz38_vv2",
+  "artifact_file": "gemini__m_gemini-2.5-flash-lite__l_rust__run000.artifact",
+  "trajectory_file": "gemini__m_gemini-2.5-flash-lite__l_rust__run000.trajectory.json",
+  "trajectory": null,
+  "raw_agent_stdout": "",
+  "raw_agent_stderr": "",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "error_message": "exception on acceptance case 0: artifact exited 101; stdout=''; stderr='thread \\'main\\' panicked at src/main.rs:628:59:\\nFailed to parse input JSON: Error(\"missing field `length1`\", line: 1, column: 2950)\\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace'",
+  "language": "rust",
+  "configured_model": "gemini-2.5-flash-lite",
+  "acceptance_cases_passed": 0,
+  "acceptance_cases_total": 200,
+  "acceptance_seed": 2054
+}

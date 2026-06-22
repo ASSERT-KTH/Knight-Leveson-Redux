@@ -1,0 +1,11 @@
+{
+  "agent": "opencode",
+  "model": "opencode",
+  "run_id": 0,
+  "language": "python",
+  "sandbox_dir": "/tmp/nvp_opencode_pqqjj0cd",
+  "trajectory_capture_note": "",
+  "trajectory": null,
+  "raw_agent_stdout": "",
+  "raw_agent_stderr": ""
+}

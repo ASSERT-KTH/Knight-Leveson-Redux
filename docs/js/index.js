@@ -66,11 +66,15 @@ function renderStats() {
     .join("");
 }
 
+function displayStatus(status) {
+  return status === "api_unavailable" ? "timeout (api_unavailable)" : status;
+}
+
 function chip(label, count, pressed) {
   return `<button class="chip" aria-pressed="${
     pressed ? "true" : "false"
   }" data-value="${escapeAttr(label)}">${escapeHtml(
-    label
+    displayStatus(label)
   )} <span class="count">${count}</span></button>`;
 }
 
@@ -222,7 +226,7 @@ function renderCard(item) {
     <div class="bottom">
       <span>
         <span class="status-badge ${escapeAttr(item.build_status)}">${escapeHtml(
-    item.build_status
+    displayStatus(item.build_status)
   )}</span>
         <span class="accept-badge ${item.acceptance_passed ? "yes" : "no"}">${
     item.acceptance_passed ? "accepted" : "not accepted"

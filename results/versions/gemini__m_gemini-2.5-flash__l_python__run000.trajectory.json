@@ -1,0 +1,132 @@
+{
+  "agent": "gemini",
+  "model": "gemini-2.5-flash",
+  "run_id": 0,
+  "language": "python",
+  "sandbox_dir": "/tmp/nvp_gemini_oogifqkh",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "session_id": "9c6f97fe-5f08-41f6-a9aa-fcbf1fe3c3a5",
+      "response": "The `decide.py` file has been created and updated according to the requirements. This includes the `realcompare` function, helper functions for geometric calculations, implementation of all 15 Launch Interceptor Conditions (LICs) to generate the Conditions Met Vector (CMV), the logic for calculating the Preliminary Unlocking Matrix (PUM) and the Final Unlocking Vector (FUV), and the final launch decision. The script also handles JSON input from stdin and outputs JSON to stdout, and is self-contained.",
+      "stats": {
+        "models": {
+          "gemini-2.5-flash": {
+            "api": {
+              "totalRequests": 4,
+              "totalErrors": 0,
+              "totalLatencyMs": 64346
+            },
+            "tokens": {
+              "input": 92220,
+              "prompt": 140919,
+              "candidates": 10324,
+              "total": 155160,
+              "cached": 48699,
+              "thoughts": 3917,
+              "tool": 0
+            },
+            "roles": {
+              "main": {
+                "totalRequests": 4,
+                "totalErrors": 0,
+                "totalLatencyMs": 64346,
+                "tokens": {
+                  "input": 92220,
+                  "prompt": 140919,
+                  "candidates": 10324,
+                  "total": 155160,
+                  "cached": 48699,
+                  "thoughts": 3917,
+                  "tool": 0
+                }
+              }
+            }
+          }
+        },
+        "tools": {
+          "totalCalls": 5,
+          "totalSuccess": 5,
+          "totalFail": 0,
+          "totalDurationMs": 53,
+          "totalDecisions": {
+            "accept": 5,
+            "reject": 0,
+            "modify": 0,
+            "auto_accept": 0
+          },
+          "byName": {
+            "read_file": {
+              "count": 3,
+              "success": 3,
+              "fail": 0,
+              "durationMs": 33,
+              "decisions": {
+                "accept": 3,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "write_file": {
+              "count": 1,
+              "success": 1,
+              "fail": 0,
+              "durationMs": 11,
+              "decisions": {
+                "accept": 1,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "replace": {
+              "count": 1,
+              "success": 1,
+              "fail": 0,
+              "durationMs": 9,
+              "decisions": {
+                "accept": 1,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            }
+          }
+        },
+        "files": {
+          "totalLinesAdded": 636,
+          "totalLinesRemoved": 0
+        }
+      },
+      "stream": "stdout",
+      "index": 0
+    },
+    {
+      "stream": "stderr",
+      "index": 0,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 1,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 2,
+      "format": "text",
+      "text": "[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics."
+    },
+    {
+      "stream": "stderr",
+      "index": 3,
+      "format": "text",
+      "text": "[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset)."
+    }
+  ],
+  "raw_agent_stdout": "{\n  \"session_id\": \"9c6f97fe-5f08-41f6-a9aa-fcbf1fe3c3a5\",\n  \"response\": \"The `decide.py` file has been created and updated according to the requirements. This includes the `realcompare` function, helper functions for geometric calculations, implementation of all 15 Launch Interceptor Conditions (LICs) to generate the Conditions Met Vector (CMV), the logic for calculating the Preliminary Unlocking Matrix (PUM) and the Final Unlocking Vector (FUV), and the final launch decision. The script also handles JSON input from stdin and outputs JSON to stdout, and is self-contained.\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-2.5-flash\": {\n        \"api\": {\n          \"totalRequests\": 4,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 64346\n        },\n        \"tokens\": {\n          \"input\": 92220,\n          \"prompt\": 140919,\n          \"candidates\": 10324,\n          \"total\": 155160,\n          \"cached\": 48699,\n          \"thoughts\": 3917,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 4,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 64346,\n            \"tokens\": {\n              \"input\": 92220,\n              \"prompt\": 140919,\n              \"candidates\": 10324,\n              \"total\": 155160,\n              \"cached\": 48699,\n              \"thoughts\": 3917,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 5,\n      \"totalSuccess\": 5,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 53,\n      \"totalDecisions\": {\n        \"accept\": 5,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"read_file\": {\n          \"count\": 3,\n          \"success\": 3,\n          \"fail\": 0,\n          \"durationMs\": 33,\n          \"decisions\": {\n            \"accept\": 3,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"write_file\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 11,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"replace\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 9,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 636,\n      \"totalLinesRemoved\": 0\n    }\n  }\n}",
+  "raw_agent_stderr": "YOLO mode is enabled. All tool calls will be automatically approved.\nYOLO mode is enabled. All tool calls will be automatically approved.\n[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics.\n[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset).\n"
+}

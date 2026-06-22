@@ -1,0 +1,132 @@
+{
+  "agent": "gemini",
+  "model": "gemini-2.5-pro",
+  "run_id": 0,
+  "language": "pascal",
+  "sandbox_dir": "/tmp/nvp_gemini_7vbe_7zh",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "session_id": "64397070-83e7-4fe0-8c8a-55b7ba871b66",
+      "response": "\nI have successfully created the `decide_bin` executable, and the `lipdecide.pas` source file is also present. The task is complete.\n",
+      "stats": {
+        "models": {
+          "gemini-2.5-pro": {
+            "api": {
+              "totalRequests": 9,
+              "totalErrors": 0,
+              "totalLatencyMs": 570428
+            },
+            "tokens": {
+              "input": 185001,
+              "prompt": 474402,
+              "candidates": 26052,
+              "total": 566160,
+              "cached": 289401,
+              "thoughts": 65706,
+              "tool": 0
+            },
+            "roles": {
+              "main": {
+                "totalRequests": 9,
+                "totalErrors": 0,
+                "totalLatencyMs": 570428,
+                "tokens": {
+                  "input": 185001,
+                  "prompt": 474402,
+                  "candidates": 26052,
+                  "total": 566160,
+                  "cached": 289401,
+                  "thoughts": 65706,
+                  "tool": 0
+                }
+              }
+            }
+          }
+        },
+        "tools": {
+          "totalCalls": 11,
+          "totalSuccess": 11,
+          "totalFail": 0,
+          "totalDurationMs": 464,
+          "totalDecisions": {
+            "accept": 11,
+            "reject": 0,
+            "modify": 0,
+            "auto_accept": 0
+          },
+          "byName": {
+            "run_shell_command": {
+              "count": 5,
+              "success": 5,
+              "fail": 0,
+              "durationMs": 300,
+              "decisions": {
+                "accept": 5,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "read_file": {
+              "count": 3,
+              "success": 3,
+              "fail": 0,
+              "durationMs": 82,
+              "decisions": {
+                "accept": 3,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            },
+            "write_file": {
+              "count": 3,
+              "success": 3,
+              "fail": 0,
+              "durationMs": 82,
+              "decisions": {
+                "accept": 3,
+                "reject": 0,
+                "modify": 0,
+                "auto_accept": 0
+              }
+            }
+          }
+        },
+        "files": {
+          "totalLinesAdded": 1000,
+          "totalLinesRemoved": 167
+        }
+      },
+      "stream": "stdout",
+      "index": 0
+    },
+    {
+      "stream": "stderr",
+      "index": 0,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 1,
+      "format": "text",
+      "text": "YOLO mode is enabled. All tool calls will be automatically approved."
+    },
+    {
+      "stream": "stderr",
+      "index": 2,
+      "format": "text",
+      "text": "[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics."
+    },
+    {
+      "stream": "stderr",
+      "index": 3,
+      "format": "text",
+      "text": "[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset)."
+    }
+  ],
+  "raw_agent_stdout": "{\n  \"session_id\": \"64397070-83e7-4fe0-8c8a-55b7ba871b66\",\n  \"response\": \"\\nI have successfully created the `decide_bin` executable, and the `lipdecide.pas` source file is also present. The task is complete.\\n\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-2.5-pro\": {\n        \"api\": {\n          \"totalRequests\": 9,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 570428\n        },\n        \"tokens\": {\n          \"input\": 185001,\n          \"prompt\": 474402,\n          \"candidates\": 26052,\n          \"total\": 566160,\n          \"cached\": 289401,\n          \"thoughts\": 65706,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 9,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 570428,\n            \"tokens\": {\n              \"input\": 185001,\n              \"prompt\": 474402,\n              \"candidates\": 26052,\n              \"total\": 566160,\n              \"cached\": 289401,\n              \"thoughts\": 65706,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 11,\n      \"totalSuccess\": 11,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 464,\n      \"totalDecisions\": {\n        \"accept\": 11,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"run_shell_command\": {\n          \"count\": 5,\n          \"success\": 5,\n          \"fail\": 0,\n          \"durationMs\": 300,\n          \"decisions\": {\n            \"accept\": 5,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"read_file\": {\n          \"count\": 3,\n          \"success\": 3,\n          \"fail\": 0,\n          \"durationMs\": 82,\n          \"decisions\": {\n            \"accept\": 3,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"write_file\": {\n          \"count\": 3,\n          \"success\": 3,\n          \"fail\": 0,\n          \"durationMs\": 82,\n          \"decisions\": {\n            \"accept\": 3,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 1000,\n      \"totalLinesRemoved\": 167\n    }\n  }\n}",
+  "raw_agent_stderr": "YOLO mode is enabled. All tool calls will be automatically approved.\nYOLO mode is enabled. All tool calls will be automatically approved.\n[STARTUP] Phase 'cleanup_ops' was started but never ended. Skipping metrics.\n[STARTUP] Cannot measure phase 'cleanup_ops': start mark 'startup:cleanup_ops:start' not found (likely cleared by reset).\n"
+}

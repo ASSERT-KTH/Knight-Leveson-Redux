@@ -1,0 +1,11 @@
+{
+  "agent": "gemini",
+  "model": "gemini",
+  "run_id": 0,
+  "language": "pascal",
+  "sandbox_dir": "/tmp/nvp_gemini_3ace8nvq",
+  "trajectory_capture_note": "",
+  "trajectory": null,
+  "raw_agent_stdout": "",
+  "raw_agent_stderr": ""
+}

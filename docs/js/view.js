@@ -21,6 +21,10 @@ const LANG_MAP = {
   rust: { hljs: "rust", filename: "src/lib.rs" },
 };
 
+function displayStatus(status) {
+  return status === "api_unavailable" ? "timeout (api_unavailable)" : status;
+}
+
 async function main() {
   if (!versionId) {
     showError("Missing ?v=… parameter.");
@@ -56,7 +60,7 @@ async function main() {
     ["Model", model],
     ["Language", language],
     ["Run", run],
-    ["Build status", payload.build_status || "unknown"],
+    ["Build status", displayStatus(payload.build_status || "unknown")],
     ["Acceptance", payload.acceptance_passed ? "passed" : "not passed"],
     ["Timestamp", payload.timestamp || "—"],
     ["Source bytes", (payload.source_code || "").length.toLocaleString()],

@@ -1,6 +1,6 @@
 # NVP Agent Implementations — GitHub Pages site
 
-Static site that showcases every AI-agent version of the Knight & Leveson
+Static site that showcases every configured AI-agent version of the Knight & Leveson
 Launch Interceptor Program stored under
 [`results/versions/`](../results/versions/).
 
@@ -42,6 +42,12 @@ docs/
     ├── facets.json      # filter choices + totals
     └── versions/*.json  # one file per implementation (copied from results/)
 ```
+
+## Build status note
+
+The browser displays `api_unavailable` as `timeout (api_unavailable)`: the
+generation attempt did not produce an artifact because the agent/API call timed
+out or was unavailable.
 
 ## Refreshing the data
 

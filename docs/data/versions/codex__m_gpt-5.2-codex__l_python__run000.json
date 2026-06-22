@@ -1,0 +1,16 @@
+{
+  "agent_name": "codex",
+  "model_name": "gpt-5.2-codex",
+  "configured_model": "gpt-5.2-codex",
+  "model_slug": "gpt-5.2-codex",
+  "run_id": 0,
+  "language": "python",
+  "prompt": "",
+  "source_code": "",
+  "acceptance_passed": false,
+  "acceptance_cases_passed": 0,
+  "acceptance_cases_total": 200,
+  "acceptance_seed": null,
+  "build_status": "no_output",
+  "error_message": "configured triple produced no admitted artifact"
+}

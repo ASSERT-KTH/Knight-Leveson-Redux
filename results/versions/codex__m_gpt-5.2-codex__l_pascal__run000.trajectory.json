@@ -1,0 +1,37 @@
+{
+  "agent": "codex",
+  "model": "codex",
+  "run_id": 0,
+  "language": "pascal",
+  "sandbox_dir": "/tmp/nvp_codex_395_rxfy",
+  "trajectory_capture_note": "Captured provider-exposed CLI output and structured events when available. Private chain-of-thought reasoning is not available from these adapters.",
+  "trajectory": [
+    {
+      "type": "thread.started",
+      "thread_id": "019e642c-eb0d-7453-aab9-9ea7f6a933a2",
+      "stream": "stdout",
+      "index": 0
+    },
+    {
+      "type": "turn.started",
+      "stream": "stdout",
+      "index": 1
+    },
+    {
+      "type": "error",
+      "message": "{\n  \"type\": \"error\",\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"code\": \"unsupported_value\",\n    \"message\": \"Unsupported value: 'low' is not supported with the 'gpt-5.2-codex' model. Supported values are: 'medium'.\",\n    \"param\": \"text.verbosity\"\n  },\n  \"status\": 400\n}",
+      "stream": "stdout",
+      "index": 2
+    },
+    {
+      "type": "turn.failed",
+      "error": {
+        "message": "{\n  \"type\": \"error\",\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"code\": \"unsupported_value\",\n    \"message\": \"Unsupported value: 'low' is not supported with the 'gpt-5.2-codex' model. Supported values are: 'medium'.\",\n    \"param\": \"text.verbosity\"\n  },\n  \"status\": 400\n}"
+      },
+      "stream": "stdout",
+      "index": 3
+    }
+  ],
+  "raw_agent_stdout": "{\"type\":\"thread.started\",\"thread_id\":\"019e642c-eb0d-7453-aab9-9ea7f6a933a2\"}\n{\"type\":\"turn.started\"}\n{\"type\":\"error\",\"message\":\"{\\n  \\\"type\\\": \\\"error\\\",\\n  \\\"error\\\": {\\n    \\\"type\\\": \\\"invalid_request_error\\\",\\n    \\\"code\\\": \\\"unsupported_value\\\",\\n    \\\"message\\\": \\\"Unsupported value: 'low' is not supported with the 'gpt-5.2-codex' model. Supported values are: 'medium'.\\\",\\n    \\\"param\\\": \\\"text.verbosity\\\"\\n  },\\n  \\\"status\\\": 400\\n}\"}\n{\"type\":\"turn.failed\",\"error\":{\"message\":\"{\\n  \\\"type\\\": \\\"error\\\",\\n  \\\"error\\\": {\\n    \\\"type\\\": \\\"invalid_request_error\\\",\\n    \\\"code\\\": \\\"unsupported_value\\\",\\n    \\\"message\\\": \\\"Unsupported value: 'low' is not supported with the 'gpt-5.2-codex' model. Supported values are: 'medium'.\\\",\\n    \\\"param\\\": \\\"text.verbosity\\\"\\n  },\\n  \\\"status\\\": 400\\n}\"}}\n",
+  "raw_agent_stderr": ""
+}

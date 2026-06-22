@@ -1,0 +1,11 @@
+{
+  "agent": "gemini",
+  "model": "gemini",
+  "run_id": 0,
+  "language": "python",
+  "sandbox_dir": "/tmp/nvp_gemini_90gimo6a",
+  "trajectory_capture_note": "",
+  "trajectory": null,
+  "raw_agent_stdout": "",
+  "raw_agent_stderr": ""
+}

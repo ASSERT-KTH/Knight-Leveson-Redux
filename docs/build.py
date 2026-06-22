@@ -25,9 +25,9 @@ OUT_DATA_DIR = ROOT / "docs" / "data"
 OUT_VERSIONS_DIR = OUT_DATA_DIR / "versions"
 
 
-# Build statuses to exclude from the site (runs where the agent never
-# produced any code because the upstream API was down / timed out).
-EXCLUDED_BUILD_STATUSES = {"api_unavailable", "no_output"}
+# Build statuses to exclude from the site. Keep this empty so rejected
+# and no-output configured versions remain visible in the browser.
+EXCLUDED_BUILD_STATUSES: set[str] = set()
 
 
 SUMMARY_FIELDS = (
@@ -111,6 +111,10 @@ def build(source_dir: Path = DEFAULT_SOURCE_DIR) -> None:
 
         source_code = payload.get("source_code") or ""
         prompt = payload.get("prompt") or ""
+        acceptance_raw = payload.get("acceptance_passed")
+        if acceptance_raw is None:
+            acceptance_raw = extra.get("acceptance_passed", False)
+
         summary = {
             "version_id": version_id,
             "file": src.name,
@@ -119,7 +123,7 @@ def build(source_dir: Path = DEFAULT_SOURCE_DIR) -> None:
             "language": language,
             "run_id": payload.get("run_id", 0),
             "build_status": build_status,
-            "acceptance_passed": bool(payload.get("acceptance_passed")),
+            "acceptance_passed": bool(acceptance_raw),
             "timestamp": payload.get("timestamp", ""),
             "error_message": payload.get("error_message", ""),
             "source_lines": source_code.count("\n") + (1 if source_code else 0),

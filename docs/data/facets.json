@@ -1,20 +1,20 @@
 {
   "agents": [
     [
+      "opencode",
+      18
+    ],
+    [
       "claude_code",
-      13
+      15
     ],
     [
       "codex",
-      11
-    ],
-    [
-      "opencode",
-      10
+      15
     ],
     [
       "gemini",
-      8
+      15
     ],
     [
       "cursor",
@@ -22,6 +22,10 @@
     ]
   ],
   "models": [
+    [
+      "anthropic/claude-haiku-4.5",
+      3
+    ],
     [
       "anthropic/claude-opus-4.5",
       3
@@ -47,6 +51,18 @@
       3
     ],
     [
+      "gemini-2.5-flash",
+      3
+    ],
+    [
+      "gemini-2.5-flash-lite",
+      3
+    ],
+    [
+      "gemini-2.5-pro",
+      3
+    ],
+    [
       "gemini-3-flash-preview",
       3
     ],
@@ -55,7 +71,19 @@
       3
     ],
     [
+      "google/gemma-4-26b-a4b-it",
+      3
+    ],
+    [
+      "google/gemma-4-31b-it",
+      3
+    ],
+    [
       "gpt-5.2",
+      3
+    ],
+    [
+      "gpt-5.2-codex",
       3
     ],
     [
@@ -67,61 +95,61 @@
       3
     ],
     [
+      "gpt-5.4-mini",
+      3
+    ],
+    [
       "qwen/qwen3.5-397b-a17b",
+      3
+    ],
+    [
+      "qwen/qwen3.5-flash-02-23",
+      3
+    ],
+    [
+      "qwen/qwen3.5-plus-02-15",
       3
     ],
     [
       "qwen/qwen3.6-plus",
       3
-    ],
-    [
-      "gemini-2.5-pro",
-      2
-    ],
-    [
-      "gpt-5.4-mini",
-      2
-    ],
-    [
-      "qwen/qwen3.5-plus-02-15",
-      2
-    ],
-    [
-      "anthropic/claude-haiku-4.5",
-      1
-    ],
-    [
-      "google/gemma-4-31b-it",
-      1
-    ],
-    [
-      "qwen/qwen3.5-flash-02-23",
-      1
     ]
   ],
   "languages": [
     [
+      "pascal",
+      23
+    ],
+    [
       "python",
-      18
+      23
     ],
     [
       "rust",
-      17
-    ],
-    [
-      "pascal",
-      13
+      23
     ]
   ],
   "build_statuses": [
     [
       "ok",
-      48
+      59
+    ],
+    [
+      "no_output",
+      6
+    ],
+    [
+      "api_unavailable",
+      3
+    ],
+    [
+      "syntax_error",
+      1
     ]
   ],
   "totals": {
-    "versions": 48,
+    "versions": 69,
     "accepted": 48,
-    "built_ok": 48
+    "built_ok": 59
   }
 }
