@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "Knight-Leveson Redux"
+type: software
+authors:
+  - family-names: "Ron"
+    given-names: "Javier"
+  - family-names: "Baudry"
+    given-names: "Benoit"
+  - family-names: "Monperrus"
+    given-names: "Martin"
+repository-code: "https://github.com/ASSERT-KTH/Knight-Leveson-Redux"
+preferred-citation:
+  type: article
+  title: "N-Version Programming with Coding Agents"
+  authors:
+    - family-names: "Ron"
+      given-names: "Javier"
+    - family-names: "Baudry"
+      given-names: "Benoit"
+    - family-names: "Monperrus"
+      given-names: "Martin"
+  year: 2026
+  doi: "10.48550/arXiv.2606.20158"
+  url: "https://arxiv.org/abs/2606.20158"
